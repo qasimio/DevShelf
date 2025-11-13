@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.controllers.MainViewController">
+
+    <top>
+        <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label text="📘 DevShelf" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+
+            <HBox alignment="CENTER" spacing="10.0">
+                <TextField fx:id="searchField" prefWidth="400.0" promptText="Search for books (e.g. 'java', 'algorithms')..." style="-fx-font-size: 14; -fx-background-radius: 5;" />
+                <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Search" />
+            </HBox>
+
+            <Label fx:id="statusLabel" textFill="#ecf0f1" />
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <content>
+                <VBox fx:id="resultsContainer" spacing="10.0" style="-fx-padding: 20;">
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <Label alignment="CENTER" text="DevShelf v1.0 - Powered by JavaFX" BorderPane.alignment="CENTER" style="-fx-padding: 10; -fx-text-fill: grey;" />
+    </bottom>
+
+</BorderPane>

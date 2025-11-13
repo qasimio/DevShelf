@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <?import javafx.geometry.Insets?>
+        <?import javafx.scene.control.Label?>
+        <?import javafx.scene.layout.HBox?>
+        <?import javafx.scene.layout.VBox?>
+        <?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2); -fx-border-color: #ecf0f1; -fx-border-radius: 8;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.controllers.BookCardController">
+
+<padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+</padding>
+
+<Label text="📖" textFill="#7f8c8d">
+    <font>
+        <Font size="30.0" />
+    </font>
+</Label>
+
+<VBox spacing="5.0" HBox.hgrow="ALWAYS">
+    <Label fx:id="titleLabel" text="Book Title Goes Here" textFill="#2c3e50">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Label>
+
+    <HBox spacing="10.0">
+        <Label fx:id="authorLabel" text="Author Name" textFill="#7f8c8d" />
+        <Label text="|" textFill="#bdc3c7" />
+        <Label fx:id="ratingLabel" style="-fx-background-color: #f1c40f; -fx-padding: 2 6; -fx-background-radius: 4;" text="4.5 ★" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="10.0" />
+            </font>
+        </Label>
+    </HBox>
+
+    <Label fx:id="categoryLabel" style="-fx-font-style: italic;" text="Category: Programming" textFill="#95a5a6" />
+</VBox>
+
+</HBox>

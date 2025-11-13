@@ -1,0 +1,3287 @@
+[
+  {
+    "bookId": 1,
+    "title": "Introduction to Algorithms",
+    "author": "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein",
+    "description": "Comprehensive algorithms textbook covering design, analysis and a broad set of algorithms.",
+    "progLang": "Pseudo-code",
+    "category": "Algorithms",
+    "tag": [
+      "algorithms",
+      "data-structures",
+      "theory"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/q3NkYKM6/01.jpg",
+    "downLink": "https://www.cs.mcgill.ca/~akroit/math/compsci/Cormen%20Introduction%20to%20Algorithms.pdf"
+  },
+  {
+    "bookId": 2,
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt, David Thomas",
+    "description": "Practical advice and philosophies for professional software development and craftsmanship.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "best-practices",
+      "career",
+      "productivity"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/ymxL991C/02.jpg",
+    "downLink": "https://cdn.ttgtmedia.com/rms/pdf/pragmatic_programmer_ch4.pdf"
+  },
+  {
+    "bookId": 3,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "description": "Principles and patterns for writing readable, maintainable code with many examples.",
+    "progLang": "Java",
+    "category": "Software Engineering",
+    "tag": [
+      "clean-code",
+      "refactoring",
+      "testing"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/xtbRgjDf/03.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780132350884/samplepages/9780132350884.pdf"
+  },
+  {
+    "bookId": 4,
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+    "description": "Classic catalog of object-oriented design patterns and their uses.",
+    "progLang": "C++/Java",
+    "category": "Software Design",
+    "tag": [
+      "design-patterns",
+      "oop",
+      "architecture"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/Y7B6Nd9V/04.jpg",
+    "downLink": "https://www.javier8a.com/itc/bd1/articulo.pdf"
+  },
+  {
+    "bookId": 5,
+    "title": "Structure and Interpretation of Computer Programs",
+    "author": "Harold Abelson, Gerald Jay Sussman, Julie Sussman",
+    "description": "Foundational computer science concepts taught via Scheme—abstraction, recursion, interpreters.",
+    "progLang": "Scheme",
+    "category": "Computer Science",
+    "tag": [
+      "foundations",
+      "programming-paradigms",
+      "abstraction"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/nqzFXJZ9/05.jpg",
+    "downLink": "https://eldritchdata.neocities.org/PDF/U/SICP-TheWizardBook.pdf"
+  },
+  {
+    "bookId": 6,
+    "title": "Code Complete",
+    "author": "Steve McConnell",
+    "description": "Software construction best practices covering design, debugging, and code quality.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "construction",
+      "best-practices",
+      "quality"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/VY2P9XkN/06.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780735619678/samplepages/9780735619678.pdf"
+  },
+  {
+    "bookId": 7,
+    "title": "Refactoring: Improving the Design of Existing Code",
+    "author": "Martin Fowler",
+    "description": "Catalog of refactorings and techniques to improve code structure while preserving behavior.",
+    "progLang": "Java",
+    "category": "Software Engineering",
+    "tag": [
+      "refactoring",
+      "design",
+      "maintainability"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/fY2zJBX6/07.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/Refactoring.Improving.the.Design.of.Existing.Code.2nd.edition.www.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 8,
+    "title": "The Art of Computer Programming",
+    "author": "Donald E. Knuth",
+    "description": "Multi-volume magnum opus covering algorithms, combinatorics, and analysis of algorithms.",
+    "progLang": "Mixed/Pascal",
+    "category": "Algorithms",
+    "tag": [
+      "math",
+      "algorithms",
+      "analysis"
+    ],
+    "rating": 4.8,
+    "coverUrl": "https://i.ibb.co/rG71P845/08.jpg",
+    "downLink": "https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/The%20Art%20of%20Computer%20Programming%20(vol.%201_%20Fundamental%20Algorithms)%20(3rd%20ed.)%20%5BKnuth%201997-07-17%5D.pdf"
+  },
+  {
+    "bookId": 9,
+    "title": "Artificial Intelligence: A Modern Approach",
+    "author": "Stuart Russell, Peter Norvig",
+    "description": "Comprehensive introduction to AI: search, logic, learning, planning, probabilistic approaches.",
+    "progLang": "Pseudo-code",
+    "category": "Artificial Intelligence",
+    "tag": [
+      "ai",
+      "machine-learning",
+      "search"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/GQL6Gz7G/09.jpg",
+    "downLink": "https://people.engr.tamu.edu/guni/csce625/slides/AI.pdf"
+  },
+  {
+    "bookId": 10,
+    "title": "Patterns of Enterprise Application Architecture",
+    "author": "Martin Fowler",
+    "description": "Patterns and architectural guidance for enterprise systems and integration.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "architecture",
+      "patterns",
+      "enterprise"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/bjtzdTSg/10.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/Patterns%20of%20Enterprise%20Application%20Architecture.pdf"
+  },
+  {
+    "bookId": 11,
+    "title": "Working Effectively with Legacy Code",
+    "author": "Michael Feathers",
+    "description": "Strategies and techniques for safely changing and improving legacy systems.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "legacy",
+      "testing",
+      "refactoring"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/FkfY6gqR/11.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/Working.Effectively.with.Legacy.Code..www.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 12,
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "description": "Systematic treatment of data systems, reliability, scalability, and maintainability.",
+    "progLang": "Multiple",
+    "category": "Distributed Systems",
+    "tag": [
+      "databases",
+      "scalability",
+      "distributed-systems"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/KzGB30pK/12.jpg",
+    "downLink": "https://unidel.edu.ng/focelibrary/books/Designing%20Data-Intensive%20Applications%20The%20Big%20Ideas%20Behind%20Reliable,%20Scalable,%20and%20Maintainable%20Systems%20by%20Martin%20Kleppmann%20(z-lib.org).pdf"
+  },
+  {
+    "bookId": 13,
+    "title": "Grokking Algorithms: An Illustrated Guide",
+    "author": "Aditya Bhargava",
+    "description": "Beginner-friendly visual introduction to core algorithms and problem solving.",
+    "progLang": "Python",
+    "category": "Algorithms",
+    "tag": [
+      "introductory",
+      "visual",
+      "algorithms"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/vv3VxnyN/13.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/grokking-algorithms-an-illustrated-guide-for-programmers-and-other-curious-people.pdf"
+  },
+  {
+    "bookId": 14,
+    "title": "Deep Learning",
+    "author": "Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+    "description": "Comprehensive textbook on deep learning theory, architectures, and techniques.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "deep-learning",
+      "neural-networks",
+      "theory"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/FbvjSKKP/14.jpg",
+    "downLink": "https://aikosh.indiaai.gov.in/static/Deep+Learning+Ian+Goodfellow.pdf"
+  },
+  {
+    "bookId": 15,
+    "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
+    "author": "Aurélien Géron",
+    "description": "Practical guide to building ML systems using scikit-learn and TensorFlow with hands-on examples.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "practical",
+      "tensorflow",
+      "sklearn"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/1YTstvTf/15.jpg",
+    "downLink": "https://www.rasa-ai.com/wp-content/uploads/2022/02/Aur%C3%A9lien-G%C3%A9ron-Hands-On-Machine-Learning-with-Scikit-Learn-Keras-and-Tensorflow_-Concepts-Tools-and-Techniques-to-Build-Intelligent-Systems-O%E2%80%99Reilly-Media-2019.pdf"
+  },
+  {
+    "bookId": 16,
+    "title": "The Mythical Man-Month",
+    "author": "Frederick P. Brooks Jr.",
+    "description": "Classic essays on software project management, scheduling, and human factors in engineering.",
+    "progLang": "N/A",
+    "category": "Management",
+    "tag": [
+      "project-management",
+      "team",
+      "history"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/Pvxr6nBK/16.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780201835953/samplepages/0201835959.pdf"
+  },
+  {
+    "bookId": 17,
+    "title": "Compilers: Principles, Techniques, and Tools (Dragon Book)",
+    "author": "Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffrey D. Ullman",
+    "description": "authoritative text on compiler construction: lexing, parsing, optimization, code generation.",
+    "progLang": "C",
+    "category": "Compilers",
+    "tag": [
+      "compilers",
+      "parsing",
+      "optimization"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/DgYvZ6Bw/17.jpg",
+    "downLink": "https://ggnindia.dronacharya.info/Downloads/Sub-info/RelatedBook/6thSem/Compiler-Design-TEXT-book-1.pdf"
+  },
+  {
+    "bookId": 18,
+    "title": "Operating System Concepts",
+    "author": "Abraham Silberschatz, Peter B. Galvin, Greg Gagne",
+    "description": "Comprehensive OS textbook covering processes, memory, file systems, and concurrency.",
+    "progLang": "C",
+    "category": "Operating Systems",
+    "tag": [
+      "os",
+      "concurrency",
+      "memory"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/qM62NTpk/18.jpg",
+    "downLink": "https://os.ecci.ucr.ac.cr/slides/Abraham-Silberschatz-Operating-System-Concepts-10th-2018.pdf"
+  },
+  {
+    "bookId": 19,
+    "title": "Modern Operating Systems",
+    "author": "Andrew S. Tanenbaum, Herbert Bos",
+    "description": "Detailed coverage of OS principles and case studies, with practical examples.",
+    "progLang": "C",
+    "category": "Operating Systems",
+    "tag": [
+      "os",
+      "design",
+      "concurrency"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/xS60mBjg/19.jpg",
+    "downLink": "https://csc-knu.github.io/sys-prog/books/Andrew%20S.%20Tanenbaum%20-%20Modern%20Operating%20Systems.pdf"
+  },
+  {
+    "bookId": 20,
+    "title": "Introduction to the Theory of Computation",
+    "author": "Michael Sipser",
+    "description": "Clear introduction to automata, computability, and complexity theory.",
+    "progLang": "N/A",
+    "category": "Theory",
+    "tag": [
+      "theory",
+      "complexity",
+      "automata"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/KjxPgtbn/20.jpg",
+    "downLink": "https://drive.uqu.edu.sa/_/mskhayat/files/MySubjects/20189FS%20ComputationTheory/Introduction%20to%20the%20theory%20of%20computation_third%20edition%20-%20Michael%20Sipser.pdf"
+  },
+  {
+    "bookId": 21,
+    "title": "Algorithms",
+    "author": "Robert Sedgewick, Kevin Wayne",
+    "description": "Algorithms and data structures with emphasis on practical implementations and analysis.",
+    "progLang": "Java",
+    "category": "Algorithms",
+    "tag": [
+      "algorithms",
+      "data-structures",
+      "practical"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/YFC2bcNt/21.jpg",
+    "downLink": "https://mrce.in/ebooks/Algorithms%204th%20Ed.pdf"
+  },
+  {
+    "bookId": 22,
+    "title": "The C Programming Language",
+    "author": "Brian W. Kernighan, Dennis M. Ritchie",
+    "description": "Foundational book on C programming by the language creators—concise and authoritative.",
+    "progLang": "C",
+    "category": "Programming Language",
+    "tag": [
+      "c",
+      "systems",
+      "foundations"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/6RPmhv2y/22.jpg",
+    "downLink": "https://www.cimat.mx/ciencia_para_jovenes/bachillerato/libros/%5BKernighan-Ritchie%5DThe_C_Programming_Language.pdf"
+  },
+  {
+    "bookId": 23,
+    "title": "Effective Java",
+    "author": "Joshua Bloch",
+    "description": "Best practices and design patterns for writing robust Java programs.",
+    "progLang": "Java",
+    "category": "Programming Language",
+    "tag": [
+      "java",
+      "best-practices",
+      "performance"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/0p3v0YnV/23.jpg",
+    "downLink": "https://kea.nu/files/textbooks/new/Effective%20Java%20%282017%2C%20Addison-Wesley%29.pdf"
+  },
+  {
+    "bookId": 24,
+    "title": "You Don't Know JS (series)",
+    "author": "Kyle Simpson",
+    "description": "In-depth series covering JavaScript fundamentals, scopes, closures, async and more.",
+    "progLang": "JavaScript",
+    "category": "Programming Language",
+    "tag": [
+      "javascript",
+      "deep-dive",
+      "series"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/fGvx5K0x/24.jpg",
+    "downLink": "https://livreur2soleil.com/yms/Ebooks/Informatique/Programmation/Javascript/2022/You-Dont-Know-JS-Yet-Get-Started-_Kyle-Simpson_-_Z-Library_.pdf"
+  },
+  {
+    "bookId": 25,
+    "title": "Eloquent JavaScript",
+    "author": "Marijn Haverbeke",
+    "description": "Modern introduction to JavaScript and programming, with exercises and examples.",
+    "progLang": "JavaScript",
+    "category": "Programming Language",
+    "tag": [
+      "javascript",
+      "introductory",
+      "practice"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/dsTsF1Yv/25.jpg",
+    "downLink": "https://eloquentjavascript.net/Eloquent_JavaScript_small.pdf"
+  },
+  {
+    "bookId": 26,
+    "title": "Python Crash Course",
+    "author": "Eric Matthes",
+    "description": "Hands-on, project-based introduction to Python for beginners.",
+    "progLang": "Python",
+    "category": "Programming Language",
+    "tag": [
+      "python",
+      "beginner",
+      "projects"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/Zprq9XYX/26.jpg",
+    "downLink": "https://khwarizmi.org/wp-content/uploads/2021/04/Eric_Matthes_Python_Crash_Course_A_Hands.pdf"
+  },
+  {
+    "bookId": 27,
+    "title": "Fluent Python",
+    "author": "Luciano Ramalho",
+    "description": "Deep dive into Python features, idioms and best practices for experienced programmers.",
+    "progLang": "Python",
+    "category": "Programming Language",
+    "tag": [
+      "python",
+      "advanced",
+      "idioms"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/XQmTnSp/27.jpg",
+    "downLink": "https://elmoukrie.com/wp-content/uploads/2022/05/luciano-ramalho-fluent-python_-clear-concise-and-effective-programming-oreilly-media-2022.pdf"
+  },
+  {
+    "bookId": 28,
+    "title": "Effective C++",
+    "author": "Scott Meyers",
+    "description": "Guidelines and best practices for writing efficient and correct C++ code.",
+    "progLang": "C++",
+    "category": "Programming Language",
+    "tag": [
+      "c++",
+      "performance",
+      "best-practices"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/35tFMvDh/28.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321334879/samplepages/0321334876.pdf"
+  },
+  {
+    "bookId": 29,
+    "title": "The Clean Coder",
+    "author": "Robert C. Martin",
+    "description": "Professionalism and discipline for software developers: ethics, communication, testing.",
+    "progLang": "Multiple",
+    "category": "Career",
+    "tag": [
+      "professionalism",
+      "testing",
+      "habits"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/RkfGtzDg/29.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780137081073/samplepages/0137081073.pdf"
+  },
+  {
+    "bookId": 30,
+    "title": "Domain-Driven Design",
+    "author": "Eric Evans",
+    "description": "Methods for designing complex software by aligning domain models with business needs.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "ddd",
+      "modeling",
+      "architecture"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/4gnV8CtS/30.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321125217/samplepages/0321125215.pdf"
+  },
+  {
+    "bookId": 31,
+    "title": "Building Microservices",
+    "author": "Sam Newman",
+    "description": "Principles, patterns and pitfalls when designing and deploying microservices.",
+    "progLang": "Multiple",
+    "category": "Distributed Systems",
+    "tag": [
+      "microservices",
+      "deployment",
+      "integration"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/q301RNj7/31.jpg",
+    "downLink": "https://book.northwind.ir/bookfiles/building-microservices/Building.Microservices.pdf"
+  },
+  {
+    "bookId": 32,
+    "title": "Continuous Delivery",
+    "author": "Jez Humble, David Farley",
+    "description": "Practices for reliable, small, automated releases and deployment pipelines.",
+    "progLang": "Multiple",
+    "category": "DevOps",
+    "tag": [
+      "ci/cd",
+      "automation",
+      "reliability"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/5hC0d7qW/32.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9780321670274_A23552386/preview-9780321670274_A23552386.pdf"
+  },
+  {
+    "bookId": 33,
+    "title": "Site Reliability Engineering",
+    "author": "Betsy Beyer, Chris Jones, Jennifer Petoff, Niall Richard Murphy (editors)",
+    "description": "Google SRE principles: reliability, monitoring, incident response, scalability.",
+    "progLang": "Multiple",
+    "category": "DevOps",
+    "tag": [
+      "sre",
+      "monitoring",
+      "ops"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/dwqmTKjp/33.jpg",
+    "downLink": "https://www.amdocs.com/sites/default/files/site-reliability-engineering-amdocs.pdf"
+  },
+  {
+    "bookId": 34,
+    "title": "Release It!",
+    "author": "Michael T. Nygard",
+    "description": "Practical strategies to design production-ready systems that survive real-world failures.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "stability",
+      "resilience",
+      "production"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/35Y2TZfK/34.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/dev-teams/production/Michael_Nygard-Design_and_Deploy_Production-Ready_Software-EN.pdf"
+  },
+  {
+    "bookId": 35,
+    "title": "Algorithms in a Nutshell",
+    "author": "George T. Heineman, Gary Pollice, Stanley Selkow",
+    "description": "Practical guide to algorithm implementations and performance considerations.",
+    "progLang": "Multiple",
+    "category": "Algorithms",
+    "tag": [
+      "practical",
+      "implementations",
+      "algorithms"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/DDPGmQWC/35.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/algo-list/common/Heineman_Pollice_Selkow-Algorithms_in_a_Nutshell-EN.pdf"
+  },
+  {
+    "bookId": 36,
+    "title": "Introduction to Machine Learning with Python",
+    "author": "Andreas C. Müller, Sarah Guido",
+    "description": "Practical introduction to ML workflows and scikit-learn in Python.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "python",
+      "scikit-learn",
+      "practical",
+      "ml"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/DPpvGVfV/36.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/introduction-to-machine-learning-with-python.pdf"
+  },
+  {
+    "bookId": 37,
+    "title": "Pattern Recognition and Machine Learning",
+    "author": "Christopher M. Bishop",
+    "description": "Statistical pattern recognition and Bayesian approaches to machine learning.",
+    "progLang": "Matlab/Pseudo",
+    "category": "Machine Learning",
+    "tag": [
+      "probabilistic",
+      "theory",
+      "ml"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/FbLxsZnG/37.jpg",
+    "downLink": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+  },
+  {
+    "bookId": 38,
+    "title": "Hands-On Distributed Systems with Python",
+    "author": "Some author (example)",
+    "description": "Practical patterns for distributed development with Python.",
+    "progLang": "Python",
+    "category": "Distributed Systems",
+    "tag": [
+      "distributed",
+      "python",
+      "patterns"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/d0hz0SYV/38.jpg",
+    "downLink": "https://www.cs.usfca.edu/~afedosov/trickle.pdf"
+  },
+  {
+    "bookId": 39,
+    "title": "The Phoenix Project",
+    "author": "Gene Kim, Kevin Behr, George Spafford",
+    "description": "Novel-format introduction to DevOps, IT operations and flow in organizations.",
+    "progLang": "N/A",
+    "category": "DevOps",
+    "tag": [
+      "devops",
+      "story",
+      "process"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/8Drn4Xm9/39.jpg",
+    "downLink": "https://www.haio.ir/app/uploads/2021/12/The-Phoenix-Project-A-Novel-about-IT-DevOps-and-Helping-Your-Business-Win-by-Gene-Kim-George-Spafford-Kevin-Behr-z-lib.org_.pdf"
+  },
+  {
+    "bookId": 40,
+    "title": "The Goal",
+    "author": "Eliyahu M. Goldratt",
+    "description": "Business novel about constraints, throughput and system-level thinking—useful for engineering management.",
+    "progLang": "N/A",
+    "category": "Management",
+    "tag": [
+      "systems-thinking",
+      "process",
+      "management"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/nMtNnRQQ/40.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/the-goal-by-eliyahu-m-goldratt.pdf"
+  },
+  {
+    "bookId": 41,
+    "title": "Learning Python",
+    "author": "Mark Lutz",
+    "description": "Comprehensive guide to Python language and libraries for beginners and intermediates.",
+    "progLang": "Python",
+    "category": "Programming Language",
+    "tag": [
+      "python",
+      "comprehensive",
+      "reference"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/gMhHg4hB/41.jpg",
+    "downLink": "https://cfm.ehu.es/ricardo/docs/python/Learning_Python.pdf"
+  },
+  {
+    "bookId": 42,
+    "title": "Effective Modern C++",
+    "author": "Scott Meyers",
+    "description": "Guidelines for writing correct and efficient C++11/C++14 code.",
+    "progLang": "C++",
+    "category": "Programming Language",
+    "tag": [
+      "c++",
+      "modern-c++",
+      "best-practices"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/LDJPmrT5/42.jpg",
+    "downLink": "https://ananyapam7.github.io/resources/C++/Scott_Meyers_Effective_Modern_C++.pdf"
+  },
+  {
+    "bookId": 43,
+    "title": "Introduction to Linear Algebra",
+    "author": "Gilbert Strang",
+    "description": "Clear presentation of linear algebra fundamentals used in computing and ML.",
+    "progLang": "N/A",
+    "category": "Mathematics",
+    "tag": [
+      "linear-algebra",
+      "math",
+      "foundations"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/WNYKrZ1Y/43.jpg",
+    "downLink": "https://jcer.in/jcer-docs/E-Learning/Digital%20Library%20/E-Books/linear-algebra-author-gilbert-strang.pdf"
+  },
+  {
+    "bookId": 44,
+    "title": "Pattern-Oriented Software Architecture (Vol 1)",
+    "author": "Frank Buschmann et al.",
+    "description": "Catalogue of architectural and design patterns for large systems.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "patterns",
+      "architecture",
+      "scalability"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/bjwVLG1W/44.jpg",
+    "downLink": "https://daneshjavaji.wordpress.com/wp-content/uploads/2018/02/sznikak_jegyzet_pattern-oriented-sa_vol1.pdf"
+  },
+  {
+    "bookId": 45,
+    "title": "CompTIA Security+ Guide to Network Security Fundamentals",
+    "author": "Various",
+    "description": "Introductory security concepts and practices for network security foundations.",
+    "progLang": "N/A",
+    "category": "Security",
+    "tag": [
+      "security",
+      "network",
+      "basics"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/gb3BcWNW/45.jpg",
+    "downLink": "https://unidel.edu.ng/focelibrary/books/A%202022%20Comptia%20Security+%20Guide%20to%20Network%20Security%20Fundamentals%20by%20Mark%20Ciampa%20(z-lib.org).pdf"
+  },
+  {
+    "bookId": 46,
+    "title": "Cryptography Engineering",
+    "author": "Niels Ferguson, Bruce Schneier, Tadayoshi Kohno",
+    "description": "Practical guidance to designing and implementing secure cryptographic systems.",
+    "progLang": "C",
+    "category": "Security",
+    "tag": [
+      "cryptography",
+      "practical",
+      "security"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/rGJxwY2G/46.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/cryptography-engineering.pdf"
+  },
+  {
+    "bookId": 47,
+    "title": "Serious Cryptography",
+    "author": "Jean-Philippe Aumasson",
+    "description": "Modern introduction to cryptography with practical emphasis on security engineering.",
+    "progLang": "Multiple",
+    "category": "Security",
+    "tag": [
+      "cryptography",
+      "modern",
+      "engineering"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/F4Cr4CQy/47.jpg",
+    "downLink": "https://www.kea.nu/files/textbooks/humblesec/seriouscrytography.pdf"
+  },
+  {
+    "bookId": 48,
+    "title": "Designing Interfaces",
+    "author": "Jenifer Tidwell",
+    "description": "Patterns and best practices for UI and interaction design.",
+    "progLang": "N/A",
+    "category": "UI/UX",
+    "tag": [
+      "ui",
+      "ux",
+      "design-patterns"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/dF9s7Q8/48.jpg",
+    "downLink": "https://ebooks.karbust.me/Technology/Designing%20Interfaces%20Patterns%20for%20Effective%20Interaction%20Design%20-%203rd%20Edition%20-%20Jenifer%20Tidwell,%20Charles%20Brewer,%20Aynne%20Valencia%20-%20O'Reilly%20Media%20(2020).pdf"
+  },
+  {
+    "bookId": 49,
+    "title": "Don't Make Me Think",
+    "author": "Steve Krug",
+    "description": "Practical web usability advice focused on simplicity and user experience.",
+    "progLang": "N/A",
+    "category": "UI/UX",
+    "tag": [
+      "usability",
+      "ux",
+      "web"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/dwwmP9hT/49.jpg",
+    "downLink": "https://dn790002.ca.archive.org/0/items/SteveKrugDontMakeMeThink/Steve_Krug_Don%E2%80%99t_Make_Me_Think%2C.pdf"
+  },
+  {
+    "bookId": 50,
+    "title": "Laws of UX",
+    "author": "Jon Yablonski, Jason Leikam, et al.",
+    "description": "Practical UI design tips focused on layout, typography and visual polish for developers.",
+    "progLang": "N/A",
+    "category": "UX",
+    "tag": [
+      "ux",
+      "design",
+      "frontend"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/1Gx8wc53/50.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/laws-of-ux.pdf"
+  },
+  {
+    "bookId": 51,
+    "title": "The Design of Everyday Things",
+    "author": "Don Norman",
+    "description": "Foundational book on human-centered design and usability across products.",
+    "progLang": "N/A",
+    "category": "Design",
+    "tag": [
+      "design",
+      "usability",
+      "cognitive"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/S42mHF3t/51.jpg",
+    "downLink": "https://dl.icdst.org/pdfs/files4/4bb8d08a9b309df7d86e62ec4056ceef.pdf"
+  },
+  {
+    "bookId": 52,
+    "title": "Data Science from Scratch",
+    "author": "Joel Grus",
+    "description": "Introduction to data science concepts with implementations in Python from first principles.",
+    "progLang": "Python",
+    "category": "Data Science",
+    "tag": [
+      "data-science",
+      "python",
+      "basics"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/5xcywr68/52.jpg",
+    "downLink": "https://jcer.in/jcer-docs/E-Learning/Digital%20Library%20/E-Books/Data%20Science%20from%20Scratch%20by%20Joel%20Grus.pdf"
+  },
+  {
+    "bookId": 53,
+    "title": "Practical Statistics for Data Scientists",
+    "author": "Peter Bruce, Andrew Bruce, Peter Gedeck",
+    "description": "Key statistical concepts and techniques used in data science with examples.",
+    "progLang": "R/Python",
+    "category": "Data Science",
+    "tag": [
+      "statistics",
+      "data-science",
+      "applied"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/1YvH5XMj/53.jpg",
+    "downLink": "https://datapot.vn/wp-content/uploads/2023/12/datapot.vn-Practical-Statistics-for-Data-Scientists.pdf?srsltid=AfmBOopN0heFM9_Hfx_CcgBRrrA37fpgrcMojV3heM2Yt_BRpVvvAgTw"
+  },
+  {
+    "bookId": 54,
+    "title": "The Elements of Statistical Learning",
+    "author": "Trevor Hastie, Robert Tibshirani, Jerome Friedman",
+    "description": "Comprehensive statistical learning theory and methods used in ML.",
+    "progLang": "R/Matlab",
+    "category": "Machine Learning",
+    "tag": [
+      "statistical-learning",
+      "theory",
+      "ml"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/v6NTjj9r/54.jpg",
+    "downLink": "https://esl.hohoweiya.xyz/book/The%20Elements%20of%20Statistical%20Learning.pdf"
+  },
+  {
+    "bookId": 55,
+    "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow”",
+    "author": "Aurelien Geron",
+    "description": "Practical techniques of general machine learning and deep learning",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "nlp",
+      "machine-learning",
+      "transformers"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/kV8VrSr3/55.jpg",
+    "downLink": "https://www.rasa-ai.com/wp-content/uploads/2022/02/Aur%C3%A9lien-G%C3%A9ron-Hands-On-Machine-Learning-with-Scikit-Learn-Keras-and-Tensorflow_-Concepts-Tools-and-Techniques-to-Build-Intelligent-Systems-O%E2%80%99Reilly-Media-2019.pdf"
+  },
+  {
+    "bookId": 56,
+    "title": "Natural Language Processing with Python",
+    "author": "Steven Bird, Ewan Klein, Edward Loper",
+    "description": "Classic introduction to NLP using the NLTK toolkit and corpus linguistics techniques.",
+    "progLang": "Python",
+    "category": "NLP",
+    "tag": [
+      "nlp",
+      "nltk",
+      "text-processing"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/prfx8sFD/56.jpg",
+    "downLink": "https://tjzhifei.github.io/resources/NLTK.pdf"
+  },
+  {
+    "bookId": 57,
+    "title": "Reinforcement Learning: An Introduction",
+    "author": "Richard S. Sutton, Andrew G. Barto",
+    "description": "authoritative text on reinforcement learning theory and algorithms.",
+    "progLang": "Pseudo-code",
+    "category": "Machine Learning",
+    "tag": [
+      "reinforcement-learning",
+      "theory",
+      "algorithms"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/QvC2jyT7/57.jpg",
+    "downLink": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+  },
+  {
+    "bookId": 58,
+    "title": "Clean Architecture",
+    "author": "Robert C. Martin",
+    "description": "Guidance on component separation, boundaries and building maintainable architectures.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "architecture",
+      "clean-code",
+      "boundaries"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/SDP9swPc/58.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9780134494333_A30787590/preview-9780134494333_A30787590.pdf"
+  },
+  {
+    "bookId": 59,
+    "title": "The Art of Scalability",
+    "author": "Martin L. Abbott, Michael T. Fisher",
+    "description": "Strategies and organizational practices for scaling large systems and teams.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "scalability",
+      "teams",
+      "process"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/q3xTrBLK/59.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9780134031378_A25116502/preview-9780134031378_A25116502.pdf"
+  },
+  {
+    "bookId": 60,
+    "title": "Programming Pearls",
+    "author": "Jon Bentley",
+    "description": "Collection of programming problems, techniques and insights focusing on practical algorithmic thinking.",
+    "progLang": "C",
+    "category": "Programming",
+    "tag": [
+      "problems",
+      "algorithms",
+      "thinking"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/twRSvVcT/60.jpg",
+    "downLink": "https://tfetimes.com/wp-content/uploads/2015/04/ProgrammingPearls2nd.pdf"
+  },
+  {
+    "bookId": 61,
+    "title": "The UNIX Programming Environment",
+    "author": "Brian W. Kernighan, Rob Pike",
+    "description": "Classic guide to Unix tools, philosophy and programming practices.",
+    "progLang": "C/Shell",
+    "category": "Systems",
+    "tag": [
+      "unix",
+      "tools",
+      "philosophy"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/Ngr64RFz/61.jpg",
+    "downLink": "https://scis.uohyd.ac.in/~apcs/itw/UNIXProgrammingEnvironment.pdf"
+  },
+  {
+    "bookId": 62,
+    "title": "Programming Language Pragmatics",
+    "author": "Michael L. Scott",
+    "description": "Comprehensive text about language design, semantics and implementation techniques.",
+    "progLang": "Multiple",
+    "category": "Programming Languages",
+    "tag": [
+      "language-design",
+      "semantics",
+      "compilers"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/KcRmNrm4/62.jpg",
+    "downLink": "https://fjrhdp.wordpress.com/wp-content/uploads/2014/12/programming-language-pragmatics-2ed.pdf"
+  },
+  {
+    "bookId": 63,
+    "title": "Test-Driven Development: By Example",
+    "author": "Kent Beck",
+    "description": "Practical introduction to TDD with examples and incremental design techniques.",
+    "progLang": "Java",
+    "category": "Testing",
+    "tag": [
+      "tdd",
+      "testing",
+      "design"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/jkx4P8h4/63.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9780137585281_A43279227/preview-9780137585281_A43279227.pdf"
+  },
+
+  {
+    "bookId": 64,
+    "title": "The Art of Readable Code",
+    "author": "Dustin Boswell, Trevor Foucher",
+    "description": "Small techniques and principles to make code clearer and easier to maintain.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "readability",
+      "style",
+      "practical"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/1G8Cv5cg/64.jpg",
+    "downLink": "https://mcusoft.wordpress.com/wp-content/uploads/2015/04/the-art-of-readable-code.pdf"
+  },
+  {
+    "bookId": 65,
+    "title": "High Performance Browser Networking",
+    "author": "Ilya Grigorik",
+    "description": "Performance-focused guide to networking, HTTP, TCP, TLS and optimizations for web apps.",
+    "progLang": "N/A",
+    "category": "Networking",
+    "tag": [
+      "networking",
+      "performance",
+      "web"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/HpnX8dZV/65.jpg",
+    "downLink": "https://cdn.studio.f5.com/files/k6fem79d/production/265418323f4c8e48d117eb7a18f5db42263b846f.pdf"
+  },
+  {
+    "bookId": 66,
+    "title": "HTTP: The Definitive Guide",
+    "author": "David Gourley, Brian Totty, Marjorie Sayer, Anshu Aggarwal, Sailu Reddy",
+    "description": "In-depth reference for HTTP protocol and related technologies.",
+    "progLang": "N/A",
+    "category": "Networking",
+    "tag": [
+      "http",
+      "protocols",
+      "web"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/ym0CYyCy/66.jpg",
+    "downLink": "https://dl.ebooksworld.ir/books/HTTP.The.Definitive.Guide.Brian.Totty.David.Gourley.OReilly.9781565925090.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 67,
+    "title": "Seven Languages in Seven Weeks",
+    "author": "Bruce A. Tate",
+    "description": "Rapid introductions to seven different programming languages and paradigms.",
+    "progLang": "Multiple",
+    "category": "Programming Languages",
+    "tag": [
+      "languages",
+      "paradigms",
+      "introductory"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/dJHrRHwM/67.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Pragmatic%20Programmers/Seven%20Languages%20in%20Seven%20Weeks%20A%20Pragmatic%20Guide%20to%20Learning%20Programming%20Languages.pdf"
+  },
+  {
+    "bookId": 68,
+    "title": "Programming Rust",
+    "author": "Jim Blandy, Jason Orendorff",
+    "description": "Comprehensive guide to systems programming and safe concurrency with Rust.",
+    "progLang": "Rust",
+    "category": "Programming Language",
+    "tag": [
+      "rust",
+      "systems",
+      "concurrency"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/7NKsc3mt/68.jpg",
+    "downLink": "https://agorism.dev/book/rust/Jim%20Blandy%2C%20Jason%20Orendorff%20-%20Programming%20Rust_%20Fast%2C%20Safe%20Systems%20Development%20%282017%2C%20O%E2%80%99Reilly%20Media%29.pdf"
+  },
+  {
+    "bookId": 69,
+    "title": "The Rust Programming Language",
+    "author": "Steve Klabnik, Carol Nichols",
+    "description": "Official Rust book covering language fundamentals and idiomatic Rust.",
+    "progLang": "Rust",
+    "category": "Programming Language",
+    "tag": [
+      "rust",
+      "official",
+      "systems"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/SXJ459sq/69.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/No.Starch.Press.The.Rust.Programming.Language.www.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 70,
+    "title": "Learning React",
+    "author": "Alex Banks, Eve Porcello",
+    "description": "Introduction to React fundamentals, components, state and hooks with examples.",
+    "progLang": "JavaScript",
+    "category": "Frontend",
+    "tag": [
+      "react",
+      "frontend",
+      "components"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/r2M4qwzs/70.jpg",
+    "downLink": "http://repo.darmajaya.ac.id/4114/1/Learning%20React_%20Functional%20Web%20Development%20with%20React%20and%20Redux%20%28%20PDFDrive%20%29.pdf"
+  },
+  {
+    "bookId": 71,
+    "title": "You Don't Know JS: Async & Performance",
+    "author": "Kyle Simpson",
+    "description": "In-depth coverage of JavaScript asynchronous programming and performance considerations.",
+    "progLang": "JavaScript",
+    "category": "Programming Language",
+    "tag": [
+      "javascript",
+      "async",
+      "performance"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/gZ0n58ks/71.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9781491905210_A24112927/preview-9781491905210_A24112927.pdf"
+  },
+  {
+    "bookId": 72,
+    "title": "A Philosophy of Software Design",
+    "author": "John Ousterhout",
+    "description": "High-level principles for designing large, maintainable software systems.",
+    "progLang": "Multiple",
+    "category": "Software Design",
+    "tag": [
+      "design",
+      "abstraction",
+      "complexity"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/vxXPMb4x/72.jpg",
+    "downLink": "https://web.stanford.edu/~ouster/cgi-bin/aposd2ndEdExtract.pdf"
+  },
+  {
+    "bookId": 73,
+    "title": "Software Architecture in Practice",
+    "author": "Len Bass, Paul Clements, Rick Kazman",
+    "description": "Foundational principles and case studies in software architecture and quality attributes.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "architecture",
+      "quality-attributes",
+      "case-studies"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/Dm9s3Wz/73.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321815736/samplepages/0321815734.pdf"
+  },
+  {
+    "bookId": 74,
+    "title": "Introduction to Algorithms (2nd edition)",
+    "author": "Cormen et al.",
+    "description": "(Another common reference of CLRS used in courses) Core algorithms textbook used worldwide.",
+    "progLang": "Pseudo-code",
+    "category": "Algorithms",
+    "tag": [
+      "algorithms",
+      "reference",
+      "analysis"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/kVLr7Mdz/74.jpg",
+    "downLink": "https://estigia.fi-b.unam.mx/maestria/cormen.pdf"
+  },
+  {
+    "bookId": 75,
+    "title": "Data Structures and Algorithms Made Easy",
+    "author": "Narasimha Karumanchi",
+    "description": "Collection of algorithmic problems and solutions focused on interviews and practice.",
+    "progLang": "Java",
+    "category": "Algorithms",
+    "tag": [
+      "interview",
+      "practice",
+      "ds"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/fVnMxNzg/75.jpg",
+    "downLink": "https://eprints.triatmamulya.ac.id/1694/1/Data%20Structures%20and%20Algorithms%20Made%20Easy_%20Data%20Structures%20and%20Algorithmic%20Puzzles.pdf"
+  },
+  {
+    "bookId": 76,
+    "title": "Elements of Programming Interviews in python",
+    "author": "Adnan Aziz, Tsung-Hsien Lee, Amit Prakash",
+    "description": "Interview-focused problems with solutions and discussion across languages.",
+    "progLang": "Python",
+    "category": "Interview Prep",
+    "tag": [
+      "interviews",
+      "algorithms",
+      "practice"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/QvLZp4yL/76.jpg",
+    "downLink": "https://www.math.uaic.ro/~iuliap/Informatica/Elements%20of%20Programming%20Interviews.pdf"
+  },
+  {
+    "bookId": 77,
+    "title": "Cracking the Coding Interview",
+    "author": "Gayle Laakmann McDowell",
+    "description": "Popular interview prep book with hundreds of problems and strategies for tech interviews.",
+    "progLang": "Java/C++/Python",
+    "category": "Interview Prep",
+    "tag": [
+      "interviews",
+      "algorithms",
+      "practice"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/9Hq2TVtR/77.jpg",
+    "downLink": "http://repo.darmajaya.ac.id/4188/1/Cracking%20the%20Coding%20Interview_%20189%20Programming%20Questions%20and%20Solutions%20%28%20PDFDrive%20%29.pdf"
+  },
+  {
+    "bookId": 78,
+    "title": "The Algorithm Design Manual",
+    "author": "Steven S. Skiena",
+    "description": "Practical guide to algorithm design, problem solving and catalog of algorithmic resources.",
+    "progLang": "C/C++",
+    "category": "Algorithms",
+    "tag": [
+      "algorithms",
+      "manual",
+      "practical"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/whcms5w4/78.jpg",
+    "downLink": "https://mrce.in/ebooks/Algorithm%20Design%20Manual%203rd%20Ed.pdf"
+  },
+  {
+    "bookId": 79,
+    "title": "Mathematics for Computer Science",
+    "author": "Eric Lehman, F. Thomson Leighton, Albert R. Meyer",
+    "description": "Discrete math foundations tailored for CS topics like proofs, graphs, counting and probability.",
+    "progLang": "N/A",
+    "category": "Mathematics",
+    "tag": [
+      "discrete-math",
+      "proofs",
+      "foundations"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/gL6snd62/79.jpg",
+    "downLink": "https://people.csail.mit.edu/meyer/mcs.pdf"
+  },
+  {
+    "bookId": 80,
+    "title": "Programming Erlang",
+    "author": "Joe Armstrong",
+    "description": "Introduction to Erlang and concurrent, distributed systems programming with actor model.",
+    "progLang": "Erlang",
+    "category": "Concurrent Systems",
+    "tag": [
+      "concurrency",
+      "erlang",
+      "distributed"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/5gW83NMb/80.jpg",
+    "downLink": "https://gangrel.wordpress.com/wp-content/uploads/2015/08/programming-erlang-2nd-edition.pdf"
+  },
+  {
+    "bookId": 81,
+    "title": "Seven Databases in Seven Weeks",
+    "author": "Eric Redmond, Jim R. Wilson",
+    "description": "Survey of different database paradigms and implementations with practical examples.",
+    "progLang": "Multiple",
+    "category": "Databases",
+    "tag": [
+      "databases",
+      "nosql",
+      "sql"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/BHTWNYgg/81jpg.jpg",
+    "downLink": "https://www.bigdata.ir/wp-content/uploads/2016/08/CBF38937207FBA3AC468254BE7540DF0.pdf"
+  },
+  {
+    "bookId": 82,
+    "title": "Streaming Systems",
+    "author": "Tyler Akidau, Slava Chernyak, Reuven Lax",
+    "description": "Concepts and practical systems for stream processing and real-time data pipelines.",
+    "progLang": "Java/Scala",
+    "category": "Data Engineering",
+    "tag": [
+      "streaming",
+      "pipelines",
+      "realtime"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/bjTMLC9t/82.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/streaming-systems.pdf"
+  },
+  {
+    "bookId": 83,
+    "title": "Kafka: The Definitive Guide",
+    "author": "Neha Narkhede, Gwen Shapira, Todd Palino",
+    "description": "Comprehensive guide to Apache Kafka and stream processing architectures.",
+    "progLang": "Java",
+    "category": "Data Engineering",
+    "tag": [
+      "kafka",
+      "streaming",
+      "messaging"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/jZhx4GZV/83.jpg",
+    "downLink": "https://allfile.me/loading/?t=Kafka%20%20%20The%20Definitive%20Guide&s=ZG8tc2VydmVyMS5zZnMudXdtLmVkdQ"
+  },
+  {
+    "bookId": 84,
+    "title": "SQL Antipatterns",
+    "author": "Bill Karwin",
+    "description": "Common mistakes using SQL and relational databases, with corrective patterns.",
+    "progLang": "SQL",
+    "category": "Databases",
+    "tag": [
+      "sql",
+      "antipatterns",
+      "databases"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/FbSw2cDh/84.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Pragmatic%20Programmers/SQL%20Antipatterns.pdf"
+  },
+
+  {
+    "bookId": 85,
+    "title": "Head First Design Patterns",
+    "author": "Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra",
+    "description": "Beginner-friendly, example-driven introduction to classic object-oriented design patterns.",
+    "progLang": "Java",
+    "category": "Software Design",
+    "tag": [
+      "design-patterns",
+      "beginner",
+      "examples"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/8nwLGPt0/85.jpg",
+    "downLink": "https://gaoyichao.com/Xiaotu//resource/refs/head_first_design_patterns.en.pdf"
+  },
+  {
+    "bookId": 86,
+    "title": "Introduction to Probability",
+    "author": "Dimitri P. Bertsekas, John N. Tsitsiklis",
+    "description": "Solid introduction to probability theory with applications in CS and engineering.",
+    "progLang": "N/A",
+    "category": "Mathematics",
+    "tag": [
+      "probability",
+      "math",
+      "foundations"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/XZn1YnPs/86.jpg",
+    "downLink": "https://www.vfu.bg/en/e-Learning/Math--Bertsekas_Tsitsiklis_Introduction_to_probability.pdf"
+  },
+  {
+    "bookId": 87,
+    "title": "Bayesian Data Analysis",
+    "author": "Andrew Gelman et al.",
+    "description": "Comprehensive treatment of Bayesian methods with applied examples across domains.",
+    "progLang": "R/Python",
+    "category": "Statistics",
+    "tag": [
+      "bayesian",
+      "statistics",
+      "applied"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/LD8jvNhR/87.jpg",
+    "downLink": "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+  },
+  {
+    "bookId": 88,
+    "title": "Core Java Volume I–Fundamentals",
+    "author": "Cay S. Horstmann",
+    "description": "Comprehensive guide to Java language fundamentals and core APIs.",
+    "progLang": "Java",
+    "category": "Programming Language",
+    "tag": [
+      "java",
+      "core",
+      "reference"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/M5Kpv0jG/88.jpg",
+    "downLink": "https://jre-training.com/MFI/Tools/Core%20Java%20Vol%2013%20I.pdf"
+  },
+  {
+    "bookId": 89,
+    "title": "Java Concurrency in Practice",
+    "author": "Brian Goetz et al.",
+    "description": "Definitive guide to writing correct and performant concurrent Java applications.",
+    "progLang": "Java",
+    "category": "Concurrency",
+    "tag": [
+      "concurrency",
+      "java",
+      "threads"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/zTXQFbQ0/89.jpg",
+    "downLink": "https://mrce.in/ebooks/Java%20Concurrency%20in%20Practice.pdf"
+  },
+  {
+    "bookId": 90,
+    "title": "Seven More Languages in Seven Weeks",
+    "author": "Various",
+    "description": "Follow-up exploring more language paradigms and practical examples.",
+    "progLang": "Multiple",
+    "category": "Programming Languages",
+    "tag": [
+      "languages",
+      "paradigms",
+      "diversity"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/84PXdCq5/90.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/overviews/cs-tools/Bruce_Tate-Seven_More_Languages_in_Seven_Weeks-EN.pdf"
+  },
+  {
+    "bookId": 91,
+    "title": "Distributed Algorithms",
+    "author": "Wan Fokkink",
+    "description": "Applied patterns, trade-offs and algorithms for distributed system design.",
+    "progLang": "Multiple",
+    "category": "Distributed Algorithms",
+    "tag": [
+      "distributed",
+      "algorithms",
+      "tradeoffs"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/V0dWcr7G/91.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/distributed-algorithms.pdf"
+  },
+  {
+    "bookId": 92,
+    "title": "Practical Object-Oriented Design in Ruby",
+    "author": "Sandi Metz",
+    "description": "Object-oriented design principles and practical rules for maintainable code.",
+    "progLang": "Ruby",
+    "category": "Software Design",
+    "tag": [
+      "oop",
+      "design",
+      "principles"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/R4t6KkNm/92.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/dev-teams/diagrams/Sandi_Metz-Practical_Object-Oriented_Design_in_Ruby-EN.pdf"
+  },
+  {
+    "bookId": 93,
+    "title": "The Art of Multiprocessor Programming",
+    "author": "Maurice Herlihy, Nir Shavit",
+    "description": "Concurrent algorithms and correctness for multiprocessor systems.",
+    "progLang": "Java",
+    "category": "Concurrency",
+    "tag": [
+      "concurrency",
+      "multiprocessor",
+      "algorithms"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/hJ2Y057g/93.jpg",
+    "downLink": "https://www.cs.sfu.ca/~ashriram/Courses/CS431/assets/distrib/AMP.pdf"
+  },
+  {
+    "bookId": 94,
+    "title": "Modern Compiler Implementation in Java",
+    "author": "Andrew W. Appel",
+    "description": "Practical compiler construction with examples and implementation guidance.",
+    "progLang": "Java",
+    "category": "Compilers",
+    "tag": [
+      "compilers",
+      "implementation",
+      "practical"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/8gg4jx63/94.jpg",
+    "downLink": "https://eden.dei.uc.pt/~amilcar/pdf/CompilerInJava.pdf"
+  },
+  {
+    "bookId": 95,
+    "title": "Game Programming Patterns",
+    "author": "Robert Nystrom",
+    "description": "Design patterns and architecture techniques tailored to game development.",
+    "progLang": "C++/C#",
+    "category": "Game Development",
+    "tag": [
+      "games",
+      "patterns",
+      "architecture"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/VWQFvzKt/95.jpg",
+    "downLink": "https://k0d.cc/storage/books/GameDev/Game%20Programming%20Patterns.pdf"
+  },
+
+  {
+    "bookId": 96,
+    "title": "Programming Ruby (Pickaxe)",
+    "author": "Dave Thomas, Chad Fowler, Andy Hunt",
+    "description": "Comprehensive guide to Ruby and its libraries; classic reference for Rubyists.",
+    "progLang": "Ruby",
+    "category": "Programming Language",
+    "tag": [
+      "ruby",
+      "reference",
+      "libraries"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/fYwT1hmb/96.jpg",
+    "downLink": "https://jmvidal.cse.sc.edu/library/thomas05a.pdf"
+  },
+  {
+    "bookId": 97,
+    "title": "The Little Schemer",
+    "author": "Daniel P. Friedman, Matthias Felleisen",
+    "description": "Playful introduction to recursive thinking and Scheme using question-and-answer format.",
+    "progLang": "Scheme",
+    "category": "Programming Paradigms",
+    "tag": [
+      "recursion",
+      "scheme",
+      "education"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/WN76vd3X/97.jpg",
+    "downLink": "https://vpb.smallyu.net/%5BType%5D%20books/The%20Little%20Schemer.pdf"
+  },
+  {
+    "bookId": 98,
+    "title": "The Little MLer",
+    "author": "Some author",
+    "description": "Companion-style book exploring functional programming concepts with ML family languages.",
+    "progLang": "OCaml/ML",
+    "category": "Functional Programming",
+    "tag": [
+      "functional",
+      "ml",
+      "education"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/bRD2Zn7K/98.jpg",
+    "downLink": "https://www.cl.cam.ac.uk/~lp15/papers/Reviews/MLer.pdf"
+  },
+  {
+    "bookId": 99,
+    "title": "Functional Programming in Scala",
+    "author": "Paul Chiusano, Rúnar Bjarnason",
+    "description": "Practical functional programming techniques and patterns in Scala.",
+    "progLang": "Scala",
+    "category": "Functional Programming",
+    "tag": [
+      "functional",
+      "scala",
+      "patterns"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/jkhDmq4c/99.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/functional-programming-in-scala.pdf"
+  },
+  {
+    "bookId": 100,
+    "title": "Real-World OCaml",
+    "author": "Yaron Minsky, Anil Madhavapeddy, Jason Hickey",
+    "description": "Practical guide to OCaml and building real-world applications with it.",
+    "progLang": "OCaml",
+    "category": "Functional Programming",
+    "tag": [
+      "ocaml",
+      "practical",
+      "functional"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/N2S4LKWH/100.jpg",
+    "downLink": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/052E4BCCB09D56A0FE875DD81B1ED571/9781009125802AR.pdf/Real_World_OCaml__Functional_Programming_for_the_Masses.pdf?event-type=FTLA"
+  },
+  {
+    "bookId": 101,
+    "title": "The Elements of Programming Style",
+    "author": "Brian W. Kernighan, P.J. Plauger",
+    "description": "Classic guidance on writing clear and robust programs and good programming style.",
+    "progLang": "C",
+    "category": "Programming",
+    "tag": [
+      "style",
+      "guidelines",
+      "clarity"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/5gTr0JPs/101.jpg",
+    "downLink": "https://docenti.ing.unipi.it/~a009435/issw/extra/kp_elems_of_pgmng_sty.pdf"
+  },
+  {
+    "bookId": 102,
+    "title": "Refactoring to Patterns",
+    "author": "Joshua Kerievsky",
+    "description": "Combines refactoring techniques with design patterns to evolve designs gradually.",
+    "progLang": "Java",
+    "category": "Refactoring",
+    "tag": [
+      "refactoring",
+      "patterns",
+      "design"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/JWWZMgx9/102.jpg",
+    "downLink": "http://www.tarrani.net/RefactoringToPatterns.pdf"
+  },
+  {
+    "bookId": 103,
+    "title": "Implementing Domain-Driven Design",
+    "author": "Vaughn Vernon",
+    "description": "Practical guidance for applying Domain-Driven Design in real projects.",
+    "progLang": "Java",
+    "category": "Architecture",
+    "tag": [
+      "ddd",
+      "implementation",
+      "patterns"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/YFQQxcvP/103.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/AW.Implementing.Domain-Driven.Design.www.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 104,
+    "title": "Lean Software Development",
+    "author": "Mary Poppendieck, Tom Poppendieck",
+    "description": "Lean principles applied to software development for fast, quality delivery.",
+    "progLang": "N/A",
+    "category": "Process",
+    "tag": [
+      "lean",
+      "process",
+      "agile"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/4nfQLmqr/104.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321150783/samplepages/0321150783.pdf"
+  },
+  {
+    "bookId": 105,
+    "title": "Accelerate: The Science of Lean Software and DevOps",
+    "author": "Nicole Forsgren, Jez Humble, Gene Kim",
+    "description": "Empirical research on what drives high performance in software organizations.",
+    "progLang": "N/A",
+    "category": "Management",
+    "tag": [
+      "devops",
+      "metrics",
+      "performance"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/B5yjYf3h/105.jpg",
+    "downLink": "https://ebooks.karbust.me/Technology/Accelerate%20The%20Science%20of%20Lean%20Software%20and%20DevOps%20Building%20and%20Scaling%20High%20Performing%20Technology%20Organizations%20by%20Nicole%20Forsgren%20Jez%20Humble%20Gene%20Kim.pdf"
+  },
+  {
+    "bookId": 106,
+    "title": "The DevOps Handbook",
+    "author": "Gene Kim, Jez Humble, Patrick Debois, John Willis",
+    "description": "Practical practices for implementing DevOps and improving deployment flow.",
+    "progLang": "N/A",
+    "category": "DevOps",
+    "tag": [
+      "devops",
+      "practices",
+      "automation"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/xtqjwGCC/106.jpg",
+    "downLink": "https://dl.faghatketab.ir/Books/Computer/Programming/WebProgramming/The.DevOps.Handbook_faghatketab.ir.pdf"
+  },
+  {
+    "bookId": 107,
+    "title": "Microservice Patterns",
+    "author": "Chris Richardson",
+    "description": "Patterns for designing, testing, and deploying microservice architectures.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "microservices",
+      "patterns",
+      "testing"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/VY5RQvW4/107.jpg",
+    "downLink": "https://allfile.me/loading/?t=Microservice%20Patterns%20%20With%20Examples%20In%20Java&s=ZG8tc2VydmVyMS5zZnMudXdtLmVkdQ"
+  },
+  {
+    "bookId": 108,
+    "title": "Building Evolutionary Architectures",
+    "author": "Rebecca Parsons, Neal Ford, Patrick Kua",
+    "description": "Architectural fitness functions and practices for evolutionary systems.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "evolutionary",
+      "architecture",
+      "fitness"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/gLPyNqj1/108.jpg",
+    "downLink": "https://agorism.dev/book/systems/Neal%20Ford%2C%20Rebecca%20Parsons%2C%20Patrick%20Kua%20-%20Building%20Evolutionary%20Architectures_%20Support%20Constant%20Change%20%282017%2C%20O%E2%80%99Reilly%29.pdf"
+  },
+  {
+    "bookId": 109,
+    "title": "97 Things Every Programmer Should Know",
+    "author": "-edited by Kevlin Henney",
+    "description": "Collection of essays with practical insights and programming wisdom from experts.",
+    "progLang": "Multiple",
+    "category": "Career",
+    "tag": [
+      "advice",
+      "essays",
+      "wisdom"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/8gXGdw52/109.jpg",
+    "downLink": "https://www.cs.dartmouth.edu/~cs50/Reading/97_Things_Every_Programmer_Should_Know.pdf"
+  },
+  {
+    "bookId": 110,
+    "title": "The Art of UNIX Programming",
+    "author": "Eric S. Raymond",
+    "description": "Philosophy and design principles underlying UNIX culture and tools.",
+    "progLang": "C/Shell",
+    "category": "Systems",
+    "tag": [
+      "unix",
+      "philosophy",
+      "tools"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/0pVCLFnC/110.jpg",
+    "downLink": "https://cdn.nakamotoinstitute.org/docs/taoup.pdf"
+  },
+  {
+    "bookId": 111,
+    "title": "The Practice of Programming",
+    "author": "Brian W. Kernighan, Rob Pike",
+    "description": "Practical programming advice, performance, testing and debugging techniques.",
+    "progLang": "C",
+    "category": "Programming",
+    "tag": [
+      "practice",
+      "performance",
+      "testing"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/YC0x9wn/111.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Gentoomen%20Library/Software%20Engineering/B.W.Kernighan%2C%20R.Pike%20-%20The%20Practice%20of%20Programming.pdf"
+  },
+  {
+    "bookId": 112,
+    "title": "Domain-Specific Languages",
+    "author": "Martin Fowler",
+    "description": "Design and implementation of DSLs, with examples and strategies.",
+    "progLang": "Multiple",
+    "category": "Language Design",
+    "tag": [
+      "dsl",
+      "language-design",
+      "parsing"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/Ld6k8n8N/112.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321712943/samplepages/0321712943.pdf"
+  },
+  {
+    "bookId": 113,
+    "title": "The Cathedral & the Bazaar",
+    "author": "Eric S. Raymond",
+    "description": "Influential essays on open-source development models and software collaboration.",
+    "progLang": "N/A",
+    "category": "Open Source",
+    "tag": [
+      "open-source",
+      "process",
+      "community"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/3Y4w6Dwg/113.jpg",
+    "downLink": "https://monoskop.org/images/e/e0/Raymond_Eric_S_The_Cathedral_and_the_Bazaar_rev_ed.pdf"
+  },
+  {
+    "bookId": 114,
+    "title": "Building Secure and Reliable Systems",
+    "author": "Heather Adkins et al.",
+    "description": "Practical guidance on security, reliability and building resilient systems at scale.",
+    "progLang": "Multiple",
+    "category": "Security",
+    "tag": [
+      "security",
+      "reliability",
+      "ops"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/HLMvwsBw/114.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Books/Computer%20science/building_secure_and_reliable_systems.pdf"
+  },
+  {
+    "bookId": 115,
+    "title": "Security Engineering",
+    "author": "Ross J. Anderson",
+    "description": "Broad and deep treatment of security principles, threats and real-world systems.",
+    "progLang": "Multiple",
+    "category": "Security",
+    "tag": [
+      "security",
+      "engineering",
+      "threat-modeling"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/rRZt4QMp/115.jpg",
+    "downLink": "https://www.cl.cam.ac.uk/archive/rja14/Papers/SEv3.pdf"
+  },
+  {
+    "bookId": 116,
+    "title": "Computer Networks",
+    "author": "Andrew S. Tanenbaum, David J. Wetherall",
+    "description": "Comprehensive textbook on networking principles, protocols and practice.",
+    "progLang": "N/A",
+    "category": "Networking",
+    "tag": [
+      "networks",
+      "protocols",
+      "design"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/Qj6Lkxzc/116.jpg",
+    "downLink": "https://csc-knu.github.io/sys-prog/books/Andrew%20S.%20Tanenbaum%20-%20Computer%20Networks.pdf"
+  },
+  {
+    "bookId": 117,
+    "title": "Introduction to Information Retrieval",
+    "author": "Christopher D. Manning, Prabhakar Raghavan, Hinrich Schütze",
+    "description": "Core techniques for information retrieval and search engines, indexing and ranking.",
+    "progLang": "Python/Java",
+    "category": "Search",
+    "tag": [
+      "information-retrieval",
+      "search",
+      "nlp"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/pjJTQ7HT/117.jpg",
+    "downLink": "https://nlp.stanford.edu/IR-book/pdf/irbookonlinereading.pdf"
+  },
+  {
+    "bookId": 118,
+    "title": "Mining of Massive Datasets",
+    "author": "Jure Leskovec, Anand Rajaraman, Jeffrey David Ullman",
+    "description": "Techniques and algorithms for large-scale data mining and graph mining.",
+    "progLang": "Python/Scala",
+    "category": "Data Science",
+    "tag": [
+      "big-data",
+      "graph",
+      "mining"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/N2XyHxMC/118.jpg",
+    "downLink": "http://infolab.stanford.edu/~ullman/mmds/book.pdf"
+  },
+  {
+    "bookId": 119,
+    "title": "Applied Cryptography",
+    "author": "Bruce Schneier",
+    "description": "Comprehensive reference on cryptographic algorithms, protocols and practical considerations.",
+    "progLang": "C",
+    "category": "Security",
+    "tag": [
+      "cryptography",
+      "algorithms",
+      "protocols"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/G4ZdqYkL/119.jpg",
+    "downLink": "https://mrajacse.wordpress.com/wp-content/uploads/2012/01/applied-cryptography-2nd-ed-b-schneier.pdf"
+  },
+  {
+    "bookId": 120,
+    "title": "Serious Python",
+    "author": "Julien Danjou",
+    "description": "Advanced Python techniques for robust, professional code and production systems.",
+    "progLang": "Python",
+    "category": "Programming Language",
+    "tag": [
+      "python",
+      "advanced",
+      "production"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/9mtkzJtQ/120.jpg",
+    "downLink": "https://someplace-else.neocities.org/books/Serious%20Python.pdf"
+  },
+  {
+    "bookId": 121,
+    "title": "Effective Python",
+    "author": "Brett Slatkin",
+    "description": "59 specific ways to write better Python code with concrete examples.",
+    "progLang": "Python",
+    "category": "Programming Language",
+    "tag": [
+      "python",
+      "best-practices",
+      "tips"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/0jm35W26/121.jpg",
+    "downLink": "https://www.krishnagudi.com/wp-content/uploads/2023/05/Effective-Python-Brett-Slatkin.pdf"
+  },
+  {
+    "bookId": 122,
+    "title": "High Performance Python",
+    "author": "Micha Gorelick, Ian Ozsvald",
+    "description": "Techniques for profiling and improving Python performance in CPU and memory usage.",
+    "progLang": "Python",
+    "category": "Performance",
+    "tag": [
+      "performance",
+      "python",
+      "profiling"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/MDNsxS1c/122.jpg",
+    "downLink": "https://dl.hellodigi.ir/dl.hellodigi.ir/dl/book/High%20Performance%20Python.pdf"
+  },
+  {
+    "bookId": 123,
+    "title": "Introduction to Algorithms: A Creative Approach",
+    "author": "Some authors",
+    "description": "Algorithmic problem solving with emphasis on creativity and practical application.",
+    "progLang": "Pseudo-code",
+    "category": "Algorithms",
+    "tag": [
+      "algorithms",
+      "creative",
+      "problem-solving"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/wrP0zHtj/123.jpg",
+    "downLink": "https://blogtailieublog.wordpress.com/wp-content/uploads/2017/05/introduction-to-algorithms-by-udi-manber.pdf"
+  },
+  {
+    "bookId": 124,
+    "title": "The Elements of Computing Systems (Nand2Tetris)",
+    "author": "Noam Nisan, Shimon Schocken",
+    "description": "Build a computer from first principles: hardware through OS and compiler in projects.",
+    "progLang": "Hack",
+    "category": "Computer Science",
+    "tag": [
+      "hardware",
+      "software",
+      "projects"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/Mkc52chd/124.jpg",
+    "downLink": "https://mrce.in/ebooks/Computing%20Systems%20Elements%202nd%20Ed.pdf"
+  },
+  {
+    "bookId": 125,
+    "title": "Make: Electronics",
+    "author": "Charles Platt",
+    "description": "Hands-on electronics and hardware projects for beginners that complement systems programming.",
+    "progLang": "N/A",
+    "category": "Hardware",
+    "tag": [
+      "hardware",
+      "electronics",
+      "projects"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/8gspxgTQ/125.jpg",
+    "downLink": "https://arl.human.cornell.edu/linked%20docs/Make%20-%20Electronics.pdf"
+  },
+  {
+    "bookId": 126,
+    "title": "Computer Systems: A Programmer's Perspective",
+    "author": "Randal E. Bryant, David R. O'Hallaron",
+    "description": "Understanding how software maps to hardware: memory, processes, linking and performance.",
+    "progLang": "C",
+    "category": "Systems",
+    "tag": [
+      "systems",
+      "performance",
+      "hardware"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/MDKPr5Rr/126.jpg",
+    "downLink": "https://www.cs.sfu.ca/~ashriram/Courses/CS295/assets/books/CSAPP_2016.pdf"
+  },
+  {
+    "bookId": 127,
+    "title": "The Practice of Cloud System Administration",
+    "author": "Thomas A. Limoncelli et al.",
+    "description": "Operational guidance for running and automating cloud-hosted services.",
+    "progLang": "Multiple",
+    "category": "Operations",
+    "tag": [
+      "cloud",
+      "ops",
+      "sre"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/Vcj58Sdm/127.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321943187/samplepages/9780321943187.pdf"
+  },
+  {
+    "bookId": 128,
+    "title": "Docker: Up & Running",
+    "author": "Karl Matthias, Sean P. Kane",
+    "description": "Practical guide to containerization with Docker and related workflow patterns.",
+    "progLang": "N/A",
+    "category": "DevOps",
+    "tag": [
+      "docker",
+      "containers",
+      "deployment"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/svj9CzgB/128.jpg",
+    "downLink": "https://imaster.academy/contenidos-tematicos/2022/ciclo4/Programacion/Ciclo%204A/Semana_6/01_Material_Apoyo/Docker.pdf"
+  },
+  {
+    "bookId": 129,
+    "title": "Kubernetes Up & Running",
+    "author": "Brendan Burns, Joe Beda, Kelsey Hightower",
+    "description": "Practical introduction and patterns for orchestrating containers with Kubernetes.",
+    "progLang": "N/A",
+    "category": "DevOps",
+    "tag": [
+      "kubernetes",
+      "orchestration",
+      "containers"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/JFw10tLZ/129.jpg",
+    "downLink": "https://eddiejackson.net/azure/Kubernetes_book.pdf"
+  },
+  {
+    "bookId": 130,
+    "title": "Learning SQL",
+    "author": "Alan Beaulieu",
+    "description": "Practical introduction to SQL querying, data modeling and relational concepts.",
+    "progLang": "SQL",
+    "category": "Databases",
+    "tag": [
+      "sql",
+      "queries",
+      "relational"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/bM7Hvp5L/130.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/languages/sql/mysql/Alan_Beaulieu-Learning_SQL-EN.pdf"
+  },
+  {
+    "bookId": 131,
+    "title": "NoSQL Distilled",
+    "author": "Pramod J. Sadalage, Martin Fowler",
+    "description": "Concise overview of NoSQL systems, design trade-offs and use cases.",
+    "progLang": "N/A",
+    "category": "Databases",
+    "tag": [
+      "nosql",
+      "design",
+      "tradeoffs"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/PGmQp9cS/131.jpg",
+    "downLink": "https://www.bigdata.ir/wp-content/uploads/2016/08/6C594096C6E33AE41A6D365F2C4588C6.pdf"
+  },
+  {
+    "bookId": 132,
+    "title": "Designing APIs with Swagger and OpenAPI",
+    "author": "Joshua S. Ponelat , Lukas Rosenstock",
+    "description": "Practical guide to designing, documenting and testing RESTful APIs using OpenAPI.",
+    "progLang": "Multiple",
+    "category": "APIs",
+    "tag": [
+      "api",
+      "openapi",
+      "rest"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/B5XL5ybP/132.jpg",
+    "downLink": "https://dl.ebooksworld.ir/books/Designing.APIs.with.Swagger.and.OpenAPI.Ponelat.Rosenstock.Manning.9781617296284.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 133,
+    "title": "RESTful Web APIs",
+    "author": "Leonard Richardson, Mike Amundsen, Sam Ruby",
+    "description": "Design principles and patterns for building RESTful web services.",
+    "progLang": "Multiple",
+    "category": "APIs",
+    "tag": [
+      "rest",
+      "api",
+      "design"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/Rk0cD0YC/133.jpg",
+    "downLink": "https://pepa.holla.cz/wp-content/uploads/2016/01/RESTful-Web-APIs.pdf"
+  },
+  {
+    "bookId": 134,
+    "title": "Designing Distributed Systems",
+    "author": "Brendan Burns",
+    "description": "Design patterns for distributed systems using containers and cloud-native concepts.",
+    "progLang": "Multiple",
+    "category": "Distributed Systems",
+    "tag": [
+      "distributed",
+      "patterns",
+      "cloud-native"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/MxygH61M/134.jpg",
+    "downLink": "http://103.203.175.90:81/fdScript/RootOfEBooks/E%20Book%20collection%20-%202025/CSE%20%20IT%20AIDS%20ML/Designing_Distributed_Systems_Patterns_and_Paradigms_for_Scalable.pdf"
+  },
+  {
+    "bookId": 135,
+    "title": "Programming Principles and Practice Using C++",
+    "author": "Bjarne Stroustrup",
+    "description": "Introduction to programming and C++ by the language creator, emphasizing good design.",
+    "progLang": "C++",
+    "category": "Programming Language",
+    "tag": [
+      "c++",
+      "education",
+      "design"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/67Ct8P61/135.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321992789/samplepages/9780321992789.pdf"
+  },
+  {
+    "bookId": 136,
+    "title": "C Programming: A Modern Approach",
+    "author": "K. N. King",
+    "description": "Clear, modern introduction to C language for learners and practitioners.",
+    "progLang": "C",
+    "category": "Programming Language",
+    "tag": [
+      "c",
+      "introductory",
+      "reference"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/wFxW8Xn8/136.jpg",
+    "downLink": "https://all4pdfs.com/download/4868367-c-programming-a-modern-approach-2nd-edition"
+  },
+  {
+    "bookId": 137,
+    "title": "Advanced Programming in the UNIX Environment",
+    "author": "W. Richard Stevens, Stephen A. Rago",
+    "description": "In-depth reference for UNIX system programming and APIs.",
+    "progLang": "C",
+    "category": "Systems",
+    "tag": [
+      "unix",
+      "system-programming",
+      "apIs"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/hFWMHyq2/137.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780321637734/samplepages/0321637739.pdf"
+  },
+  {
+    "bookId": 138,
+    "title": "Concurrency in Go",
+    "author": "Katherine Cox-Buday",
+    "description": "Practical guide to concurrency patterns and idioms in Go.",
+    "progLang": "Go",
+    "category": "Concurrency",
+    "tag": [
+      "go",
+      "concurrency",
+      "patterns"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/7JdB6M2d/138.jpg",
+    "downLink": "https://edu.anarcho-copy.org/Programming%20Languages/Go/Concurrency%20in%20Go.pdf"
+  },
+  {
+    "bookId": 139,
+    "title": "The Go Programming Language",
+    "author": "Alan A. A. Donovan, Brian W. Kernighan",
+    "description": "authoritative book on Go language fundamentals, idioms and libraries.",
+    "progLang": "Go",
+    "category": "Programming Language",
+    "tag": [
+      "go",
+      "reference",
+      "systems"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/9ks4X7dh/139.jpg",
+    "downLink": "http://www.cs.uniroma2.it/upload/2017/TSC/The%20Go%20Programming%20Language.pdf"
+  },
+  {
+    "bookId": 140,
+    "title": "Effective Go Recipes",
+    "author": "Miki Tebeka",
+    "description": "Style and idiomatic guidance for writing Go programs.",
+    "progLang": "Go",
+    "category": "Programming Language",
+    "tag": [
+      "go",
+      "solutions",
+      "idioms"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/j9Skvrgd/140.jpg",
+    "downLink": "http://103.203.175.90:81/fdScript/RootOfEBooks/E%20Book%20collection%20-%202025%20-%20A/CSE%20%20IT%20AIDS%20ML/Effective_Go_Recipes_Fast_Solutions_to_Common_Tasks_Miki_Tebeka.pdf"
+  },
+  {
+    "bookId": 141,
+    "title": "Reactive Design Patterns",
+    "author": "Roland Kuhn, Brian Hanafee, Jamie Allen",
+    "description": "Patterns for building responsive, resilient and scalable reactive systems.",
+    "progLang": "Scala/Java",
+    "category": "Architecture",
+    "tag": [
+      "reactive",
+      "patterns",
+      "resilience"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/WvFDL0j1/141.jpg",
+    "downLink": "https://content.lightbend.com/hubfs/collateral/ebook/ebook_reactive_design_patterns.pdf"
+  },
+  {
+    "bookId": 142,
+    "title": "Scala for the Impatient",
+    "author": "Cay S. Horstmann",
+    "description": "Concise, practical introduction to Scala for experienced developers.",
+    "progLang": "Scala",
+    "category": "Programming Language",
+    "tag": [
+      "scala",
+      "practical",
+      "introductory"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/Nd0qsYFR/142.jpg",
+    "downLink": "https://fileadmin.cs.lth.se/scala/scala-impatient.pdf"
+  },
+  {
+    "bookId": 143,
+    "title": "Effective JavaScript",
+    "author": "David Herman",
+    "description": "Practical advice and patterns for writing effective JavaScript programs.",
+    "progLang": "JavaScript",
+    "category": "Programming Language",
+    "tag": [
+      "javascript",
+      "best-practices",
+      "patterns"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/Pvn7dj4X/143.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/languages/escss/style/David_Herman-Effective_JavaScript-EN.pdf"
+  },
+  {
+    "bookId": 144,
+    "title": "Learning Web Design",
+    "author": "Jennifer Niederst Robbins",
+    "description": "Foundational guide to HTML, CSS, and web design basics for beginners.",
+    "progLang": "HTML/CSS",
+    "category": "Frontend",
+    "tag": [
+      "html",
+      "css",
+      "web"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/fzh67XJf/144.jpg",
+    "downLink": "https://files.addictbooks.com/wp-content/uploads/2024/04/Learning-Web-Design-5th-Edition.pdf"
+  },
+  {
+    "bookId": 145,
+    "title": "CSS: The Definitive Guide",
+    "author": "Eric A. Meyer, Estelle Weyl",
+    "description": "Comprehensive guide to CSS layout, selectors, and modern techniques.",
+    "progLang": "CSS",
+    "category": "Frontend",
+    "tag": [
+      "css",
+      "layout",
+      "design"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/7JPqyf9K/145.jpg",
+    "downLink": "http://ommolketab.ir/aaf-lib/3is96dr3kb27mhirroqj76fb7lzc3j.pdf"
+  },
+  {
+    "bookId": 146,
+    "title": "JavaScript: The Good Parts",
+    "author": "Douglas Crockford",
+    "description": "Concise opinionated guide to the most reliable and effective parts of JavaScript.",
+    "progLang": "JavaScript",
+    "category": "Programming Language",
+    "tag": [
+      "javascript",
+      "best-parts",
+      "opinion"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/8DWRgNzb/146.jpg",
+    "downLink": "https://andersonguelphjs.github.io/OReilly_JavaScript_The_Good_Parts_May_2008.pdf"
+  },
+  {
+    "bookId": 147,
+    "title": "The Humane Interface",
+    "author": "Jef Raskin",
+    "description": "Design principles for human-centered user interfaces and interaction simplicity.",
+    "progLang": "N/A",
+    "category": "UI/UX",
+    "tag": [
+      "ui",
+      "human-centered",
+      "interaction"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/gb34LNtd/147.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/the-humane-interface.pdf"
+  },
+  {
+    "bookId": 148,
+    "title": "The Pragmatic Programmer: 20th Anniversary Edition",
+    "author": "Andrew Hunt, David Thomas",
+    "description": "Updated edition of the classic pragmatic guidance and practices for developers.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "pragmatic",
+      "best-practices",
+      "career"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/Df29r89G/148.jpg",
+    "downLink": "https://picture.iczhiku.com/resource/eetop/sYKdWjSKWHEehVcb.pdf"
+  },
+  {
+    "bookId": 149,
+    "title": "Patterns, Principles, and Practices of Domain-Driven Design",
+    "author": "Scott Millett, Nick Tune",
+    "description": "Comprehensive guide to applying DDD patterns, strategic design and implementation.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "ddd",
+      "strategic-design",
+      "practical"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/My4Gs5Pm/149.jpg",
+    "downLink": "https://content.e-bookshelf.de/media/reading/L-3518835-7a667ab463.pdf"
+  },
+  {
+    "bookId": 150,
+      "title": "Refactoring: Ruby Edition",
+    "author": "Jay Fields et al.",
+    "description": "Refactoring techniques and examples applied to Ruby projects.",
+    "progLang": "Ruby",
+    "category": "Refactoring",
+    "tag": [
+      "refactoring",
+      "ruby",
+      "techniques"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/vMDrkZj/150.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/languages/ruby/style/Jay_Fields_Shane_Harvie-Refactoring_Ruby_Edition-EN.pdf"
+  },
+  {
+    "bookId": 151,
+    "title": "The Practice of System and Network Administration",
+    "author": "Thomas A. Limoncelli, Christina J. Hogan, Strata R. Chalup",
+    "description": "Operational best practices for system and network administrators in production environments.",
+    "progLang": "N/A",
+    "category": "Operations",
+    "tag": [
+      "ops",
+      "network",
+      "best-practices"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/HLCkLrgB/151.jpg",
+    "downLink": "https://lira.epac.to/DOCS-TECH/Networking/Administration/The%20Practice%20of%20System%20and%20Network%20Administration%202nd%20Edition.pdf"
+  },
+  {
+    "bookId": 152,
+    "title": "Machine Learning Engineering",
+    "author": "Andriy Burkov",
+    "description": "Practical guide to productionizing machine learning systems and ML engineering essentials.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "mlops",
+      "production",
+      "engineering"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/KxK2JwCQ/152.jpg",
+    "downLink": "https://soclibrary.futa.edu.ng/books/Machine%20Learning%20Engineering%20(Andriy%20Burkov)%20(Z-Library).pdf"
+  },
+  {
+    "bookId": 153,
+    "title": "Data Visualization: A Practical Introduction",
+    "author": "Kieran Healy",
+    "description": "Introduction to data visualization principles and practice with examples.",
+    "progLang": "R",
+    "category": "Data Science",
+    "tag": [
+      "visualization",
+      "data-viz",
+      "practice"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/93hxKWx5/153.jpg",
+    "downLink": "https://jwmason.org/wp-content/uploads/2021/08/Kieran-Healy-Data-Visualization_-A-Practical-Introduction-Princeton-University-Press-2019.pdf"
+  },
+  {
+    "bookId": 154,
+    "title": "Storytelling with Data",
+    "author": "Cole Nussbaumer Knaflic",
+    "description": "Practical techniques for effective data communication and visualization.",
+    "progLang": "N/A",
+    "category": "Data Science",
+    "tag": [
+      "storytelling",
+      "visualization",
+      "communication"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/FqcqfW8G/154.jpg",
+    "downLink": "https://luutruvn.com/wp-content/uploads/2025/03/Storytelling-with-Data_-A-Data-Visualization-Guide-for-Business-Professionals-PDFDrive-.pdf"
+  },
+  {
+    "bookId": 155,
+    "title": "Python for Data Analysis",
+    "author": "Wes McKinney",
+    "description": "Practical data analysis techniques using pandas, NumPy and the PyData ecosystem.",
+    "progLang": "Python",
+    "category": "Data Science",
+    "tag": [
+      "pandas",
+      "data-analysis",
+      "python"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/wrs8ZN1M/155.jpg",
+    "downLink": "https://www.lkhibra.ma/books/Python-for-Data-Analysis.pdf"
+  },
+  {
+    "bookId": 156,
+    "title": "Scala Cookbook",
+    "author": "Alvin Alexander",
+    "description": "Practical recipes for Scala programming tasks and idioms.",
+    "progLang": "Scala",
+    "category": "Programming Language",
+    "tag": [
+      "scala",
+      "recipes",
+      "practical"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/HDvWqwW9/156.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9781449340339_A24027860/preview-9781449340339_A24027860.pdf"
+  },
+  {
+    "bookId": 157,
+    "title": "Effective TypeScript",
+    "author": "Dan Vanderkam",
+    "description": "Best practices and patterns for writing robust TypeScript applications.",
+    "progLang": "TypeScript",
+    "category": "Programming Language",
+    "tag": [
+      "typescript",
+      "best-practices",
+      "patterns"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/HDvWqwW9/156.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/effective-typescript.pdf"
+  },
+  {
+    "bookId": 158,
+    "title": "Programming TypeScript",
+    "author": "Boris Cherny",
+    "description": "Clear guide to TypeScript features, architecture and typing patterns for large apps.",
+    "progLang": "TypeScript",
+    "category": "Programming Language",
+    "tag": [
+      "typescript",
+      "typing",
+      "architecture"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/4RsFKNyh/158.jpg",
+    "downLink": "https://books-library.website/files/books-library.net-10132058Ts3U9.pdf"
+  },
+  {
+    "bookId": 159,
+    "title": "Designing Web APIs",
+    "author": "Brendan Forster",
+    "description": "Principles and patterns to design robust, versioned and secure web APIs.",
+    "progLang": "Multiple",
+    "category": "APIs",
+    "tag": [
+      "api",
+      "versioning",
+      "security"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/gF7B5LWL/159.jpg",
+    "downLink": "https://ebooks.karbust.me/Technology/Designing%20Web%20APIs%20-%20Brenda%20Jin,%20Saurabh%20Sahni,%20Amir%20Shevat-OReilly-9781492026921.pdf"
+  },
+  {
+    "bookId": 160,
+    "title": "Refactoring Databases",
+    "author": "Scott W. Ambler, Pramod J. Sadalage",
+    "description": "Techniques for safely evolving database schemas and refactoring data models.",
+    "progLang": "SQL",
+    "category": "Databases",
+    "tag": [
+      "refactoring",
+      "schema",
+      "databases"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/8gD2wKb4/160.jpg",
+    "downLink": "https://www.pearson.de/media/muster/ext/9780321468055.pdf"
+  },
+  {
+    "bookId": 161,
+    "title": "The Data Warehouse Toolkit",
+    "author": "Ralph Kimball, Margy Ross",
+    "description": "Dimensional modeling techniques and patterns for designing data warehouses.",
+    "progLang": "SQL",
+    "category": "Data Engineering",
+    "tag": [
+      "dw",
+      "dimensional-modeling",
+      "etl"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/ccw5sRtS/161.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/databases/warehouses/Ralph_Kimball_Margy_Ross-The_Data_Warehouse_Toolkit-EN.pdf"
+  },
+  {
+    "bookId": 162,
+    "title": "Fundamentals of Database Systems",
+    "author": "Ramez Elmasri, Shamkant B. Navathe",
+    "description": "Comprehensive textbook on database design, theory and implementation.",
+    "progLang": "SQL",
+    "category": "Databases",
+    "tag": [
+      "databases",
+      "theory",
+      "design"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/nqbcQdLT/162.jpg",
+    "downLink": "https://www.auhd.edu.ye/upfiles/elibrary/Azal2020-01-22-12-28-11-76901.pdf"
+  },
+  {
+    "bookId": 163,
+    "title": "Learning from Data (a short course)",
+    "author": "Yaser S. Abu-Mostafa, Malik Magdon-Ismail, Hsuan-Tien Lin",
+    "description": "Concise introduction to machine learning theory and practice.",
+    "progLang": "Matlab/Python",
+    "category": "Machine Learning",
+    "tag": [
+      "ml",
+      "theory",
+      "learning"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/YFf9Wv2d/163.jpg",
+    "downLink": "https://mrce.in/ebooks/Learning%20From%20Data.pdf"
+  },
+  {
+    "bookId": 164,
+    "title": "Deep Learning with Python",
+    "author": "François Chollet",
+    "description": "Practical deep learning guide using Keras with intuitive explanations and examples.",
+    "progLang": "Python",
+    "category": "Deep Learning",
+    "tag": [
+      "keras",
+      "deep-learning",
+      "practical"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/HpKsGs1y/164.jpg",
+    "downLink": "https://tanthiamhuat.wordpress.com/wp-content/uploads/2018/03/deeplearningwithpython.pdf"
+  },
+  {
+    "bookId": 165,
+    "title": "Pattern Recognition",
+    "author": "Some Classic author",
+    "description": "Foundational material on pattern recognition methods used in ML and vision.",
+    "progLang": "N/A",
+    "category": "Machine Learning",
+    "tag": [
+      "pattern-recognition",
+      "vision",
+      "ml"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/FbLxsZnG/37.jpg",
+    "downLink": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+  },
+  {
+    "bookId": 166,
+    "title": "Hands-On Natural Language Processing with Python",
+    "author": "Some author",
+    "description": "Applied NLP techniques using modern Python libraries and transformer models.",
+    "progLang": "Python",
+    "category": "NLP",
+    "tag": [
+      "nlp",
+      "transformers",
+      "practical"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/fVs2wbyD/166.jpg",
+    "downLink": "https://tjzhifei.github.io/resources/NLTK.pdf"
+  },
+  {
+    "bookId": 167,
+    "title": "Transformers for Natural Language Processing",
+    "author": "Denis Rothman",
+    "description": "Practical introduction to transformer architectures and applications in NLP.",
+    "progLang": "Python",
+    "category": "NLP",
+    "tag": [
+      "transformers",
+      "nlp",
+      "deep-learning"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/zW2d1jKf/167.jpg",
+    "downLink": "https://landing.deepset.ai/hubfs/Ebooks/oreilly_chapter_excerpt_nlpt.pdf"
+  },
+  {
+    "bookId": 168,
+    "title": "Generative Deep Learning",
+    "author": "David Foster",
+    "description": "Guide to generative models: GANs, VAEs and modern generative techniques.",
+    "progLang": "Python",
+    "category": "Deep Learning",
+    "tag": [
+      "generative-ai",
+      "gans",
+      "vae"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/xtpbkv3H/168.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/generative-deep-learning.pdf"
+  },
+  {
+    "bookId": 169,
+    "title": "Deep Reinforcement Learning Hands-On",
+    "author": "Maxim Lapan",
+    "description": "Practical approaches to reinforcement learning with hands-on projects using PyTorch.",
+    "progLang": "Python",
+    "category": "Reinforcement Learning",
+    "tag": [
+      "reinforcement-learning",
+      "pytorch",
+      "projects"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/x8CcSm97/169.jpg",
+    "downLink": "https://arxiv.org/pdf/2201.02135"
+  },
+  {
+    "bookId": 170,
+    "title": "Pro Cloud-Native Java EE Apps",
+    "author": "Luqman Saeed , Ghazy Abdallah",
+    "description": "Practical patterns for building cloud-native apps with containers and serverless.",
+    "progLang": "Java",
+    "category": "Cloud",
+    "tag": [
+      "cloud-native",
+      "serverless",
+      "containers"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/pvT00GXZ/170.jpg",
+    "downLink": "https://content.e-bookshelf.de/media/reading/L-26044190-3be4fe7627.pdf"
+  },
+  {
+    "bookId": 171,
+    "title": "Serverless Architectures on AWS",
+    "author": "Peter Sbarski",
+    "description": "Patterns and best practices for architecting serverless applications on AWS.",
+    "progLang": "Multiple",
+    "category": "Cloud",
+    "tag": [
+      "serverless",
+      "aws",
+      "patterns"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/8g0ZF09n/171.jpg",
+    "downLink": "https://d1.awsstatic.com/whitepapers/serverless-architectures-with-aws-lambda.pdf"
+  },
+  {
+    "bookId": 172,
+    "title": "Learning TensorFlow",
+    "author": "Tom Hope, Yehezkel S. Resheff, Itay Lieder",
+    "description": "Hands-on guide to building machine learning models using TensorFlow.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "tensorflow",
+      "practical",
+      "deep-learning"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/xTTDQgN/172.jpg",
+    "downLink": "https://pages.cs.wisc.edu/~shivaram/cs744-readings/TensorFlow.pdf"
+  },
+  {
+    "bookId": 173,
+    "title": "The Manager's Path",
+    "author": "Camille Fournier",
+    "description": "Guidance for engineering managers on people management, leadership and careers.",
+    "progLang": "N/A",
+    "category": "Management",
+    "tag": [
+      "management",
+      "leadership",
+      "careers"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/JwpvycXW/173.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/the-manager's-path.pdf"
+  },
+  {
+    "bookId": 174,
+    "title": "Lean from the Trenches",
+    "author": "Henrik Kniberg",
+    "description": "Practical agile and lean techniques applied to real software teams and projects.",
+    "progLang": "N/A",
+    "category": "Process",
+    "tag": [
+      "agile",
+      "lean",
+      "case-study"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/h18m7BkJ/174.jpg",
+    "downLink": "https://media.pragprog.com/titles/hklean/define.pdf"
+  },
+  {
+    "bookId": 175,
+    "title": "Working in Public",
+    "author": "By Various authors",
+    "description": "Practical guidance on open collaboration, documentation and community-driven projects.",
+    "progLang": "N/A",
+    "category": "Open Source",
+    "tag": [
+      "open-source",
+      "community",
+      "collaboration"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/mCTN0dMW/175.jpg",
+    "downLink": "https://arxiv.org/pdf/2308.04766"
+  },
+  {
+    "bookId": 176,
+    "title": "The Software Architect Elevator",
+    "author": "Gregor Hohpe",
+    "description": "Bridges technical architecture and business strategy—how architects operate within organizations.",
+    "progLang": "N/A",
+    "category": "Architecture",
+    "tag": [
+      "architecture",
+      "strategy",
+      "org-design"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/27kVHRpn/176.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/the-software-architect-elevator.pdf"
+  },
+  {
+    "bookId": 177,
+    "title": "Designing Machine Learning Systems",
+    "author": "Various",
+    "description": "Practical considerations for ML system design, monitoring and lifecycle.",
+    "progLang": "Python",
+    "category": "Machine Learning",
+    "tag": [
+      "ml-system-design",
+      "mlops",
+      "monitoring"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/60RVQCFX/177.jpg",
+    "downLink": "https://32931414.s21i.faiusr.com/61/ABUIABA9GAAglOm9ugYomtWegAU.pdf"
+  },
+  {
+    "bookId": 178,
+    "title": "Patterns for Distributed Systems",
+    "author": "Various",
+    "description": "Collection of proven patterns to build scalable distributed systems and services.",
+    "progLang": "Multiple",
+    "category": "Distributed Systems",
+    "tag": [
+      "patterns",
+      "distributed",
+      "scalability"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/0p49qc0J/178.jpg",
+    "downLink": "https://www.thoughtworks.com/content/dam/thoughtworks/documents/books/Patterns_Distributed_Systems_Sample.pdf"
+  },
+  {
+    "bookId": 179,
+    "title": "The Art of Computer Programming, Volume 1",
+    "author": "Donald E. Knuth",
+    "description": " Foundational algorithms, basic techniques and analysis.",
+    "progLang": "Pascal",
+    "category": "Algorithms",
+    "tag": [
+      "knuth",
+      "algorithms",
+      "analysis"
+    ],
+    "rating": 4.8,
+    "coverUrl": "https://i.ibb.co/C5YdG37R/179.jpg",
+    "downLink": "https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/The%20Art%20of%20Computer%20Programming%20(vol.%201_%20Fundamental%20Algorithms)%20(3rd%20ed.)%20%5BKnuth%201997-07-17%5D.pdf"
+  },
+  {
+    "bookId": 180,
+    "title": "The Art of Computer Programming, Volume 2",
+    "author": "Donald E. Knuth",
+    "description": "Continuation covering seminumerical algorithms and assorted topics.",
+    "progLang": "Pascal",
+    "category": "Algorithms",
+    "tag": [
+      "knuth",
+      "seminumerical",
+      "algorithms"
+    ],
+    "rating": 4.8,
+    "coverUrl": "https://i.ibb.co/nhW0v26/180.jpg",
+    "downLink": "https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/The%20Art%20of%20Computer%20Programming%20%28vol.%202_%20Seminumerical%20Algorithms%29%20%283rd%20ed.%29%20%5BKnuth%201997-11-14%5D.pdf"
+  },
+  {
+    "bookId": 181,
+    "title": "The Art of Computer Programming, Volume 3",
+    "author": "Donald E. Knuth",
+    "description": "Advanced topics in sorting, searching and combinatorial algorithms.",
+    "progLang": "Pascal",
+    "category": "Algorithms",
+    "tag": [
+      "knuth",
+      "sorting",
+      "searching"
+    ],
+    "rating": 4.8,
+    "coverUrl": "https://i.ibb.co/RGQSqbw4/181.jpg",
+    "downLink": "https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/The%20Art%20of%20Computer%20Programming%20%28vol.%203_%20Sorting%20and%20Searching%29%20%282nd%20ed.%29%20%5BKnuth%201998-05-04%5D.pdf"
+  },
+  {
+    "bookId": 182,
+    "title": "TCP/IP Illustrated, Volume 1",
+    "author": "W. Richard Stevens",
+    "description": "Detailed exploration of TCP/IP protocols with packet-level examples and analysis.",
+    "progLang": "N/A",
+    "category": "Networking",
+    "tag": [
+      "tcpip",
+      "protocols",
+      "analysis"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/yBsytt2J/182.jpg",
+    "downLink": "https://www.r-5.org/files/books/computers/internals/net/Richard_Stevens-TCP-IP_Illustrated-EN.pdf"
+  },
+  {
+    "bookId": 183,
+    "title": "Domain-Driven Design Distilled",
+    "author": "Vaughn Vernon",
+    "description": "Concise introduction to core DDD concepts and practices for real projects.",
+    "progLang": "Multiple",
+    "category": "Architecture",
+    "tag": [
+      "ddd",
+      "distilled",
+      "practical"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/gMkKVz5F/183.jpg",
+    "downLink": "https://ptgmedia.pearsoncmg.com/images/9780134434421/samplepages/9780134434421.pdf"
+  },
+  {
+    "bookId": 184,
+    "title": "Software Engineering at Google",
+    "author": "Titus Winters, Tom Manshreck, Hyrum Wright",
+    "description": "Practical engineering practices used at Google: style, testing, code health and organization.",
+    "progLang": "Multiple",
+    "category": "Software Engineering",
+    "tag": [
+      "code-health",
+      "testing",
+      "scale"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/Qjf9v4jQ/184.jpg",
+    "downLink": "https://soclibrary.futa.edu.ng/books/Software%20Engineering%20at%20Google%20by%20Hyrum%20Wright,%20Tom%20Manshreck,%20Titus%20Winters%20(z-lib.org).pdf"
+  },
+  {
+    "bookId": 185,
+    "title": "The Site Reliability Workbook",
+    "author": "Betsy Beyer et al.",
+    "description": "Practical exercises and case studies to apply SRE practices in organizations.",
+    "progLang": "Multiple",
+    "category": "SRE",
+    "tag": [
+      "sre",
+      "case-studies",
+      "practical"
+    ],
+    "rating": 4.3,
+    "coverUrl": "https://i.ibb.co/pp0TzWc/185.jpg",
+    "downLink": "https://lrita.github.io/images/posts/com/the-site-reliability-workbook-next18.pdf"
+  },
+  {
+    "bookId": 186,
+    "title": "Practical Vim",
+    "author": "Drew Neil",
+    "description": "Productive editing techniques and workflows for Vim users to be more efficient.",
+    "progLang": "N/A",
+    "category": "Tools",
+    "tag": [
+      "vim",
+      "productivity",
+      "editor"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/NbMStCH/186.jpg",
+    "downLink": "https://digtvbg.com/files/LINUX/Practical%20Vim%20-%20Drew%20Neil_1241.pdf"
+  },
+  {
+    "bookId": 187,
+    "title": "Pro Git",
+    "author": "Scott Chacon, Ben Straub",
+    "description": "Comprehensive guide to Git version control, branching, workflows and internals.",
+    "progLang": "N/A",
+    "category": "Tools",
+    "tag": [
+      "git",
+      "version-control",
+      "workflows"
+    ],
+    "rating": 4.6,
+    "coverUrl": "https://i.ibb.co/Z1MJF1k5/187.jpg",
+    "downLink": "https://progit2.s3.amazonaws.com/en/2016-03-22-f3531/progit-en.1084.pdf"
+  },
+  {
+    "bookId": 188,
+    "title": "Agile Software Development, Principles, Patterns, and Practices",
+    "author": "Robert C. Martin",
+    "description": "Agile principles, object-oriented design and patterns illustrated with examples and exercises.",
+    "progLang": "Java",
+    "category": "Agile",
+    "tag": [
+      "agile",
+      "oop",
+      "patterns"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/9k8Wn1N1/188.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/agile-software-development--principles--patterns--and-practices.pdf"
+  },
+
+  {
+    "bookId": 189,
+    "title": "BDD in Action",
+    "author": "John Ferguson Smart",
+    "description": "Behavior-Driven Development practices and tooling to drive requirements via tests.",
+    "progLang": "Java",
+    "category": "Testing",
+    "tag": [
+      "bdd",
+      "testing",
+      "requirements"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/4gg7ytS0/189.jpg",
+    "downLink": "https://cdn.bookey.app/files/pdf/book/en/bdd-in-action.pdf"
+  },
+  {
+    "bookId": 190,
+    "title": "The Art of Software Testing",
+    "author": "Glenford J. Myers, Corey Sandler, Tom Badgett",
+    "description": "Fundamental principles and practices for software testing strategies.",
+    "progLang": "Multiple",
+    "category": "Testing",
+    "tag": [
+      "testing",
+      "principles",
+      "quality"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/hF0rg4yr/190.jpg",
+    "downLink": "https://malenezi.github.io/malenezi/SE401/Books/114-the-art-of-software-testing-3-edition.pdf"
+  },
+  {
+    "bookId": 191,
+    "title": "A Tour of C++",
+    "author": "Bjarne Stroustrup",
+    "description": "Compact overview of modern C++ language features and standard library.",
+    "progLang": "C++",
+    "category": "Programming Language",
+    "tag": [
+      "c++",
+      "modern",
+      "overview"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/bMZs3rgb/191.jpg",
+    "downLink": "https://elhacker.info/manuales/Lenguajes%20de%20Programacion/C++/A%20Tour%20of%20C++%20-%20Bjarne%20Stroustrup%20(Addison-Wesley,%202014)(193p).pdf"
+  },
+  {
+    "bookId": 192,
+    "title": "C# in Depth",
+    "author": "Jon Skeet",
+    "description": "Deep dive into C# language features, idioms and evolution across versions.",
+    "progLang": "C#",
+    "category": "Programming Language",
+    "tag": [
+      "c#",
+      "deep-dive",
+      "language"
+    ],
+    "rating": 4.7,
+    "coverUrl": "https://i.ibb.co/BKqpLq9k/192.jpg",
+    "downLink": "https://dl.ebooksworld.ir/motoman/Manning.Csharp.in.Depth.4th.Edition.www.EBooksWorld.ir.pdf"
+  },
+  {
+    "bookId": 193,
+    "title": "Building Secure Software",
+    "author": "John Viega, Gary McGraw",
+    "description": "Secure coding principles and development lifecycle practices to reduce vulnerabilities.",
+    "progLang": "Multiple",
+    "category": "Security",
+    "tag": [
+      "secure-coding",
+      "lifecycle",
+      "vulnerabilities"
+    ],
+    "rating": 4.1,
+    "coverUrl": "https://i.ibb.co/HD4kdbJ0/193.jpg",
+    "downLink": "https://www.pearson.de/media/muster/toc/toc_9780672334061.pdf"
+  },
+  {
+    "bookId": 194,
+    "title": "The Art of Deception",
+    "author": "Kevin D. Mitnick",
+    "description": "Social engineering tactics and defenses through case studies and real incidents.",
+    "progLang": "N/A",
+    "category": "Security",
+    "tag": [
+      "social-engineering",
+      "security",
+      "awareness"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/rfmB9CkW/194.jpg",
+    "downLink": "https://ia800102.us.archive.org/4/items/pdfsandebooks/UP/Life%20Skills/Teach%20Yourself%20-%20Body%20Language%20%20Ebooks%20-%20Mantesh/The%20Art%20of%20Deception%20-%20Kevin%20Mitnick.pdf"
+  },
+  {
+    "bookId": 195,
+    "title": "Applied Predictive Modeling",
+    "author": "Max Kuhn, Kjell Johnson",
+    "description": "Applied techniques for predictive modeling, feature engineering and model assessment.",
+    "progLang": "R",
+    "category": "Data Science",
+    "tag": [
+      "predictive-modeling",
+      "feature-engineering",
+      "applied"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/WW5JqBCd/195.jpg",
+    "downLink": "https://vuquangnguyen2016.wordpress.com/wp-content/uploads/2018/03/applied-predictive-modeling-max-kuhn-kjell-johnson_1518.pdf"
+  },
+  {
+    "bookId": 196,
+    "title": "Speech and Language Processing",
+    "author": "Dan Jurafsky, James H. Martin",
+    "description": "Comprehensive text on NLP, speech recognition and language modeling.",
+    "progLang": "Python/Java",
+    "category": "NLP",
+    "tag": [
+      "nlp",
+      "speech",
+      "language-modeling"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/k6MF66v9/196.jpg",
+    "downLink": "https://home.cs.colorado.edu/~martin/SLP/Updates/1.pdf"
+  },
+  {
+    "bookId": 197,
+    "title": "Probabilistic Graphical Models",
+    "author": "Daphne Koller, Nir Friedman",
+    "description": "In-depth treatment of graphical models, inference algorithms and learning.",
+    "progLang": "Matlab/Python",
+    "category": "Machine Learning",
+    "tag": [
+      "graphical-models",
+      "probabilistic",
+      "inference"
+    ],
+    "rating": 4.5,
+    "coverUrl": "https://i.ibb.co/mfxRt2Z/197.jpg",
+    "downLink": "https://www.changjiangcai.com/files/text-books/Koller-and-friedman-probabilistic-graphical-models-2009.pdf"
+  },
+  {
+    "bookId": 198,
+    "title": "Bayesian Reasoning and Machine Learning",
+    "author": "David Barber",
+    "description": "Bayesian approaches to machine learning with practical algorithms and examples.",
+    "progLang": "Matlab/Python",
+    "category": "Machine Learning",
+    "tag": [
+      "bayesian",
+      "ml",
+      "inference"
+    ],
+    "rating": 4.2,
+    "coverUrl": "https://i.ibb.co/dsCBrZh0/198.jpg",
+    "downLink": "http://web4.cs.ucl.ac.uk/staff/D.Barber/textbook/090310.pdf"
+  },
+  {
+    "bookId": 199,
+    "title": "An Introduction to Statistical Learning",
+    "author": "Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani",
+    "description": "A more accessible companion to ESL focused on applied statistical learning with R examples.",
+    "progLang": "R",
+    "category": "Statistics",
+    "tag": [
+      "statistical-learning",
+      "applied",
+      "r"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/bjRYTCZk/199.jpg",
+    "downLink": "https://www.stat.berkeley.edu/~rabbee/s154/ISLR_First_Printing.pdf"
+  },
+  {
+    "bookId": 200,
+    "title": "Practical Programming: An Introduction to Computer Science Using Python",
+    "author": "Plenty of authors",
+    "description": "Introductory programming and CS concepts taught through Python projects and examples.",
+    "progLang": "Python",
+    "category": "Education",
+    "tag": [
+      "introductory",
+      "python",
+      "projects"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/8gz25m4S/200.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Pragmatic%20Programmers/Practical%20Programming.pdf"
+  },
+  {
+    "bookId": 201,
+    "title": "Make It Stick: The Science of Successful Learning",
+    "author": "Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel",
+    "description": "Evidence-based techniques for learning effectively—useful for programmers learning new skills.",
+    "progLang": "N/A",
+    "category": "Learning",
+    "tag": [
+      "learning",
+      "cognitive-science",
+      "study-techniques"
+    ],
+    "rating": 4.4,
+    "coverUrl": "https://i.ibb.co/PZNSmFzc/201.jpg",
+    "downLink": "https://www.hup.harvard.edu/file/feeds/PDF/9780674729018_sample.pdf"
+  },
+  {
+    "bookId": 202,
+    "title": "The Self-Taught Programmer",
+    "author": "Cory Althoff",
+    "description": "Practical roadmap and advice for becoming a software developer without formal training.",
+    "progLang": "Python",
+    "category": "Career",
+    "tag": [
+      "self-taught",
+      "career",
+      "roadmap"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/nMkb4RXw/202.jpg",
+    "downLink": "http://repo.darmajaya.ac.id/4765/1/The%20Self-Taught%20Programmer_%20The%20Definitive%20Guide%20to%20Programming%20Professionally%20%28%20PDFDrive%20%29.pdf"
+  },
+  {
+    "bookId": 203,
+    "title": "The Passionate Programmer",
+    "author": "Chad Fowler",
+    "description": "Career guidance for software developers focusing on continuous learning and marketable skills.",
+    "progLang": "N/A",
+    "category": "Career",
+    "tag": [
+      "career",
+      "growth",
+      "skills"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/TBmgP4wj/203.jpg",
+    "downLink": "https://theswissbay.ch/pdf/Gentoomen%20Library/Programming/Pragmatic%20Programmers/The%20Passionate%20Programmer.pdf"
+  },
+  {
+    "bookId": 204,
+    "title": "Soft Skills: The software developer's life manual",
+    "author": "John Sonmez",
+    "description": "Non-technical guidance covering career, productivity, and lifestyle for developers.",
+    "progLang": "N/A",
+    "category": "Career",
+    "tag": [
+      "soft-skills",
+      "career",
+      "productivity"
+    ],
+    "rating": 4,
+    "coverUrl": "https://i.ibb.co/WJJw73B/204.jpg",
+    "downLink": "https://www.dreamtechpress.com/wp-content/uploads/2019/02/toc_978-93-5119-764-5.pdf"
+  },
+  {
+    "bookId": 205,
+    "title": "The Art of Computer Programming Volume 4A",
+    "author": "Donald E. Knuth",
+    "description": "expansions from Knuth's work offering deep analysis of algorithms and methods.",
+    "progLang": "Pascal",
+    "category": "Algorithms",
+    "tag": [
+      "knuth",
+      "essays",
+      "algorithms"
+    ],
+    "rating": 4.8,
+    "coverUrl": "https://i.ibb.co/HT639bhb/205.jpg",
+    "downLink": "https://api.pageplace.de/preview/DT0400.9780133488876_A23586211/preview-9780133488876_A23586211.pdf"
+  }
+]

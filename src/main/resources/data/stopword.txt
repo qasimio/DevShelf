@@ -1,0 +1,3 @@
+"a","an","the","and","or","but","if","then","else","on","in","at","by","for","with","about","against",
+"between","into","through","during","before","after","above","below","to","from","up","down","of","is",
+"are","was","were","be","been","being","as","that","this","these","those","it","its","I","you","he","she","they"
