@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ui.gui.services.DevShelfService;
 
 import java.io.IOException;
 
@@ -28,31 +27,35 @@ public class BookDetailController {
     @FXML private Button readButton;
 
     private Book book;
-    private Stage stage; // The stage this view is currently in
-    private Scene previousScene; // To go back
+    private Stage stage;
+    private Scene previousScene;
 
+    // Called by MainViewController to pass data in
     public void setBookData(Book book, Stage stage, Scene previousScene) {
         this.book = book;
         this.stage = stage;
         this.previousScene = previousScene;
 
+        // 1. Set Text Data
         fullTitle.setText(book.getTitle());
         authors.setText(book.getAuthor());
-        category.setText("Category: " + book.getCategory());
+        category.setText(book.getCategory());
         rating.setText(book.getRating() + " ★");
         progLang.setText(book.getProgLang());
         descriptionText.setText(book.getDescription());
 
-        // Load Image
+        // 2. Set Image (Async load)
         String url = (book.getCoverUrl() != null && !book.getCoverUrl().isEmpty())
                 ? book.getCoverUrl()
                 : "https://via.placeholder.com/150x200?text=No+Cover";
+
+        // 'true' means load in background to prevent freezing
         largeCoverImage.setImage(new Image(url, true));
     }
 
     @FXML
     private void handleBack() {
-        // Go back to the search list
+        // Return to the list view
         if (stage != null && previousScene != null) {
             stage.setScene(previousScene);
         }
@@ -61,23 +64,27 @@ public class BookDetailController {
     @FXML
     private void handleRead() {
         if (book.getDownLink() == null || book.getDownLink().isEmpty()) {
-            System.out.println("No download link available.");
+            System.out.println("❌ No download link for this book.");
             return;
         }
 
         try {
-            // Open the WebView Window
+            System.out.println("📖 Opening book: " + book.getDownLink());
+
+            // Load the Web Viewer
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/gui/fxml/WebViewWindow.fxml"));
             Parent root = loader.load();
 
+            // Pass the URL to the controller
             WebViewController controller = loader.getController();
             controller.loadUrl(book.getDownLink());
 
+            // Open in new Max Window
             Stage webStage = new Stage();
             webStage.setTitle("Reading: " + book.getTitle());
             webStage.setScene(new Scene(root));
-            webStage.initModality(Modality.APPLICATION_MODAL); // Block other windows until closed
-            webStage.setMaximized(true); // Open full screen for reading
+            webStage.initModality(Modality.APPLICATION_MODAL); // Block background interaction
+            webStage.setMaximized(true);
             webStage.show();
 
         } catch (IOException e) {

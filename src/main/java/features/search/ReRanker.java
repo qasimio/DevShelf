@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReRanker {
 
@@ -50,6 +51,21 @@ public class ReRanker {
             return new HashMap<>();
         }
     }
+
+    /**
+     * Returns the DocIDs of the most clicked books, sorted by popularity.
+     */
+    public List<Integer> getTopTrending(int limit) {
+        return popularityMap.entrySet().stream()
+                // Sort by Value (Count) Descending
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                // Take the top N
+                .limit(limit)
+                // Extract the Key (BookID)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * Re-ranks a list using the Master Formula AND applies tiered boosts.

@@ -7,10 +7,7 @@ import features.search.ReRanker;
 import features.search.Suggester;
 import utils.LoggingService; // (Moved to utils? Check your imports)
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DevShelfService {
@@ -72,6 +69,53 @@ public class DevShelfService {
 
         return new SearchResponse(books, isSuggestion, usedQuery);
     }
+
+    /**
+     * Returns a list of up to 5 titles that start with the given prefix.
+     * Used for Autocomplete.
+     */
+    public List<String> getAutoCompletions(String prefix) {
+        if (prefix == null || prefix.isEmpty()) return Collections.emptyList();
+
+        String lowerPrefix = prefix.toLowerCase();
+
+        return bookMap.values().stream()
+                // Get the title
+                .map(Book::getTitle)
+                // Remove nulls
+                .filter(Objects::nonNull)
+                // Check if it starts with the prefix (Case insensitive)
+                .filter(title -> title.toLowerCase().contains(lowerPrefix))
+                // Keep it unique
+                .distinct()
+                // Limit to 5 suggestions
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<Book> getTrendingBooks() {
+        // 1. Get Top 10 IDs from ReRanker
+        List<Integer> trendingIds = reRanker.getTopTrending(10);
+
+        // 2. Convert IDs to Book Objects
+        List<Book> trendingBooks = new ArrayList<>();
+        for (Integer id : trendingIds) {
+            Book b = bookMap.get(id);
+            if (b != null) {
+                trendingBooks.add(b);
+            }
+        }
+
+        // 3. If no popularity data exists yet (clean install),
+        // just return the first 10 books from the database as a fallback.
+        if (trendingBooks.isEmpty()) {
+            return bookMap.values().stream().limit(10).collect(Collectors.toList());
+        }
+
+        return trendingBooks;
+    }
+
 
     public void logClick(String query, int bookId) {
         System.out.println("🖱️ Click Logged: BookID " + bookId + " for query '" + query + "'");

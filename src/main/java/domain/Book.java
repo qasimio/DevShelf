@@ -6,16 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Book {
-    int bookId;
-    String title;
-    String author;
-    String description;
-    String progLang;
-    String category;
-    String[] tag;
-    float rating;
-    String coverUrl;
-    String downLink;
+    private int bookId;
+    private String title;
+    private String author;
+    private String description;
+    private String progLang;
+    private String category;
+    private String[] tag;
+    private float rating;
+    private String coverUrl;
+    private String downLink;
 
     public Book() {}
 

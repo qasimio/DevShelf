@@ -1,0 +1,24 @@
+/* The container of the suggestions */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 5 5; /* Round bottom corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-padding: 0;
+}
+
+/* Each suggestion row */
+.menu-item {
+    -fx-padding: 10 15 10 15;
+    -fx-background-color: transparent;
+}
+
+/* Hover effect */
+.menu-item:focused {
+    -fx-background-color: #ecf0f1;
+}
+
+/* Text inside the suggestion */
+.menu-item .label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 13px;
+}
