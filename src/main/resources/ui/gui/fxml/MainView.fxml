@@ -10,67 +10,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ui.gui.controllers.MainViewController"
-            stylesheets="@../css/style.css">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.controllers.MainViewController">
 
     <top>
-        <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
-            <Label text="📘 DevShelf" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="28.0" />
-                </font>
-            </Label>
+    <VBox alignment="CENTER" spacing="15.0" style="-     -background-color: #2c3e50; -fx-padding: 20;">
+        <Label text="📘 DevShelf" textFill="#465276">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" spacing="10.0">
+            <Button layoutX="10.0" onAction="#handleHome" style="-fx-background-color: #3782cc; -fx-text-fill: white; -fx-font-size: 14;" text="🏠" textFill="WHITE" />
 
-            <HBox alignment="CENTER" spacing="10.0">
-                <Button layoutX="10.0" onAction="#handleHome"
-                        style="-fx-background-color: #3782cc; -fx-text-fill: white; -fx-font-size: 14;"
-                        text="🏠" textFill="WHITE" />
+            <TextField fx:id="searchField" onAction="#handleSearch" prefWidth="400.0" promptText="Search for books..." style="-fx-font-size: 14; -fx-background-radius: 5;" />
+            <Button fx:id="searchButton" onAction="#handleSearch" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold;" text=" Search 🔍" />
+        </HBox>
 
-                <TextField fx:id="searchField" onAction="#handleSearch"
-                           prefWidth="400.0" promptText="Search for books..."
-                           style="-fx-font-size: 14; -fx-background-radius: 5;" />
+        <HBox alignment="CENTER" spacing="15.0" style="-fx-padding: 10; -fx-background-color: #34495e;">
 
-                <Button fx:id="searchButton" onAction="#handleSearch"
-                        style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text=" Search 🔍" />
-            </HBox>
+            <Label style="-fx-font-weight: bold;" text="Sort:" textFill="#bdc3c7" />
+            <ComboBox fx:id="sortCombo" prefWidth="150.0" promptText="Relevance" style="-fx-background-color: white; -fx-background-radius: 4;" />
 
-            <HBox alignment="CENTER" spacing="15.0" style="-fx-padding: 10; -fx-background-color: #34495e;">
-                <Label style="-fx-font-weight: bold;" text="Sort:" textFill="#bdc3c7" />
-                <ComboBox fx:id="sortCombo" prefWidth="150.0" promptText="Relevance"
-                          style="-fx-background-color: white; -fx-background-radius: 4;" />
+            <Label text="|" textFill="#7f8c8d" />
 
-                <Label text="|" textFill="#7f8c8d" />
+            <Label style="-fx-font-weight: bold;" text="Filter:" textFill="#bdc3c7" />
+            <ComboBox fx:id="categoryCombo" prefWidth="180.0" promptText="All Categories" style="-fx-background-color: white; -fx-background-radius: 4;" />
 
-                <Label style="-fx-font-weight: bold;" text="Filter:" textFill="#bdc3c7" />
-                <ComboBox fx:id="categoryCombo" prefWidth="180.0" promptText="All Categories"
-                          style="-fx-background-color: white; -fx-background-radius: 4;" />
+            <Button onAction="#handleClearFilter" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;" text="clear" />
+        </HBox>
 
-                <Button onAction="#handleClearFilter"
-                        style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;"
-                        text="clear" />
-            </HBox>
-
-            <Label fx:id="statusLabel" textFill="#ecf0f1" />
-        </VBox>
+        <Label fx:id="statusLabel" textFill="#ecf0f1" />
+    </VBox>
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" stylesheets="@../css/style.css">
             <content>
-                <VBox fx:id="resultsContainer" spacing="10.0" style="-fx-padding: 20;" />
+                <VBox fx:id="resultsContainer" spacing="10.0" style="-fx-padding: 20;">
+                </VBox>
             </content>
         </ScrollPane>
     </center>
 
     <bottom>
-        <Label alignment="CENTER"
-               style="-fx-padding: 10; -fx-text-fill: grey;"
-               text="DevShelf v1.0 - Powered by JavaFX"
-               BorderPane.alignment="CENTER" />
+        <Label alignment="CENTER" style="-fx-padding: 10; -fx-text-fill: grey;" text="DevShelf v1.0 - Powered by JavaFX" BorderPane.alignment="CENTER" />
     </bottom>
 
 </BorderPane>
