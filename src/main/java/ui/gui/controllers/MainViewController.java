@@ -268,15 +268,22 @@ public class MainViewController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/gui/fxml/BookDetailView.fxml"));
             Parent detailRoot = loader.load();
+
             BookDetailController controller = loader.getController();
 
             Stage currentStage = (Stage) searchField.getScene().getWindow();
             Scene currentScene = searchField.getScene();
 
-            controller.setBookData(book, currentStage, currentScene);
+            // --- UPDATE THIS METHOD CALL ---
+            // Pass the service so the detail view can get recommendations
+            controller.setBookData(book, service, currentStage, currentScene);
+
             currentStage.setScene(new Scene(detailRoot));
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
+
 }

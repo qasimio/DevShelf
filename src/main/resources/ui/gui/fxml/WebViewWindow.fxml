@@ -10,7 +10,9 @@
             <Button text="Close Reader" onAction="#handleClose"
                     style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" />
 
-            <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
+            <javafx.scene.layout.Region>
+                <HBox.hgrow>ALWAYS</HBox.hgrow>
+            </javafx.scene.layout.Region>
 
             <Button text="🌐 Open in Browser / Download" onAction="#handleOpenExternal"
                     style="-fx-background-color: #3498db; -fx-text-fill: white;" />

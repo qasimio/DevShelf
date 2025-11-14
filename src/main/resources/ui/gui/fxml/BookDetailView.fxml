@@ -44,7 +44,7 @@
 
                         <Separator style="-fx-padding: 10 0;" />
 
-                        <Label text="Programming Language:" textFill="#95a5a6" font="$x3" style="-fx-font-size: 12;" />
+                        <Label text="Programming Language:" textFill="#95a5a6"  style="-fx-font-size: 12;" />
                         <Label fx:id="progLang" text="Pseudo-code" textFill="#34495e" style="-fx-font-weight: bold;" />
 
                         <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS" style="-fx-padding: 20 0 0 0;">
@@ -53,6 +53,8 @@
                         </VBox>
                     </VBox>
                 </HBox>
+
+                <Separator />
 
                 <Separator />
 
@@ -65,7 +67,19 @@
                     </TextFlow>
                 </VBox>
 
+
+                <Separator />
+
+                <VBox spacing="10.0">
+                    <Label text="You Might Also Like" textFill="#2c3e50">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <VBox fx:id="recommendationsContainer" spacing="8.0" />
+                </VBox>
             </VBox>
         </ScrollPane>
     </center>
 </BorderPane>
+

@@ -6,14 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink; // <-- NEW
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox; // <-- NEW
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.Setter;
+import ui.gui.services.DevShelfService; // <-- NEW
 
 import java.io.IOException;
+import java.util.List; // <-- NEW
+
 
 public class BookDetailController {
 
@@ -24,33 +30,69 @@ public class BookDetailController {
     @FXML private Label rating;
     @FXML private Label progLang;
     @FXML private Text descriptionText;
+    @Setter
     @FXML private Button readButton;
+    @FXML private VBox recommendationsContainer;
 
     private Book book;
+    private DevShelfService service;
     private Stage stage;
     private Scene previousScene;
 
     // Called by MainViewController to pass data in
-    public void setBookData(Book book, Stage stage, Scene previousScene) {
+    public void setBookData(Book book, DevShelfService service, Stage stage, Scene previousScene) {
         this.book = book;
+        this.service = service;
         this.stage = stage;
         this.previousScene = previousScene;
 
         // 1. Set Text Data
         fullTitle.setText(book.getTitle());
         authors.setText(book.getAuthor());
-        category.setText(book.getCategory());
+        category.setText("Category: " + book.getCategory());
         rating.setText(book.getRating() + " ★");
         progLang.setText(book.getProgLang());
         descriptionText.setText(book.getDescription());
 
-        // 2. Set Image (Async load)
         String url = (book.getCoverUrl() != null && !book.getCoverUrl().isEmpty())
-                ? book.getCoverUrl()
-                : "https://via.placeholder.com/150x200?text=No+Cover";
-
-        // 'true' means load in background to prevent freezing
+                     ? book.getCoverUrl()
+                     : "https://via.placeholder.com/150x200?text=No+Cover";
         largeCoverImage.setImage(new Image(url, true));
+
+        // --- 2. Load recommendations ---
+        loadRecommendations();
+    }
+
+    /**
+     * NEW: Asks the service for recommendations and builds the UI.
+     */
+    private void loadRecommendations() {
+        // Clear any old recommendations
+        recommendationsContainer.getChildren().clear();
+
+        if (this.service == null || this.book == null) return;
+
+        // Ask the "Brain" for related books
+        List<Book> recommendations = service.getRecommendationsFor(this.book);
+
+        if (recommendations.isEmpty()) {
+            recommendationsContainer.getChildren().add(new Label("No recommendations found."));
+            return;
+        }
+
+        // Build a clickable Hyperlink for each recommendation
+        for (Book recBook : recommendations) {
+            Hyperlink link = new Hyperlink(recBook.getTitle() + " by " + recBook.getAuthor());
+            link.setStyle("-fx-font-size: 14px; -fx-text-fill: #2980b9;");
+
+            // --- This is the "reload" logic ---
+            link.setOnAction(e -> {
+                // "Reloads" this entire page with the new book's data
+                setBookData(recBook, this.service, this.stage, this.previousScene);
+            });
+
+            recommendationsContainer.getChildren().add(link);
+        }
     }
 
     @FXML
@@ -91,4 +133,5 @@ public class BookDetailController {
             e.printStackTrace();
         }
     }
+
 }

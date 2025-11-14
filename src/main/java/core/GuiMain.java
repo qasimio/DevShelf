@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import utils.LoggingService;
 import storage.BookLoader;
@@ -53,12 +54,18 @@ public class GuiMain extends Application {
         LoggingService loggingService = new LoggingService(LOGS_FILE);
         ReRanker reRanker = new ReRanker(bookMap, POPULARITY_FILE);
 
+        // --- NEW: Build the Graph ---
+        System.out.println("Building recommendation graph...");
+        Graph graph = new Graph();
+        graph.buildGraph(books); // This builds the relationships
+        System.out.println("Graph built with " + graph.adjList.size() + " nodes.");
+
         List<String> titles = new ArrayList<>();
         for(Book b : books) if(b.getTitle() != null) titles.add(b.getTitle());
         Suggester suggester = new Suggester(titles, stopWords);
 
         // --- 2. Create the App Brain ---
-        DevShelfService service = new DevShelfService(bookMap, queryProcessor, reRanker, suggester, loggingService);
+        DevShelfService service = new DevShelfService(bookMap, queryProcessor, reRanker, suggester, graph, loggingService);
 
         // --- 3. Load the UI ---
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/gui/fxml/MainView.fxml"));
@@ -70,12 +77,17 @@ public class GuiMain extends Application {
 
         // --- 5. Show Window ---
         Scene scene = new Scene(root);
+        Image logo = new Image("assets/images/DevShelf6.jpg");
+        stage.getIcons().add(logo);
         stage.setTitle("DevShelf - Library Search Engine");
         stage.setScene(scene);
         stage.show();
 
         System.out.println("✅ GUI Started successfully.");
     }
+
+
+
     public static void main(String[] args) {
         launch(args);
     }

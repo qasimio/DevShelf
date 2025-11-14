@@ -2,6 +2,7 @@ package ui.gui.services;
 
 import domain.Book;
 import domain.SearchResult;
+import features.recommendation.Graph;
 import features.search.QueryProcessor;
 import features.search.ReRanker;
 import features.search.Suggester;
@@ -17,13 +18,15 @@ public class DevShelfService {
     private final ReRanker reRanker;
     private final Suggester suggester;
     private final LoggingService loggingService;
+    private final Graph graph;
 
     public DevShelfService(Map<Integer, Book> bookMap, QueryProcessor queryProcessor,
-                           ReRanker reRanker, Suggester suggester, LoggingService loggingService) {
+                           ReRanker reRanker, Suggester suggester, Graph graph, LoggingService loggingService) {
         this.bookMap = bookMap;
         this.queryProcessor = queryProcessor;
         this.reRanker = reRanker;
         this.suggester = suggester;
+        this.graph = graph;
         this.loggingService = loggingService;
     }
 
@@ -93,6 +96,38 @@ public class DevShelfService {
                 .collect(Collectors.toList());
     }
 
+
+    public List<Book> getRecommendationsFor(Book book) {
+        if (book == null) return Collections.emptyList();
+
+        // 1. Get the list of related titles, sorted by popularity
+        List<String> relatedTitles = graph.recommendPopularBooks(
+                book.getTitle(),
+                5, // Get top 5
+                reRanker.getPopularityMap(), // Re-use the map from the ReRanker
+                new ArrayList<>(bookMap.values())
+        );
+
+        // 2. Convert the list of String titles back into Book objects
+        return relatedTitles.stream()
+                .map(this::findBookByTitle) // Use our helper
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Helper method to find a book by its exact title (case-insensitive).
+     */
+    private Book findBookByTitle(String title) {
+        String normalizedTitle = title.toLowerCase().trim();
+        // This is faster than streaming the map values every time
+        for (Book book : bookMap.values()) {
+            if (book.getTitle() != null && book.getTitle().toLowerCase().trim().equals(normalizedTitle)) {
+                return book;
+            }
+        }
+        return null;
+    }
 
     public List<Book> getTrendingBooks() {
         // 1. Get Top 10 IDs from ReRanker
