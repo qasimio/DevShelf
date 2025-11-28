@@ -3,9 +3,11 @@ package ui.gui.services;
 import domain.Book;
 import domain.SearchResult;
 import features.recommendation.Graph;
+import features.search.PhraseCompletion;
 import features.search.QueryProcessor;
 import features.search.ReRanker;
 import features.search.Suggester;
+import features.search.PhraseCompletion;
 import utils.LoggingService; // (Moved to utils? Check your imports)
 
 import java.util.*;
@@ -19,7 +21,7 @@ public class DevShelfService {
     private final Suggester suggester;
     private final LoggingService loggingService;
     private final Graph graph;
-
+private final PhraseCompletion phraseCompletion;
     public DevShelfService(Map<Integer, Book> bookMap, QueryProcessor queryProcessor,
                            ReRanker reRanker, Suggester suggester, Graph graph, LoggingService loggingService) {
         this.bookMap = bookMap;
@@ -28,6 +30,8 @@ public class DevShelfService {
         this.suggester = suggester;
         this.graph = graph;
         this.loggingService = loggingService;
+        phraseCompletion=new PhraseCompletion();
+        indexAllBooksForAutocomplete();
     }
 
     public SearchResponse search(String query) {
@@ -77,25 +81,69 @@ public class DevShelfService {
      * Returns a list of up to 5 titles that start with the given prefix.
      * Used for Autocomplete.
      */
+    // In DevShelfService.java:
+    private void indexAllBooksForAutocomplete() {
+        // ...
+        for (Book book : bookMap.values()) {
+            String fullTitle = book.getTitle();
+            // ... (check for null)
+
+            // ✅ MODIFIED SPLIT: Split only by spaces or commas, preserving symbols/punctuation.
+            // We split by one or more spaces or commas. Adjust based on common separators in your titles.
+            String[] words = fullTitle.split("[\\s,]+");
+
+            for (String word : words) {
+                // Trim to handle leading/trailing spaces from complex splitting
+                String cleanWord = word.trim();
+                if (!cleanWord.isEmpty()) {
+                    // Insert the word (e.g., "C++" or "C#")
+                    phraseCompletion.insertWordAndTitle(cleanWord, fullTitle);
+                }
+            }
+        }
+        // ...
+    }
+    // In DevShelfService.java:
+
     public List<String> getAutoCompletions(String prefix) {
         if (prefix == null || prefix.isEmpty()) return Collections.emptyList();
 
+        // 1. Get all matches from the Trié (fast!)
+        List<String> allMatches = phraseCompletion.Complete(prefix, 50); // Get a larger sample
+
         String lowerPrefix = prefix.toLowerCase();
 
-        return bookMap.values().stream()
-                // Get the title
-                .map(Book::getTitle)
-                // Remove nulls
-                .filter(Objects::nonNull)
-                // Check if it starts with the prefix (Case insensitive)
-                .filter(title -> title.toLowerCase().contains(lowerPrefix))
-                // Keep it unique
-                .distinct()
-                // Limit to 5 suggestions
+        // 2. Separate into two groups
+        List<String> startingMatches = new ArrayList<>();
+        List<String> midTitleMatches = new ArrayList<>();
+
+        for (String title : allMatches) {
+            // Check if the title ITSELF starts with the prefix (e.g., prefix "Des" matches title "Design Patterns")
+            if (title.toLowerCase().startsWith(lowerPrefix)) {
+                startingMatches.add(title);
+            } else {
+                // This is a mid-title word match (e.g., prefix "Pat" matches word "Patterns" in "Design Patterns")
+                midTitleMatches.add(title);
+            }
+        }
+
+        // 3. Combine and limit
+        // Start with strict prefix matches, then append mid-title matches
+        List<String> finalSuggestions = new ArrayList<>();
+        finalSuggestions.addAll(startingMatches);
+
+        // Add mid-title matches until the limit (5) is hit
+        for (String title : midTitleMatches) {
+            if (!finalSuggestions.contains(title)) { // Avoid duplicates if a title was added by 'startingMatches'
+                finalSuggestions.add(title);
+            }
+        }
+
+        // 4. Return the top 5
+        return finalSuggestions.stream()
                 .limit(5)
                 .collect(Collectors.toList());
     }
-
 
     public List<Book> getRecommendationsFor(Book book) {
         if (book == null) return Collections.emptyList();
