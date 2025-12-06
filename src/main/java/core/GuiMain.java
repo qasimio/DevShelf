@@ -83,7 +83,13 @@ public class GuiMain extends Application {
         System.out.println("✅ GUI Started successfully.");
     }
 
+   @Override
+    public void stop() {
+       System.out.println("🛑 Application stopping. Running maintenance...");
 
+       // Run analysis in a background thread so the window closes instantly
+       new Thread(LogAnalyzerMain::analyze).start();
+   }
 
     public static void main(String[] args) {
         launch(args);

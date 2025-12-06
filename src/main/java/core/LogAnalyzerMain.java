@@ -12,8 +12,12 @@ import java.util.Map;
 
 public class LogAnalyzerMain {
 
+    public static void main(String[] args)  {
+        analyze();
+    }
 
-    public static void main(String[] args) {
+    public static void analyze() {
+
         System.out.println("--- Starting Log Analyzer ---");
 
         String appDataPath = StorageUtils.getAppDataDir();
