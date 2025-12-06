@@ -16,7 +16,6 @@ public class BookFilter {
                 .collect(Collectors.toList());
     }
 
-    // --- MISSING METHOD 1: filterByAuthor ---
     public static List<Book> filterByAuthor(List<Book> books, String author) {
         if (author == null || author.trim().isEmpty()) {
             return books;
@@ -27,7 +26,6 @@ public class BookFilter {
                 .collect(Collectors.toList());
     }
 
-    // --- MISSING METHOD 2: filterByLanguage ---
     public static List<Book> filterByLanguage(List<Book> books, String language) {
         if (language == null || language.trim().isEmpty()) {
             return books;

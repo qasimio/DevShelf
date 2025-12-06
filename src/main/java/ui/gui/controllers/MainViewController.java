@@ -31,7 +31,6 @@ public class MainViewController {
     @FXML private VBox resultsContainer;
     @FXML private Label statusLabel;
 
-    // ✅ NEW: Dropdowns
     @FXML private ComboBox<String> sortCombo;
     @FXML private ComboBox<String> categoryCombo;
     @FXML private ContextMenu suggestionsPopup = new ContextMenu();
@@ -39,15 +38,11 @@ public class MainViewController {
     @Setter
     private DevShelfService service;
 
-    // We keep two lists:
-    // 1. originalResults: The exact order returned by the "Brain" (Relevance)
-    // 2. currentDisplayList: The list currently shown (filtered/sorted)
     private List<Book> originalResults = new ArrayList<>();
     private List<Book> currentDisplayList = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        // 1. Setup Sort/Filter Options (Existing code)
         sortCombo.setItems(FXCollections.observableArrayList(
                 "Relevance", "Rating: High to Low", "Title: A-Z"
         ));
@@ -55,20 +50,16 @@ public class MainViewController {
         sortCombo.setOnAction(e -> applySortAndFilter());
         categoryCombo.setOnAction(e -> applySortAndFilter());
 
-        // 2. Load Trending Books (Existing code)
         javafx.application.Platform.runLater(() -> {
             if (service != null) loadTrending();
         });
 
-        // --- 3. NEW: Autocomplete Logic ---
         setupAutocomplete();
     }
 
     private void setupAutocomplete() {
-        // Hide the popup if the user clicks away
         suggestionsPopup.setAutoHide(true);
 
-        // Listen to every character typed
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null || newValue.trim().isEmpty()) {
                 suggestionsPopup.hide();
@@ -97,16 +88,12 @@ public class MainViewController {
             }
         });
 
-        // ✅ FIX: The "Enter" key fix.
-        // We do NOT add searchField.setOnAction() here anymore.
-        // The FXML (onAction="#handleSearch") already handles this.
     }
 
     @FXML
     private void handleHome() {
         searchField.clear();
         loadTrending();
-        // Reset dropdowns
         sortCombo.getSelectionModel().selectFirst();
         categoryCombo.getSelectionModel().select("All Categories");
     }
@@ -115,7 +102,6 @@ public class MainViewController {
         statusLabel.setText("🔥 Trending Books - Top Picks by Users");
         List<Book> trending = service.getTrendingBooks();
 
-        // We treat these as our "Current Results" so filters work on them too!
         this.originalResults = trending;
         this.currentDisplayList = trending;
 
@@ -126,12 +112,10 @@ public class MainViewController {
 
     @FXML
     private void handleSearch() {
-        // ✅ FIX: Hide popup when search is triggered
         suggestionsPopup.hide();
 
         String query = searchField.getText();
         if (query == null || query.trim().isEmpty()) {
-            // Don't search for nothing, just go home
             handleHome();
             return;
         }
@@ -139,33 +123,25 @@ public class MainViewController {
         statusLabel.setText("Searching for \"" + query + "\"...");
         resultsContainer.getChildren().clear(); // Clear old results
 
-        // 1. Get results from Backend
         SearchResponse response = service.search(query);
 
-        // 2. Save original copy (for "Relevance" sort)
         this.originalResults = response.books;
         this.currentDisplayList = new ArrayList<>(this.originalResults);
 
-        // --- ✅ FIX: NEW, ROBUST STATUS LOGIC ---
         if (this.originalResults.isEmpty()) {
             if (response.isSuggestion) {
-                // Case 1: No results for "cade", but suggestion "code" *also* had no results.
                 statusLabel.setText("❌ No results found for \"" + query + "\". Also tried \"" + response.successfulQuery + "\".");
             } else {
-                // Case 2: No results for "cade" and NO suggestion.
                 statusLabel.setText("❌ No results found for \"" + query + "\".");
             }
             populateCategoryDropdown(this.originalResults); // Clear dropdowns
         } else {
             if (response.isSuggestion) {
-                // Case 3: No results for "cade", but we *are* showing results for "code".
                 statusLabel.setText("💡 No results for \"" + query + "\". Showing results for \"" + response.successfulQuery + "\".");
             } else {
-                // Case 4: Normal search, results found.
                 statusLabel.setText("✅ Found " + originalResults.size() + " books for \"" + query + "\".");
             }
 
-            // Setup Filters and display
             populateCategoryDropdown(this.originalResults);
             sortCombo.getSelectionModel().select("Relevance");
             categoryCombo.getSelectionModel().select("All Categories");
@@ -173,7 +149,6 @@ public class MainViewController {
         }
     }
 
-    // ✅ Extracts unique categories from the search results
     private void populateCategoryDropdown(List<Book> books) {
         List<String> categories = books.stream()
                 .map(Book::getCategory)
@@ -186,14 +161,11 @@ public class MainViewController {
         categoryCombo.setItems(FXCollections.observableArrayList(categories));
     }
 
-    // ✅ The Master Logic for Sorting & Filtering
     private void applySortAndFilter() {
         if (originalResults.isEmpty()) return;
 
-        // 1. Start with the full list
         List<Book> temp = new ArrayList<>(originalResults);
 
-        // 2. Apply Category Filter
         String selectedCat = categoryCombo.getValue();
         if (selectedCat != null && !selectedCat.equals("All Categories")) {
             temp = temp.stream()
@@ -201,7 +173,6 @@ public class MainViewController {
                     .collect(Collectors.toList());
         }
 
-        // 3. Apply Sorting
         String sortType = sortCombo.getValue();
         if (sortType != null) {
             switch (sortType) {
@@ -220,7 +191,6 @@ public class MainViewController {
             }
         }
 
-        // 4. Update Display
         this.currentDisplayList = temp;
         displayBooks(this.currentDisplayList);
     }
@@ -236,12 +206,9 @@ public class MainViewController {
     private void displayBooks(List<Book> books) {
         resultsContainer.getChildren().clear();
 
-        // 🛑 HARD LIMIT: Only show top 12.
-        // Even if 'books' has 200 items sorted by rating, we only show the top 50.
         int limit = Math.min(books.size(), 12);
 
         if (limit == 0) {
-            // Optional: Show a "No Books" label if empty
             return;
         }
 
@@ -276,8 +243,6 @@ public class MainViewController {
             Stage currentStage = (Stage) searchField.getScene().getWindow();
             Scene currentScene = searchField.getScene();
 
-            // --- UPDATE THIS METHOD CALL ---
-            // Pass the service so the detail view can get recommendations
             controller.setBookData(book, service, currentStage, currentScene);
 
             currentStage.setScene(new Scene(detailRoot));
