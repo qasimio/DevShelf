@@ -4,34 +4,32 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Book;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
-
 public class BookLoader {
+    private final String resourcePath; // e.g., "/data/book.json"
 
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final String jsonFilePath;
-
-    public BookLoader(String jsonFilePath) {
-        this.jsonFilePath = jsonFilePath;
+    public BookLoader(String resourcePath) {
+        this.resourcePath = resourcePath;
     }
 
     public List<Book> loadBooks() {
+        ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            File jsonBooks = new File(jsonFilePath);
-            return mapper.readValue(jsonBooks, new TypeReference<List<Book>>() {});
-
+        // 🚀 INDUSTRY STANDARD: Load from Classpath (Inside the JAR)
+        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                System.err.println("CRITICAL: Could not find resource: " + resourcePath);
+                return Collections.emptyList();
+            }
+            return mapper.readValue(inputStream, new TypeReference<List<Book>>() {});
         } catch (IOException e) {
-            System.err.println("Failed to Load Books from JSON file: " + e.getMessage());
+            e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
-
 }
-
 // Work on book.json - open and parson book.json

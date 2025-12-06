@@ -16,14 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * This is a standalone application.
- * Its ONLY job is to read all the books, build the index and TF-IDF
- * vectors, and save them to a single JSON file.
- * You run this ONCE, or whenever your book data changes.
- */
-
-
 public class IndexerMain {
 
     private static final String INDEX_FILE_PATH = ("src/main/resources/data/index_data.json");
@@ -72,11 +64,3 @@ public class IndexerMain {
     }
 
 }
-
-
-
-/* This is stand-alone program
-* will not run automatically
-* run this when you want to update the stored invertedIndex
-* or if there is book added/removed in book.json
- */

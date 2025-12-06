@@ -20,62 +20,59 @@ import ui.gui.services.DevShelfService;
 import utils.StopWordLoader;
 import utils.TextProcessor;
 
+import java.io.File;
 import java.util.*;
 
 public class GuiMain extends Application {
 
-    // Define paths constants (adjust if yours differ)
-    private static final String BOOKS_FILE = "src/main/resources/data/book.json";
-    private static final String INDEX_FILE = "src/main/resources/data/index_data.json";
-    private static final String STOPWORDS_FILE = "src/main/resources/data/stopword.txt";
-    private static final String LOGS_FILE = "src/main/resources/logs/logs.json";
-    private static final String POPULARITY_FILE = "src/main/resources/logs/popularity.json";
+    private static final String BOOKS_RES = "/data/book.json";
+    private static final String INDEX_RES = "/data/index_data.json";
+    private static final String STOPWORDS_RES = "/data/stopword.txt";
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("🚀 Starting DevShelf GUI...");
+        System.out.println("Starting DevShelf...");
 
-        // --- 1. Load Backend Services (Exact same as CLI) ---
-        // (We do this here so the UI has data ready immediately)
-        BookLoader bookLoader = new BookLoader(BOOKS_FILE);
+        String appDataPath = utils.StorageUtils.getAppDataDir();
+        String logsPath = appDataPath + File.separator + "logs.json";
+        String popularityPath = appDataPath + File.separator + "popularity.json";
+        System.out.println("User Data Directory: " + appDataPath);
+
+        BookLoader bookLoader = new BookLoader(BOOKS_RES);
         List<Book> books = bookLoader.loadBooks();
         Map<Integer, Book> bookMap = new HashMap<>();
         for(Book b : books) bookMap.put(b.getBookId(), b);
 
-        IndexLoader indexLoader = new IndexLoader(INDEX_FILE);
+        IndexLoader indexLoader = new IndexLoader(INDEX_RES);
         SearchIndexData indexData = indexLoader.loadIndex();
 
-        Set<String> stopWords = StopWordLoader.loadStopWords(STOPWORDS_FILE);
+        Set<String> stopWords = StopWordLoader.loadStopWords(STOPWORDS_RES);
         TextProcessor textProcessor = new TextProcessor(stopWords);
 
         QueryProcessor queryProcessor = new QueryProcessor(textProcessor,
                 indexData.getInvertedIndex(), indexData.getTfIdfVectors(), indexData.getIdfScores());
 
-        LoggingService loggingService = new LoggingService(LOGS_FILE);
-        ReRanker reRanker = new ReRanker(bookMap, POPULARITY_FILE);
 
-        // --- NEW: Build the Graph ---
+        LoggingService loggingService = new LoggingService(logsPath);
+        ReRanker reRanker = new ReRanker(bookMap, popularityPath);
+
         System.out.println("Building recommendation graph...");
         Graph graph = new Graph();
-        graph.buildGraph(books); // This builds the relationships
+        graph.buildGraph(books);
         System.out.println("Graph built with " + graph.adjList.size() + " nodes.");
 
         List<String> titles = new ArrayList<>();
         for(Book b : books) if(b.getTitle() != null) titles.add(b.getTitle());
         Suggester suggester = new Suggester(titles, stopWords);
 
-        // --- 2. Create the App Brain ---
         DevShelfService service = new DevShelfService(bookMap, queryProcessor, reRanker, suggester, graph, loggingService);
 
-        // --- 3. Load the UI ---
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/gui/fxml/MainView.fxml"));
         Parent root = loader.load();
 
-        // --- 4. Inject the Brain into the Controller ---
         MainViewController controller = loader.getController();
         controller.setService(service);
 
-        // --- 5. Show Window ---
         Scene scene = new Scene(root);
         Image logo = new Image("assets/images/DevShelf6.jpg");
         stage.getIcons().add(logo);

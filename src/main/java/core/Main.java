@@ -12,6 +12,8 @@ import storage.IndexLoader;
 import ui.cli.CliView;
 import utils.StopWordLoader;
 import utils.TextProcessor;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,29 +22,29 @@ import java.util.Set;
 
 public class Main {
 
-    // --- All paths are now in one place ---
-    private static final String INDEX_FILE_PATH = "src/main/resources/data/index_data.json";
-    private static final String STOPWORD_FILE_PATH = "src/main/resources/data/stopword.txt";
-    private static final String BOOKS_FILE_PATH = "src/main/resources/data/book.json";
-    private static final String LOGS_FILE_PATH = "src/main/resources/logs/logs.json";
-    private static final String POPULARITY_FILE_PATH = "src/main/resources/logs/popularity.json";
+    private static final String BOOKS_RES = "/data/book.json";
+    private static final String INDEX_RES = "/data/index_data.json";
+    private static final String STOPWORDS_RES = "/data/stopword.txt";
 
     public static void main(String[] args) {
-        System.out.println("📖 Assembling DevShelf Engine...");
+        System.out.println("Assembling DevShelf Engine...");
 
-        // --- 1. Load All Data ---
-        IndexLoader loader = new IndexLoader(INDEX_FILE_PATH);
+        String appDataPath = utils.StorageUtils.getAppDataDir();
+        String logsPath = appDataPath + File.separator + "logs.json";
+        String popularityPath = appDataPath + File.separator + "popularity.json";
+        System.out.println("User Data Directory: " + appDataPath);
+
+        IndexLoader loader = new IndexLoader(INDEX_RES);
         SearchIndexData loadedData = loader.loadIndex();
 
-        BookLoader bookLoader = new BookLoader(BOOKS_FILE_PATH);
+        BookLoader bookLoader = new BookLoader(BOOKS_RES);
         List<Book> allBooks = bookLoader.loadBooks();
         Map<Integer, Book> bookMap = new HashMap<>();
         for (Book b : allBooks) {
             if (b != null) bookMap.put(b.getBookId(), b);
         }
 
-        // --- 2. Build All Services ---
-        Set<String> stopWords = StopWordLoader.loadStopWords(STOPWORD_FILE_PATH);
+        Set<String> stopWords = StopWordLoader.loadStopWords(STOPWORDS_RES);
         TextProcessor textProcessor = new TextProcessor(stopWords);
 
         QueryProcessor queryProcessor = new QueryProcessor(
@@ -52,8 +54,8 @@ public class Main {
                 loadedData.getIdfScores()
         );
 
-        LoggingService loggingService = new LoggingService(LOGS_FILE_PATH);
-        ReRanker reRanker = new ReRanker(bookMap, POPULARITY_FILE_PATH);
+        LoggingService loggingService = new LoggingService(logsPath);
+        ReRanker reRanker = new ReRanker(bookMap, popularityPath);
 
         Graph graph = new Graph();
         graph.buildGraph(allBooks);
@@ -62,16 +64,14 @@ public class Main {
         for (Book b : allBooks) if (b.getTitle() != null) allTitles.add(b.getTitle());
         Suggester suggester = new Suggester(allTitles, stopWords);
 
-        // --- 3. Build The UI ---
         CliView view = new CliView();
 
-        // --- 4. Assemble the Controller & Start ---
         BookSearchEngine engine = new BookSearchEngine(
                 bookMap, queryProcessor, reRanker, suggester,
                 graph, loggingService, view
         );
 
         System.out.println("...Assembly complete. Starting application.");
-        engine.run(); // Start the main loop
+        engine.run();
     }
 }

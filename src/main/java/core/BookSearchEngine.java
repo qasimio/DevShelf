@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class BookSearchEngine {
 
-    // --- Services (Injected) ---
     private final Map<Integer, Book> bookMap;
     private final QueryProcessor queryProcessor;
     private final ReRanker reRanker;
@@ -25,7 +24,6 @@ public class BookSearchEngine {
     private final LoggingService loggingService;
     private final CliView view;
 
-    // --- State for the action loop ---
     private final Map<String, Object> currentFilters;
     private String currentSortMode;
     private boolean isSortAscending;
@@ -62,36 +60,27 @@ public class BookSearchEngine {
     }
 
     private void processQuery(String query) {
-        // --- 1. GET & RERANK ---
         List<SearchResult> tfIdfResults = queryProcessor.search(query);
         if (tfIdfResults.isEmpty()) {
             handleNoResults(query);
             return;
         }
 
-        // Pass query to reRanker for exact-match boosting
         List<SearchResult> rankedResults = reRanker.reRank(tfIdfResults, query);
 
-        // This is our master list. We *never* modify it.
         final List<Book> initialBooks = rankedResults.stream()
                 .map(r -> bookMap.get(r.getDocId()))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        // --- 2. RESET STATE for the new query ---
         clearFiltersAndSort();
 
-        // --- 3. THE FLAT ACTION LOOP ---
         while (true) {
-            // --- A. APPLY STATE ---
-            // Create a new list *every time* from the original results
             List<Book> filteredBooks = applyFilters(initialBooks);
-            applySort(filteredBooks); // Sort the new list
+            applySort(filteredBooks);
 
-            // --- B. DISPLAY ---
             view.showResults(query, filteredBooks);
 
-            // --- C. GET ACTION ---
             String choice = view.getActionPrompt();
 
             switch (choice) {
@@ -100,7 +89,7 @@ public class BookSearchEngine {
                 case "r": handleRelated(filteredBooks); break;
                 case "l": logUserClick(filteredBooks, query); break;
                 case "c": clearFiltersAndSort(); view.showMessage("Filters and sort reset."); break;
-                case "n": return; // Exits this method, goes back to main 'while' loop
+                case "n": return;
                 case "e": view.showExitMessage(); System.exit(0);
                 default: view.showMessage("Invalid command. Try again.");
             }
@@ -130,7 +119,6 @@ public class BookSearchEngine {
         } else if (currentSortMode.equals("title")) {
             BookSorter.sortByTitle(books, isSortAscending);
         }
-        // If "relevance", we do nothing. The list is already in relevance order.
     }
 
     private void handleFilterMenu() {
@@ -171,45 +159,23 @@ public class BookSearchEngine {
         view.showRelated(related);
     }
 
-    // This method goes inside core/BookSearchEngine.java
 
-/**
- * Handles the logic for when a query returns zero results.
- * It will try to find a suggestion and, if successful,
- * will display those new results.
- *
- * @param query The original, failed search query.
- */
 private void handleNoResults(String query) {
 
-    // --- 1. Tell the View to show the "No results" message ---
-    // We do this by calling showResults with an empty list.
-    // The View's internal logic will print the "❌ No results..." message.
     view.showResults(query, new ArrayList<>());
 
-    // --- 2. Get Suggestion ---
-    // (Same as your old code)
-    // We ask our Suggester service for a "Did you mean?" suggestion.
     String suggestion = suggester.suggestSimilar(query);
 
     if (suggestion != null) {
 
-        // --- 3. Show Suggestion ---
-        // (Old: System.out.println)
-        // (New: Tell the View to show it)
         view.showSuggestion(suggestion);
 
-        // --- 4. Search using the suggestion ---
-        // (Same as your old code)
         List<SearchResult> suggestedResults = queryProcessor.search(suggestion);
 
         if (!suggestedResults.isEmpty()) {
 
-            // --- 5. THE FIX: Tell the user we are auto-searching! ---
             view.showMessage("ℹ️ Showing results for the suggestion \"" + suggestion + "\" instead.");
 
-            // --- 6. Re-Rank and Convert Results ---
-            // Your old code forgot to re-rank. This new version does.
             List<SearchResult> rerankedResults = reRanker.reRank(suggestedResults, suggestion);
 
             List<Book> booksToDisplay = rerankedResults.stream()
@@ -217,24 +183,14 @@ private void handleNoResults(String query) {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            // --- 7. Show the *new* results ---
-            // (Old: SortBooks.printBooks)
-            // (New: Tell the View to show results for the *suggestion*)
             view.showResults(suggestion, booksToDisplay);
 
-            // --- 8. Log click for *new* results ---
-            // (Old: logUserClick(..., scanner, ...))
-            // (New: Call our own private logUserClick method)
             logUserClick(booksToDisplay, suggestion);
 
         } else {
-            // (Old: System.out.println)
-            // (New: Tell the View to show a message)
             view.showMessage("⚠️ Even the suggested query returned no results.");
         }
     } else {
-        // (Old: System.out.println)
-        // (New: Tell the View to show a message)
         view.showMessage("No similar titles found.");
     }
 }
@@ -242,7 +198,7 @@ private void handleNoResults(String query) {
     private void logUserClick(List<Book> booksToDisplay, String query) {
         if (booksToDisplay.isEmpty()) return;
 
-        int choice = view.getClickChoice(); // e.g., user types '1'
+        int choice = view.getClickChoice();
         if (choice > 0 && choice <= 7 && choice <= booksToDisplay.size()) {
             int clickedId = booksToDisplay.get(choice - 1).getBookId();
             loggingService.logClick(query, clickedId);
