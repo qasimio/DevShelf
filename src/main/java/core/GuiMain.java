@@ -90,7 +90,7 @@ public class GuiMain extends Application {
        // Run analysis in a background thread so the window closes instantly
        new Thread(LogAnalyzerMain::analyze).start();
    }
-
+    //main method
     public static void main(String[] args) {
         launch(args);
     }
