@@ -3283,5 +3283,25 @@
     "rating": 4.8,
     "coverUrl": "https://i.ibb.co/HT639bhb/205.jpg",
     "downLink": "https://api.pageplace.de/preview/DT0400.9780133488876_A23586211/preview-9780133488876_A23586211.pdf"
+  },
+  {
+    "bookId": 206,
+    "title": "Harry Potter",
+    "author": "J.K. Rowling",
+    "description": "Harry Potter the complete collection",
+    "progLang": "English",
+    "category": "Fiction",
+    "tag": [
+      "Harry",
+      "Potter",
+      "JK",
+      "Rowling",
+      "Fiction",
+      "Harry Potter"
+    ],
+    "rating": "4.8",
+    "coverUrl": "https://i.ibb.co/LhxPjncB/205.jpg",
+    "downLink": "https://kvongcmehsanalibrary.wordpress.com/wp-content/uploads/2021/07/harrypotter.pdf"
   }
+
 ]

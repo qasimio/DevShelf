@@ -252,5 +252,18 @@ public class MainViewController {
         }
     }
 
+    @FXML
+    private void handleRequest() {
+        // Replace with your actual Google Form Link
+        String formUrl = "https://forms.gle/JE9EYgq4bXsJincM7";
+
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(formUrl));
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Fallback for some linux distros or weird setups
+            System.out.println("Could not open browser. Link: " + formUrl);
+        }
+    }
 
 }
