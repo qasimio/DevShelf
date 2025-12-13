@@ -49,22 +49,13 @@ flowchart TD
 
 ## Chapters
 
-1. [Application Startup & Flow Control
-](01_application_startup___flow_control_.md)
-2. [Book (Domain Model)
-](02_book__domain_model__.md)
-3. [User Interface Presentation
-](03_user_interface_presentation_.md)
-4. [Search Index Management
-](04_search_index_management_.md)
-5. [Core Search Engine
-](05_core_search_engine_.md)
-6. [User Interaction & Analytics
-](06_user_interaction___analytics_.md)
-7. [Search Enhancement & Recommendations
-](07_search_enhancement___recommendations_.md)
-8. [Text Normalization Utilities
-](08_text_normalization_utilities_.md)
-
+1. [Application Startup & Flow Control](01_application_startup_flow_control.md)
+2. [Book (Domain Model)](02_book_domain_model.md)
+3. [User Interface Presentation](03_user_interface_presentation.md)
+4. [Search Index Management](04_search_index_management.md)
+5. [Core Search Engine](05_core_search_engine.md)
+6. [User Interaction & Analytics](06_user_interaction_analytics.md)
+7. [Search Enhancement & Recommendations](07_search_enhancement_recommendations.md)
+8. [Text Normalization Utilities](08_text_normalization_utilities.md)
 
 	
