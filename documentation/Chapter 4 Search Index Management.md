@@ -1,335 +1,316 @@
+# Chapter 4: Core Search Engine
 
-Welcome back to DevShelf! In our last chapter, [User Interface Presentation](03_user_interface_presentation_.md), we explored how DevShelf shows you information and takes your input. You learned how `Book` objects (our digital index cards) are displayed. But before those books can appear, DevShelf needs to *find* them, and find them *quickly*.
+Welcome back, digital librarian! In our last chapter, [Application Orchestration](03_application_orchestration_.md), we saw how DevShelf's "Main Director" brings all the pieces together. It loads our precious [Book (Domain Model)](02_book__domain_model__.md) objects, prepares the user interface, and sets up all the "smart tools" needed to make DevShelf work.
 
-Imagine you walk into a massive library and ask the librarian, "Find me all books about 'Python'!" If the librarian had to physically open and read every single book in the entire library each time someone asked a question, they'd be incredibly slow! You'd be waiting forever for your search results.
+Now, it's time to reveal one of the most exciting "smart tools": the **Core Search Engine**. This is the real magic behind finding books. You know *what* a book is and *how* the application starts, but how does DevShelf actually understand your search request and pick out the perfect books from thousands? That's what this chapter is all about!
 
-This is exactly the problem that **Search Index Management** solves for DevShelf.
+### The "Finder" of Our Digital Library
 
-### The "Librarian's Secret Catalog"
+The Core Search Engine is like the super-smart librarian in our digital library who, when you ask a question, instantly knows where to find the best books. It's the "finder" in DevShelf, responsible for answering your search queries.
 
-Search index management is like the librarian's secret, highly organized system that helps them find books in a flash. It's an **offline process**, meaning it happens *before* DevShelf is ready to answer your search queries. It involves meticulously preparing all the book data so that when you search, DevShelf doesn't have to read all the books again.
+**The problem it solves:** Imagine you type "Java programming" into DevShelf. There are hundreds of books! How does DevShelf instantly know which ones are most relevant, and why does "Effective Java" appear before a book that just *mentions* Java once? The Core Search Engine's job is to figure this out and present the best matches.
 
-**Our central use case:** To provide *instant* search results when a user types a query. Without this pre-computation, every search would feel like DevShelf was reading every book from scratch.
+**Our central use case:** A user types a search query like "Python machine learning" into DevShelf, and the Core Search Engine needs to identify, score, and rank the most relevant books on that topic.
 
-### The `IndexerMain`: Our Master Cataloger
+Let's break down how this "finder" works its magic!
 
-The `IndexerMain` is a special, separate part of our application that's solely responsible for building this "secret catalog." You don't run it every time you start DevShelf. Instead, you run it **once**, or whenever our collection of [Book (Domain Model)](02_book__domain_model__.md) data changes (e.g., new books are added or old ones are removed).
+### How the Core Search Engine Works: A Quick Overview
 
-It reads all the [Book (Domain Model)](02_book__domain_model__.md) information and creates two super-efficient lookup tables:
+The Core Search Engine, primarily handled by a component called the `QueryProcessor`, performs these key steps:
 
-1.  **Inverted Index:** This is like the index at the back of a textbook. You look up a specific word (term), and it tells you exactly *which books* contain that word.
-2.  **TF-IDF Scores:** This helps DevShelf understand *how important* a word is to a specific book, compared to its importance across *all* books. It's how we know if "Java" is a key topic in a book, or just mentioned briefly.
+1.  **Understand Your Query:** It first cleans up your search terms and breaks them into important words (we'll learn more about this in [Text Preprocessing](05_text_preprocessing_.md)).
+2.  **Find Potential Books:** It quickly consults a special "pre-built index" (like a super-fast catalog, explained in [Offline Search Indexing](06_offline_search_indexing_.md)) to find *all* books that contain *any* of your important search words.
+3.  **Score for Relevance:** Not all matching books are equally good! It then calculates a "relevance score" for each potential book based on how well it matches your query.
+4.  **Rank and Present:** Finally, it sorts the books from the highest score (most relevant) to the lowest, making sure the best matches always appear at the top of your search results.
 
-After `IndexerMain` finishes its job, it saves all this prepared data into a special file called `index_data.json`. Later, when DevShelf starts up (as we saw in [Application Startup & Flow Control](01_application_startup___flow_control_.md)), it simply *loads* this `index_data.json` file, and `boom!`, it's ready for fast searches.
+### Using the Core Search Engine
 
-### How to Build the Search Index
+You, as the user, don't directly talk to the `QueryProcessor`. Instead, when you type something into the search bar (in the GUI) or enter a command (in the CLI), our main application logic (like the `DevShelfService` for the GUI or `BookSearchEngine` for the CLI) acts as an intermediary. It takes your query and hands it over to the `QueryProcessor`.
 
-You would run the `IndexerMain` program directly. It doesn't have a user interface; it just does its work and tells you what it's doing on the console.
+Let's look at how the `DevShelfService` (used by the GUI, as seen in [User Interface (UI) Presentation](01_user_interface__ui__presentation_.md)) calls the `QueryProcessor`'s `search` method:
 
-**`src/main/java/core/IndexerMain.java` (Simplified)**
+**`src/main/java/ui/gui/services/DevShelfService.java` (Simplified `search` method)**
 ```java
-package core;
+package ui.gui.services;
 
 import domain.Book;
-import domain.SearchIndexData;
-import features.search.IndexBuilder;
-import storage.BookLoader;
-import utils.TfIdfCalculator;
-// ... other imports
+import domain.SearchResult;
+import features.search.QueryProcessor; // Our search engine!
+import java.util.List;
 
-public class IndexerMain {
-    private static final String INDEX_FILE_PATH = ("src/main/resources/data/index_data.json");
+public class DevShelfService {
+    private final QueryProcessor queryProcessor; // The brain of our search
 
-    public static void main(String[] args) {
-        System.out.println("--- Starting Offline Indexer ---");
-        try {
-            // 1. Load the raw book data
-            BookLoader loader = new BookLoader("src/main/resources/data/book.json");
-            List<Book> allBooks = loader.loadBooks();
-            System.out.println("Loading and indexing books...");
+    public DevShelfService( /* ... QueryProcessor queryProcessor ... */ ) {
+        this.queryProcessor = queryProcessor; // Get the search engine ready
+    }
 
-            // 2. Build the Inverted Index
-            IndexBuilder indexer = new IndexBuilder(/* ... */);
-            for(Book book : allBooks) {
-                indexer.indexDocument(book); // Add each book to the index
-            }
+    public SearchResponse search(String query) {
+        System.out.println("🔍 GUI Processing Query: [" + query + "]");
 
-            // 3. Calculate TF-IDF scores
-            TfIdfCalculator tfIdfCalculator = new TfIdfCalculator();
-            tfIdfCalculator.calculateIdf(indexer.getInvertedIndex(), allBooks.size());
-            tfIdfCalculator.calculateTfIdf(indexer.getInvertedIndex());
-            System.out.println("TF-IDF calculation complete.");
+        // 1. Raw Search: Hand the query to our QueryProcessor
+        List<SearchResult> results = queryProcessor.search(query);
 
-            // 4. Save everything to a JSON file
-            SearchIndexData indexData = new SearchIndexData(
-                indexer.getInvertedIndex(),
-                tfIdfCalculator.getTfIdfVectors(),
-                tfIdfCalculator.getIdfScores()
-            );
-            // ... (Use ObjectMapper to write indexData to INDEX_FILE_PATH)
-            System.out.println("--- Indexer Finished Successfully! --- ");
-        } catch (Exception e) {
-            System.err.println(" --- Indexer failed with an error. --- ");
-            e.printStackTrace();
-        }
+        // ... further steps like re-ranking, converting to Book objects ...
+        // (These steps are covered in later chapters)
+
+        // The DevShelfService then takes these results and gives them to the UI
+        // to display the actual Book objects.
+        return null; // Simplified return
     }
 }
 ```
-When you run this `IndexerMain` class, it will print messages like "Loading and indexing books..." and "Indexer Finished Successfully!", then it creates or updates the `index_data.json` file. This file contains all the pre-computed magic for fast searching!
+When you type "Python" and hit Enter, the `search` method in `DevShelfService` receives `"Python"`. It then simply passes this `query` to `queryProcessor.search(query)`. The `QueryProcessor` goes to work and returns a list of `SearchResult` objects.
 
-#### What the `index_data.json` File Looks Like (Snippet)
+A `SearchResult` object is a simple container that holds two pieces of information for each book found:
+*   `docId`: The unique ID of the book that matched (which we learned about in [Book (Domain Model)](02_book__domain_model__.md)).
+*   `score`: How relevant that book is to your query. A higher score means it's a better match.
 
-This is a small part of the generated `index_data.json`. It looks complicated, but it's just a structured way of storing our "secret catalog":
-
-**`src/main/resources/data/index_data.json` (Snippet)**
-```json
-{
-  "invertedIndex" : {
-    "don't" : [ { "docId" : 24, "freq" : 1, "positions" : [ 1 ] } ],
-    "analysi" : [ { "docId" : 1, "freq" : 1, "positions" : [ 19 ] } ],
-    "python" : [
-      { "docId" : 13, "freq" : 1, "positions" : [ 18 ] },
-      { "docId" : 26, "freq" : 4, "positions" : [ 0, 11, 16, 17 ] }
-    ]
-  },
-  "tfIdfVectors" : {
-    "1" : { "rivest" : 2.31, "stein" : 2.31, "code" : 1.01 },
-    "2" : { "profession" : 1.83, "engin" : 0.95, "practic" : 0.45 },
-    "3" : { "engin" : 0.95, "c" : 0.84, "code" : 1.49 }
-  },
-  "idfScores" : {
-    "don't" : 1.834, "straub" : 2.311, "opus" : 2.311, "analysi" : 1.357
-  }
-}
-```
-*   `invertedIndex`: Maps a word (like "python") to a list of "postings". Each "posting" tells us which book (`docId`), how many times (`freq`), and where (`positions`) the word appears in that book.
-*   `tfIdfVectors`: For each book (`docId`), it lists all the important words (`term`) in that book and their "importance score" (`tfIdf`).
-*   `idfScores`: For each word (`term`), it lists its overall rarity/importance score across *all* books.
-
-### Under the Hood: Building the Search Index Step-by-Step
-
-Let's visualize the `IndexerMain` at work as it builds this powerful index:
-
-```mermaid
-sequenceDiagram
-    participant IndexerMain
-    participant BookLoader
-    participant TextProcessor
-    participant IndexBuilder
-    participant TfIdfCalculator
-    participant index_data.json
-
-    IndexerMain->>BookLoader: "Load all book details from book.json"
-    BookLoader-->>IndexerMain: "Here's a list of all Book objects!"
-    loop For each Book
-        IndexerMain->>TextProcessor: "Clean and prepare text from book's title, description, etc."
-        Note over TextProcessor: Removes common words ("the"), corrects spelling, shortens words (stemming)
-        TextProcessor-->>IndexerMain: "Here are the important, clean words (tokens)!"
-        IndexerMain->>IndexBuilder: "Add these tokens and book ID to the Inverted Index"
-        Note over IndexBuilder: Records which words are in which book, and where.
-    end
-    IndexerMain->>TfIdfCalculator: "Calculate overall word importance (IDF) across all books"
-    IndexerMain->>TfIdfCalculator: "Calculate word importance for each book (TF-IDF)"
-    Note over TfIdfCalculator: Combines how often a word appears in a book with how rare it is overall.
-    TfIdfCalculator-->>IndexerMain: "Here are all the TF-IDF scores!"
-    IndexerMain->>index_data.json: "Save Inverted Index, TF-IDF scores to index_data.json"
-    Note over IndexerMain: This file is used later for fast searching!
-    IndexerMain-->>You: "Index build complete!"
-```
-
-### The Tools for Building the Index
-
-Let's look at the key components that `IndexerMain` uses to create the search index.
-
-#### Storing the Index Data: `SearchIndexData`
-
-This class is like a digital container that holds all the different parts of our pre-computed index.
-
-**`src/main/java/domain/SearchIndexData.java` (Simplified)**
+**`src/main/java/domain/SearchResult.java` (Simplified)**
 ```java
 package domain;
 
-import lombok.Getter;
-import java.util.List;
-import java.util.Map;
+import lombok.Getter; // A helper to automatically create 'get' methods
 
-public class SearchIndexData {
-    @Getter
-    private Map<String, List<Posting>> invertedIndex; // Our word-to-book map
-    @Getter
-    private Map<Integer, Map<String, Double>> tfIdfVectors; // Book-to-word-importance map
-    @Getter
-    private Map<String, Double> idfScores; // Overall word importance scores
+public class SearchResult implements Comparable<SearchResult> {
 
-    // ... constructors (methods to create a SearchIndexData object) ...
-}
-```
-This simple class acts as a blueprint for the entire search index data that gets saved to `index_data.json`. It clearly shows the three main pieces of information that make up our index.
+    @Getter private final int docId;   // The ID of the matching book
+    @Getter private final double score; // How relevant it is to the query
 
-#### Loading the Index for the Application: `IndexLoader`
-
-Once `IndexerMain` has created `index_data.json`, the main DevShelf application needs to load it. This is done by the `IndexLoader`.
-
-**`src/main/java/storage/IndexLoader.java` (Simplified)**
-```java
-package storage;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import domain.SearchIndexData;
-import java.io.File;
-import java.io.IOException;
-
-public class IndexLoader {
-
-    private final String indexFilePath;
-    private final ObjectMapper mapper;
-
-    public IndexLoader(String indexFilePath) {
-        this.indexFilePath = indexFilePath;
-        this.mapper = new ObjectMapper();
+    public SearchResult(int docId, double score) {
+        this.docId = docId;
+        this.score = score;
     }
 
-    public SearchIndexData loadIndex() {
-        System.out.println("Loading pre-compiled index from: " + indexFilePath);
-        try {
-            File indexFile = new File(indexFilePath);
-            if (!indexFile.exists()) {
-                throw new IOException("Index file not found! Please run IndexerMain first.");
-            }
-            // This single line reads the JSON file and converts it into a SearchIndexData object!
-            SearchIndexData indexData = mapper.readValue(indexFile, SearchIndexData.class);
-            System.out.println("Index loaded successfully.");
-            return indexData;
-        } catch (IOException e) {
-            // If the index file is missing, the app can't run correctly.
-            System.err.println("FATAL ERROR: Could not load index file.");
-            throw new RuntimeException("Failed to load search index", e);
-        }
+    // This special method helps us sort results from highest score to lowest
+    @Override
+    public int compareTo(SearchResult other) {
+        // We want to sort in descending order (highest score first)
+        return Double.compare(other.score, this.score);
     }
 }
 ```
-The `IndexLoader` reads the `index_data.json` file. If the file is missing, it stops the application because DevShelf cannot function without its "secret catalog." If it's there, it uses a powerful tool called `ObjectMapper` (from the Jackson library) to quickly turn the JSON text into a `SearchIndexData` object that our Java program can use. This is where the magic of instant search begins when the app starts!
+After the `QueryProcessor` returns this list of `SearchResult`s, `DevShelfService` (or `BookSearchEngine` in CLI) takes these `docId`s, retrieves the full [Book (Domain Model)](02_book__domain_model__.md) objects from its `bookMap` (remember this from [Application Orchestration](03_application_orchestration_.md)?), and then hands them over to the [User Interface (UI) Presentation](01_user_interface__ui__presentation_.md) to be displayed on your screen.
 
-#### Building the Inverted Index: `IndexBuilder`
+### Under the Hood: The `QueryProcessor` in Action
 
-This is where the actual "indexing" of books happens. For each book, the `IndexBuilder` extracts important words and records where they appear.
+Let's visualize what happens *inside* the `QueryProcessor` when you submit a search for "Java algorithms":
 
-**`src/main/java/features/search/IndexBuilder.java` (Simplified `indexDocument` method)**
+```mermaid
+sequenceDiagram
+    participant User
+    participant App Service
+    participant QueryProcessor
+    participant TextProcessor
+    participant Search Index
+    participant Search Results
+
+    User->>App Service: "Search: Java algorithms"
+    App Service->>QueryProcessor: search("Java algorithms")
+    QueryProcessor->>TextProcessor: "Clean and stem 'Java algorithms'"
+    Note over TextProcessor: Converts to standard terms like "java" "algorithm". (More in Chapter 5)
+    TextProcessor-->>QueryProcessor: Cleaned terms: ["java", "algorithm"]
+    QueryProcessor->>QueryProcessor: Calculate query's unique TF-IDF scores
+    QueryProcessor->>Search Index: Find documents with "java" or "algorithm"
+    Note over Search Index: Uses the pre-built "inverted index" to find initial matches. (More in Chapter 6)
+    Search Index-->>QueryProcessor: List of potential Book IDs (e.g., 1, 3, 5, 7)
+    loop For each potential Book ID
+        QueryProcessor->>Search Index: Get book's TF-IDF scores (e.g., for book ID 1)
+        Note over Search Index: Uses pre-built TF-IDF data. (More in Chapter 6)
+        Search Index-->>QueryProcessor: Book 1's TF-IDF scores
+        QueryProcessor->>QueryProcessor: Calculate Cosine Similarity (Query vs. Book 1)
+        Note over QueryProcessor: Assigns a relevance score (e.g., 0.75 for Book 1)
+    end
+    QueryProcessor->>QueryProcessor: Sort results by score (highest first)
+    QueryProcessor-->>Search Results: List<SearchResult> (e.g., (Book 1, 0.75), (Book 3, 0.62)...)
+    Search Results-->>App Service: Ranked Search Results
+    App Service-->>User: Display found books to the user
+```
+
+#### The `QueryProcessor` Class: The Search Mastermind
+
+The `QueryProcessor` is the class that orchestrates the entire search process. It needs access to some powerful tools that were prepared during application startup (remember [Application Orchestration](03_application_orchestration_.md)?):
+*   `TextProcessor`: For cleaning up your search query. We'll explore this in [Text Preprocessing](05_text_preprocessing_.md).
+*   `invertedIndex`, `tfIdfVectors`, `idfScores`: These are the core components of our pre-built search index, which we'll delve into in [Offline Search Indexing](06_offline_search_indexing_.md).
+
+**`src/main/java/features/search/QueryProcessor.java` (Simplified Constructor)**
 ```java
 package features.search;
 
-import domain.Book;
-import domain.Posting;
-import utils.TextProcessor; // Our tool to clean up text
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import domain.Posting; // Represents a word's location in a book
+import domain.SearchResult;
+import utils.TextProcessor; // Our text cleaning tool
+import java.util.*;
 
-public class IndexBuilder {
-    private final Map<String, List<Posting>> invertedIndex; // The main index: word -> list of book locations
+public class QueryProcessor {
     private final TextProcessor textProcessor;
+    private final Map<String, List<Posting>> invertedIndex;     // Word -> Books containing it
+    private final Map<Integer, Map<String, Double>> tfIdfVectors; // Book ID -> (Word -> Score)
+    private final Map<String, Double> idfScores;                // Word -> Overall Rarity Score
 
-    public IndexBuilder(TextProcessor textProcessor) {
+    public QueryProcessor(TextProcessor textProcessor,
+                          Map<String, List<Posting>> invertedIndex,
+                          Map<Integer, Map<String, Double>> tfIdfVectors,
+                          Map<String, Double> idfScores) {
         this.textProcessor = textProcessor;
-        this.invertedIndex = new HashMap<>();
+        this.invertedIndex = invertedIndex;
+        this.tfIdfVectors = tfIdfVectors;
+        this.idfScores = idfScores;
     }
-
-    public void indexDocument(Book book) {
-        // Combine all relevant text from the book
-        String bookData = book.getTitle() + " " + book.getAuthor() + " " + book.getDescription() + " " +
-                          book.getCategory() + " " + book.getProgLang() + " " + String.join(" ", book.getTag());
-
-        // 1. Clean and normalize the text (e.g., "Python" -> "python", remove "the", shorten "running" -> "run")
-        List<String> stemmedTokens = textProcessor.process(bookData);
-
-        // 2. Record term positions and frequencies within THIS book
-        Map<String, List<Integer>> termPositions = new HashMap<>();
-        for (int pos = 0; pos < stemmedTokens.size(); pos++) {
-            String term = stemmedTokens.get(pos);
-            termPositions.computeIfAbsent(term, k -> new ArrayList<>()).add(pos);
-        }
-
-        // 3. Add this book's data to the main inverted index
-        for (Map.Entry<String, List<Integer>> entry : termPositions.entrySet()) {
-            String term = entry.getKey();
-            List<Integer> positions = entry.getValue();
-            Posting posting = new Posting(book.getBookId(), positions.size(), positions); // Store book ID, frequency, positions
-            invertedIndex.computeIfAbsent(term, k -> new ArrayList<>()).add(posting); // Add to global index
-        }
-    }
-    // ... getter for invertedIndex
+    // ... search method and other helper methods
 }
 ```
-The `indexDocument` method is called for every book.
-1.  It gathers all important text about the book (title, author, description, etc.).
-2.  It uses `TextProcessor` (which we'll explore in [Text Normalization Utilities](08_text_normalization_utilities_.md)) to clean up this text, making words lowercase, removing common "stop words" like "a" or "the", and reducing words to their root form (e.g., "running", "ran", "runs" all become "run").
-3.  It then goes through each cleaned word (or "term") in the book, noting its `bookId`, how many times it appears (`freq`), and where (`positions`). This information is stored in a `Posting` object.
-4.  Finally, it adds this `Posting` to our main `invertedIndex`. If a word is seen for the first time, it gets a new entry. If it's seen again in another book, that book's `Posting` is added to the word's existing list.
+The constructor simply takes all these pre-built index components and the `TextProcessor` as "ingredients" so it has everything it needs to perform a search.
 
-#### Calculating Word Importance: `TfIdfCalculator`
+#### The `search` Method: The Core Logic
 
-After the `InvertedIndex` is built, the `TfIdfCalculator` adds a layer of "smartness" by calculating TF-IDF scores.
+This is the main method that runs when you submit a search query.
 
-**`src/main/java/utils/TfIdfCalculator.java` (Simplified `calculateIdf` and `calculateTfIdf` methods)**
+**`src/main/java/features/search/QueryProcessor.java` (Simplified `search` method)**
 ```java
-package utils;
+// Inside QueryProcessor class
+public List<SearchResult> search(String rawQuery) {
+    // 1. Process the query (clean words, stem them)
+    List<String> queryTerms = textProcessor.process(rawQuery);
+    if (queryTerms.isEmpty()) {
+        return Collections.emptyList(); // No valid terms left to search
+    }
 
-import domain.Posting;
-import lombok.Getter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+    // 2. Calculate the query's own TF-IDF vector
+    Map<String, Double> queryVector = calculateQueryVector(queryTerms);
 
-public class TfIdfCalculator {
-    @Getter
-    private Map<Integer, Map<String, Double>> tfIdfVectors = new HashMap<>(); // Book -> (Word -> Score)
-    @Getter
-    private Map<String, Double> idfScores = new HashMap<>(); // Word -> Overall Rarity Score
+    // 3. Find all documents that match *any* query term using the inverted index
+    Set<Integer> matchingDocIds = findMatchingDocuments(queryTerms);
 
-    public void calculateIdf(Map<String, List<Posting>> invertedIndex, int totalDocCount) {
-        System.out.println("Calculating IDF scores for + " + invertedIndex.size() + " terms...");
-        for(String term : invertedIndex.keySet()) {
-            int docFrequency = invertedIndex.get(term).size(); // How many documents contain this term
-            // IDF: Log (Total # of books / # of books containing this term)
-            double idf = Math.log10( (double) totalDocCount / docFrequency );
-            idfScores.put(term, idf); // Store the rarity score for each term
+    // 4. Score each matching document using Cosine Similarity
+    List<SearchResult> results = new ArrayList<>();
+    for (int docId : matchingDocIds) {
+        Map<String, Double> docVector = tfIdfVectors.get(docId); // Get book's TF-IDF scores
+        double score = cosineSimilarity(queryVector, docVector); // Calculate relevance!
+        if (score > 0) { // Only add if there's some relevance
+            results.add(new SearchResult(docId, score));
         }
     }
 
-    public void calculateTfIdf(Map<String, List<Posting>> invertedIndex) {
-        System.out.println("Calculating TF-IDF vectors for all documents...");
-        for(String term : invertedIndex.keySet()) {
-            double idf = idfScores.get(term); // Get the overall rarity score
-            List<Posting> postings = invertedIndex.get(term);
-            for(Posting posting : postings ) {
-                int docId = posting.getDocId();
-                int termFreq = posting.getFreq(); // How many times this term appears in THIS book
-                // TF: 1 + Log (Term Frequency in this book)
-                double tf = 1 + Math.log10(termFreq);
-                double tfIdf = tf * idf; // Combine TF and IDF
-                tfIdfVectors.computeIfAbsent(docId, k -> new HashMap<>()).put(term,tfIdf); // Store importance score
+    // 5. Rank (sort) the results by score (highest first)
+    Collections.sort(results);
+
+    return results;
+}
+```
+Here's a breakdown of the steps in this `search()` method:
+1.  **`textProcessor.process(rawQuery)`**: Just like our indexing process, the `QueryProcessor` uses the `TextProcessor` to clean and standardize your search query (e.g., "Programming Books" becomes ["program", "book"]).
+2.  **`calculateQueryVector(queryTerms)`**: It then creates a special numeric representation (a "vector") of your query. This is similar to how books are represented and helps us compare your query to books.
+3.  **`findMatchingDocuments(queryTerms)`**: This step is incredibly fast! It uses the `invertedIndex` we learned about in [Offline Search Indexing](06_offline_search_indexing_.md) to quickly gather a list of all `bookId`s that contain any of your processed query terms.
+4.  **`cosineSimilarity(queryVector, docVector)`**: This is the core of relevance scoring. For each potential book, it compares the query's vector to the book's pre-computed `tfIdfVectors` using a mathematical technique called Cosine Similarity.
+5.  **`Collections.sort(results)`**: Finally, all the `SearchResult`s are sorted from highest relevance score to lowest, putting the best matches at the top of your results.
+
+Let's look at some of these helper methods in more detail!
+
+#### `findMatchingDocuments`: Rapid Document Retrieval
+
+This method uses the `invertedIndex` to quickly gather all the `docId`s (book IDs) that contain at least one of your query words.
+
+**`src/main/java/features/search/QueryProcessor.java` (Simplified `findMatchingDocuments` method)**
+```java
+// Inside QueryProcessor class
+private Set<Integer> findMatchingDocuments(List<String> queryTerms) {
+    Set<Integer> docIds = new HashSet<>(); // Use a Set to store unique book IDs
+    for(String term : queryTerms) {
+        List<Posting> postings = invertedIndex.get(term); // Look up term in the index!
+        if(postings != null){
+            for(Posting p : postings) {
+                docIds.add(p.getDocId()); // Add all unique book IDs found
             }
         }
     }
+    return docIds;
 }
 ```
-1.  **`calculateIdf`**: This method first calculates the **Inverse Document Frequency (IDF)** for *every unique word* in our entire library. A word that appears in many books (like "the" or "programming") will have a low IDF score, meaning it's not very discriminating. A word that appears in few books (like "quantum entanglement") will have a high IDF score, meaning it's very specific.
-2.  **`calculateTfIdf`**: Then, for each word in each book, it calculates the **Term Frequency-Inverse Document Frequency (TF-IDF)** score.
-    *   **Term Frequency (TF)**: How often a word appears in a *specific book*. More occurrences mean more relevance to *that book*.
-    *   **TF-IDF = TF \* IDF**: This final score tells us how important a word is to a specific book, taking into account how often it appears *in that book* and how rare it is *across the entire library*. High TF-IDF means a word is very relevant and unique to a document.
+For each word in your query (e.g., "java"), it looks it up in the `invertedIndex`. The index tells it exactly which `Posting` objects (representing occurrences of the word in a book) are associated with "java". It then collects all the `docId`s from these `Posting`s. This is why the inverted index is so powerful for quick lookups!
 
-This entire process makes DevShelf incredibly efficient. When you search, it doesn't have to re-read and calculate all this information. It just looks up words and their scores in the pre-built `SearchIndexData`!
+#### `calculateQueryVector`: Understanding the Query's Importance
+
+This method creates a TF-IDF vector for *your search query itself*. This allows us to treat your query like a small "document" and compare it mathematically to our books.
+
+**`src/main/java/features/search/QueryProcessor.java` (Simplified `calculateQueryVector` method)**
+```java
+// Inside QueryProcessor class
+private Map<String, Double> calculateQueryVector(List<String> queryTerms) {
+    Map<String, Double> queryVector = new HashMap<>();
+    Map<String, Integer> termCounts = new HashMap<>(); // Count term occurrences in YOUR query
+
+    // Count how many times each term appears in your query
+    for(String term : queryTerms) {
+        termCounts.put(term, termCounts.getOrDefault(term, 0) + 1);
+    }
+
+    // For each unique term in your query, calculate its TF-IDF score
+    for(String term : termCounts.keySet()) {
+        double tf = 1 + Math.log10(termCounts.get(term)); // Term Frequency for query term
+        double idf = idfScores.getOrDefault(term, 0.0);    // Inverse Document Frequency from our index
+
+        queryVector.put(term, tf * idf); // Store TF-IDF score for query term
+    }
+    return queryVector;
+}
+```
+This method essentially does the same TF-IDF calculation we briefly mentioned for books, but for the query. It counts how many times each word appears in *your query* (Term Frequency, TF) and then multiplies it by the overall rarity of that word (`idfScores`) from our pre-built index.
+
+#### `cosineSimilarity`: Measuring How Alike Things Are
+
+This is the clever math part that gives us the relevance score! Cosine Similarity measures how "similar" two things are by looking at the "angle" between their "vectors" (our lists of TF-IDF scores).
+
+**Analogy:** Imagine your search query and a book are like two arrows (vectors) in a giant space.
+*   If they point in exactly the same direction, they are very similar (Cosine Similarity = 1.0).
+*   If they point in completely different directions (at a 90-degree angle), they are not similar at all (Cosine Similarity = 0.0).
+*   Anything in between means a partial match, with a score between 0 and 1.
+
+**`src/main/java/features/search/QueryProcessor.java` (Simplified `cosineSimilarity` method)**
+```java
+// Inside QueryProcessor class
+private double cosineSimilarity(Map<String, Double> vec1, Map<String, Double> vec2) {
+    if (vec2 == null) return 0.0; // If book has no TF-IDF data, it can't be similar
+
+    double dotProduct = 0.0;
+    double norm1 = 0.0; // "Length" of the first vector (query)
+    double norm2 = 0.0; // "Length" of the second vector (book)
+
+    // Calculate how much the two vectors overlap (dot product)
+    // and the "length" of the first vector (norm1)
+    for (String term : vec1.keySet()) {
+        double queryTermScore = vec1.get(term);
+        double bookTermScore = vec2.getOrDefault(term, 0.0);
+
+        dotProduct += queryTermScore * bookTermScore;
+        norm1 += queryTermScore * queryTermScore; // Sum of squares for norm1
+    }
+
+    // Calculate the "length" of the second vector (norm2)
+    for (double score : vec2.values()) {
+        norm2 += score * score; // Sum of squares for norm2
+    }
+
+    // Avoid division by zero in case of empty vectors
+    if (norm1 == 0.0 || norm2 == 0.0) {
+        return 0.0;
+    }
+
+    // The final formula: (Overlap) / (Length of Query * Length of Book)
+    return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
+}
+```
+This method takes two maps (the query's TF-IDF vector and a book's TF-IDF vector) and computes a score between 0 and 1. A score closer to 1 means the book is highly relevant to the query, while a score closer to 0 means it's not. This score is precisely what determines the book's ranking in your search results!
 
 ### Conclusion
 
-In this chapter, we delved into **Search Index Management**, the behind-the-scenes magic that makes DevShelf's search incredibly fast. We learned that:
-*   It's an **offline process** performed by `IndexerMain` to prepare book data for quick searching.
-*   The core components are the **Inverted Index** (mapping words to books) and **TF-IDF scores** (measuring word importance).
-*   The `IndexBuilder` populates the inverted index by processing book text and recording word locations.
-*   The `TfIdfCalculator` then assigns importance scores to words within books based on their frequency and rarity.
-*   All this prepared data is saved into `index_data.json` and loaded by the `IndexLoader` when DevShelf starts, turning our digital library into an instant search powerhouse.
+In this chapter, we explored the **Core Search Engine**, which is the "finder" of our DevShelf application. We learned that:
+*   The `QueryProcessor` is the main component responsible for taking your search query and finding relevant books.
+*   It first **processes** your query (cleaning and standardizing words) using the `TextProcessor` (which we'll explore in [Text Preprocessing](05_text_preprocessing_.md)).
+*   Then, it uses the pre-built `invertedIndex` from [Offline Search Indexing](06_offline_search_indexing_.md) to quickly **identify matching documents**.
+*   Crucially, it **scores** these books for relevance using techniques like Cosine Similarity, comparing the query's TF-IDF vector to each book's TF-IDF vector (also from [Offline Search Indexing](06_offline_search_indexing_.md)).
+*   Finally, it **ranks** the results, ensuring the most pertinent books are shown first.
 
-This efficient preparation of data is crucial for the "brain" of DevShelf, our search engine. In the next chapter, we'll explore how this pre-computed index is actually used to answer your search queries!
+This entire process allows DevShelf to quickly transform your simple search query into a prioritized list of highly relevant books. Now that we understand *how* the search engine finds and ranks books, let's dive into one of the fundamental building blocks it uses: cleaning and preparing text.
 
-[Next Chapter: Core Search Engine](05_core_search_engine_.md)
+[Next Chapter: Text Preprocessing](05_text_preprocessing_.md)
