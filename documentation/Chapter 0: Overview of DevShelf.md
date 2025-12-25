@@ -47,14 +47,13 @@ flowchart TD
 
 ## Chapters
 
-1. [User Interface (UI) Presentation](./01%20user%20interface%20presentation.md)
-2. [Book (Domain Model)](./02%20book%20domain%20model.md)
-3. [Application Orchestration](./03%20application%20orchestration.md)
-4. [Core Search Engine](./04%20core%20search%20engine.md)
-5. [Text Preprocessing](./05%20text%20preprocessing.md)
-6. [Offline Search Indexing](./06%20offline%20search%20indexing.md)
-7. [Intelligent Search Enhancements](./07%20intelligent%20search%20enhancements.md)
-8. [User Behavior Analytics](./08%20user%20behavior%20analytics.md)
-
+1. [User Interface (UI) Presentation](./Chapter%201:%20User%20Interface%20(UI)%20Presentation.md)
+2. [Book (Domain Model)](./Chapter%202:%20Book%20(Domain%20Model).md)
+3. [Application Orchestration](./Chapter%203:%20Application%20Orchestration.md)
+4. [Core Search Engine](./Chapter%204:%20Core%20Search%20Engine.md)
+5. [Text Preprocessing](./Chapter%205:%20Text%20Preprocessing.md)
+6. [Offline Search Indexing](./Chapter%206:%20Offline%20Search%20Indexing.md)
+7. [Intelligent Search Enhancements](./Chapter%207:%20Intelligent%20Search%20Enhancements.md)
+8. [User Behavior Analytics](./Chapter%208:%20User%20Behavior%20Analytics.md)
 
 
