@@ -1,400 +1,382 @@
+# Chapter 6: Offline Search Indexing
 
-Welcome back to DevShelf! In our last chapter, [Core Search Engine](05_core_search_engine_.md), we learned how DevShelf's `QueryProcessor` is a brilliant "finder," quickly sifting through our book catalog to give you relevant results. But what happens *after* you get those results? Do you click on the first one? The fifth one? Do you *always* pick the book with the highest rating, or sometimes a less-known one catches your eye?
+Welcome back, digital librarian! In our last chapter, [Text Preprocessing](05_text_preprocessing_.md), we became master digital editors. We learned how DevShelf cleans and standardizes all the text from our books and your search queries, turning messy words like "running" or "JAVA" into neat, consistent "run" and "java." This cleaning is a super important step for accurate search!
 
-Knowing what users actually *do* with the search results is incredibly valuable! It's how DevShelf can become smarter and more adaptive over time, learning what's truly popular and trending. This is exactly what **User Interaction & Analytics** is all about.
+But simply having clean words isn't enough. Imagine you've perfectly organized all the words on thousands of index cards. If you still have to read *every single one* of those cards every time someone asks for a book, it would be incredibly slow! We need a super-fast way to look up which books contain certain words.
 
-### The "Hidden Assistant" of DevShelf
+This is exactly what **Offline Search Indexing** does for DevShelf. It's like the "librarian's secret catalog" that makes searching lightning-fast. It's an important step that happens *before* DevShelf is ready to answer your search queries.
 
-Imagine DevShelf has a **hidden assistant** who quietly watches over your shoulder (not in a creepy way!) whenever you use the app. This assistant doesn't just see the books DevShelf *suggests* to you; they carefully note down *which books you actually click on* after a search.
+### What Problem Does the "Secret Catalog" Solve?
 
-**The Problem It Solves:** If DevShelf only relies on things like word matching (TF-IDF scores) and static ratings, it might miss out on real-world trends. A book might have a great rating, but if no one ever clicks on it, maybe it's not as *relevant right now*. Conversely, a newer book might not have many ratings yet, but if everyone is suddenly clicking on it, DevShelf should recognize that it's *trending*!
+Imagine DevShelf has hundreds or even thousands of books. If you search for "Python machine learning," DevShelf can't just scan every single book's title, author, and description in real-time. That would be too slow and would make your search results appear with a frustrating delay.
 
-**Our Central Use Case:** A user searches for "Java," sees a list of books, and then clicks on "Effective Java." DevShelf needs to **record this click**, and later, use these click records to figure out which "Java" books (or any books) are currently the most popular, influencing future search results and recommendations.
+The problem Offline Search Indexing solves is this: **How can DevShelf provide instant search results for thousands of books without having to read them all every time you type a query?**
 
-User Interaction & Analytics allows DevShelf to learn from real user behavior, making the system feel more dynamic and helpful.
+Our central use case: **When you start DevShelf, it should be ready to give you instant, relevant search results for any query, big or small.**
 
-### Part 1: Tracking User Clicks (The "Logger")
+To achieve this, DevShelf does a lot of heavy lifting *once*, in advance. It builds special "lookup tables" that are super quick to check, like a meticulously organized index for the entire library.
 
-The first step in understanding user behavior is to record it. DevShelf has a special service dedicated to logging every time you click on a book.
+### Key Concepts of Offline Search Indexing
 
-#### The `LoggingService`: DevShelf's Notebook
+Offline Search Indexing involves a special process that creates these fast lookup tables:
 
-The `LoggingService` is like the hidden assistant's notebook. Whenever you click a book in the search results (or open its details), the application tells the `LoggingService` to make an entry in its notebook. This entry includes what you searched for (`query`), which book you clicked on (`clickedDocId`), and `when` you clicked it.
+1.  **It's an Offline Process:** This means it's a separate program you run once, or whenever new books are added. It doesn't run every time DevShelf starts. Think of it as updating the library's main card catalog overnight, so it's ready for customers in the morning.
 
-All these notes are saved into a simple text file named `logs.json`.
+2.  **Building the Inverted Index:** This is like the index at the back of a textbook, but for our entire library!
+    *   You look up a **word** (like "python").
+    *   It quickly tells you **all the books** that contain that word, and even where it appears.
+    *   It "inverts" the usual way of thinking (book -> words) to (word -> books).
 
-#### The `LogEntry`: A Single Click Record
+3.  **Calculating TF-IDF Scores:** This helps DevShelf understand *how important* a word is to a specific book, compared to its importance across *all* books.
+    *   **TF (Term Frequency):** How many times a word appears in *one book*. More occurrences mean more importance *to that book*.
+    *   **IDF (Inverse Document Frequency):** How *rare* a word is across *all books*. A rare word (like "quantum entanglement") is more significant than a common word (like "programming").
+    *   **TF-IDF = TF \* IDF:** This combined score tells us the overall "importance" of a word in a specific book, helping DevShelf rank results more intelligently.
 
-Before saving a click, DevShelf creates a `LogEntry` object. This is a small digital record, like a single line in our assistant's notebook.
+These pre-computed data (the inverted index and all the TF-IDF scores) are then saved into a special file.
 
-**`src/main/java/domain/LogEntry.java` (Simplified)**
+### How to Build the Search Index
+
+You use a special program called `IndexerMain` (short for "Indexer Main Program") to do all this work. You usually run it directly from your computer's terminal, not through DevShelf's normal interface. It's like a dedicated librarian assistant who spends hours organizing the catalog.
+
+**`src/main/java/core/IndexerMain.java` (Simplified)**
 ```java
-package domain;
+package core;
 
-import lombok.Getter;
-import java.time.Instant; // To record the exact time
+import domain.Book;
+import domain.SearchIndexData;
+import features.search.IndexBuilder;
+import storage.BookLoader;
+import utils.TextProcessor;
+import utils.TfIdfCalculator;
+import com.fasterxml.jackson.databind.ObjectMapper; // Tool to save to JSON
+import java.io.File;
+import java.util.List;
+import java.util.Set;
 
-@Getter
-public class LogEntry {
-    private String query;         // What the user searched for
-    private int clickedDocId;     // The unique ID of the book they clicked
-    private String timestamp;     // When the click happened
+public class IndexerMain {
+    // This is where our super-fast index will be saved
+    private static final String INDEX_OUTPUT_PATH = "src/main/resources/data/index_data.json";
 
-    // A special method to create a new LogEntry
-    public LogEntry(String query, int clickedDocId) {
-        this.query = query;
-        this.clickedDocId = clickedDocId;
-        this.timestamp = Instant.now().toString(); // Record the current time automatically
-    }
-}
-```
-Each `LogEntry` clearly captures the essential details of a user's interaction with a book.
-
-#### How a Click Gets Logged
-
-When you click a book (for instance, to see its full details in the GUI), here's the simplified flow:
-
-```mermaid
-sequenceDiagram
-    participant You
-    participant GUI Controller
-    participant DevShelfService
-    participant LoggingService
-    participant logs.json file
-
-    You->>GUI Controller: Click on "Effective Java" book card
-    GUI Controller->>DevShelfService: logClick("Java", 89)
-    DevShelfService->>LoggingService: logClick("Java", 89)
-    Note over LoggingService: Creates a LogEntry object and converts it to JSON
-    LoggingService->>logs.json file: Append {"query":"Java", "clickedDocId":89, ...}
-    logs.json file-->>LoggingService: (Data written)
-    LoggingService-->>DevShelfService: (Confirmation)
-    DevShelfService-->>GUI Controller: (Confirmation)
-    GUI Controller-->>You: Show "Effective Java" details
-```
-
-The GUI Controller (like `MainViewController` or `BookDetailController` from [User Interface Presentation](03_user_interface_presentation_.md)) detects your click, tells `DevShelfService` (our main app brain, from [Application Startup & Flow Control](01_application_startup___flow_control_.md)), which then tells the `LoggingService` to record it.
-
-Here's how `LoggingService` writes that entry:
-
-**`src/main/java/utils/LoggingService.java` (Simplified `logClick` method)**
-```java
-package utils;
-
-import com.fasterxml.jackson.databind.ObjectMapper; // Tool to convert to JSON
-import domain.LogEntry;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
-public class LoggingService {
-
-    private final String logFilePath;
-    private final ObjectMapper mapper;
-
-    public LoggingService(String logFilePath) {
-        this.logFilePath = logFilePath;
-        this.mapper = new ObjectMapper();
-    }
-
-    public void logClick(String query, int clickedDocId) {
-        LogEntry entry = new LogEntry(query, clickedDocId); // Create the LogEntry
-
-        // Convert the LogEntry object into a JSON text string
-        String jsonLogLine;
+    public static void main(String[] args) {
+        System.out.println("--- Starting Offline Indexer ---");
         try {
-            jsonLogLine = mapper.writeValueAsString(entry);
-        } catch (IOException e) {
-            System.err.println("Failed to convert LogEntry to JSON.");
-            return;
-        }
+            // 1. Prepare our tools
+            Set<String> stopWords = StopWordLoader.loadStopWords("/data/stopword.txt");
+            TextProcessor textProcessor = new TextProcessor(stopWords);
+            BookLoader bookLoader = new BookLoader("/data/book.json");
+            IndexBuilder indexer = new IndexBuilder(textProcessor);
+            TfIdfCalculator tfIdfCalculator = new TfIdfCalculator();
 
-        // Write the JSON string to the logs.json file, adding it at the end
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFilePath, true))) {
-            writer.write(jsonLogLine);
-            writer.newLine(); // Add a new line for the next log entry
-            writer.flush();   // Make sure it's written to disk immediately
-        } catch (IOException e) {
-            System.err.println("Failed to write log line to file.");
+            // 2. Load all the books (from Chapter 2)
+            List<Book> allBooks = bookLoader.loadBooks();
+            System.out.println("Loading and indexing " + allBooks.size() + " books...");
+
+            // 3. Build the Inverted Index for each book
+            for(Book book : allBooks) {
+                indexer.indexDocument(book); // This analyzes each book's text
+            }
+            System.out.println("Indexing Complete. Found " + indexer.getInvertedIndex().size() + " unique terms.");
+
+            // 4. Calculate TF-IDF scores based on the inverted index
+            tfIdfCalculator.calculateIdf(indexer.getInvertedIndex(), allBooks.size());
+            tfIdfCalculator.calculateTfIdf(indexer.getInvertedIndex());
+            System.out.println("TF-IDF calculation complete.");
+
+            // 5. Gather all the index data into one object
+            SearchIndexData indexData = new SearchIndexData(
+                indexer.getInvertedIndex(),
+                tfIdfCalculator.getTfIdfVectors(),
+                tfIdfCalculator.getIdfScores()
+            );
+
+            // 6. Save this data to a file (index_data.json)
+            ObjectMapper mapper = new ObjectMapper(); // Our JSON saving tool
+            mapper.writeValue(new File(INDEX_OUTPUT_PATH), indexData); // Write the data
+            System.out.println("--- ✅ Indexer Finished Successfully! --- ");
+        } catch (Exception e) {
+            System.err.println(" --- ❌ Indexer failed with an error. --- ");
             e.printStackTrace();
         }
     }
 }
 ```
-The `logClick` method creates a `LogEntry`, converts it into a JSON string, and then appends this string as a new line to the `logs.json` file. This means `logs.json` grows larger with every user click!
+When you run `IndexerMain`, it does the following:
+1.  **Gets Ready**: It loads the [Text Preprocessing](05_text_preprocessing_.md) tools and the [Book (Domain Model)](02_book__domain_model__.md) loader.
+2.  **Loads Books**: It reads all the books from `book.json`.
+3.  **Indexes Books**: For each book, it uses the `IndexBuilder` to create entries in the inverted index.
+4.  **Calculates Scores**: It then uses the `TfIdfCalculator` to figure out the importance of each word in each book.
+5.  **Saves Everything**: All this organized data is bundled into a `SearchIndexData` object and saved as a file named `index_data.json`.
 
-#### What the `logs.json` File Looks Like
+After `IndexerMain` finishes, the `index_data.json` file is created. This file holds all the "secret catalog" information, ready for DevShelf to use when it starts.
 
-`logs.json` is a file where each line is a separate click event:
+#### What the `index_data.json` File Looks Like (Snippet)
 
-**`src/main/resources/logs/logs.json` (Snippet)**
+Here's a peek at what's inside `index_data.json`. It's a structured way to store our pre-computed search data:
+
+**`src/main/resources/data/index_data.json` (Snippet)**
 ```json
-{"query":"clean","clickedDocId":58,"timestamp":"2025-11-07T06:55:52.677729400Z"}
-{"query":"clean","clickedDocId":58,"timestamp":"2025-11-07T06:55:56.033080Z"}
-{"query":"develop","clickedDocId":108,"timestamp":"2025-11-07T18:59:05.735673500Z"}
-{"query":"The Pragmatic Programmer","clickedDocId":2,"timestamp":"2025-11-14T14:09:05.605164500Z"}
-{"query":"The Pragmatic Programmer","clickedDocId":2,"timestamp":"2025-11-14T14:09:08.471192900Z"}
+{
+  "invertedIndex" : {
+    "python" : [
+      { "docId" : 13, "freq" : 1, "positions" : [ 18 ] },
+      { "docId" : 26, "freq" : 4, "positions" : [ 0, 11, 16, 17 ] }
+    ],
+    "algorithm" : [
+      { "docId" 1, "freq" : 5, "positions" : [ 2, 15, 25, 26, 29 ] },
+      { "docId" : 13, "freq" : 4, "positions" : [ 1, 13, 17, 21 ] }
+    ]
+  },
+  "tfIdfVectors" : {
+    "1" : { "rivest" : 2.31, "stein" : 2.31, "code" : 1.01 },
+    "2" : { "profession" : 1.83, "engin" : 0.95, "practic" : 0.45 }
+  },
+  "idfScores" : {
+    "python" : 0.769, "algorithm" : 0.952, "java" : 0.952
+  }
+}
 ```
-You can see that book `ID 58` was clicked twice after a "clean" search, and book `ID 2` (The Pragmatic Programmer) was clicked several times. This raw data is exactly what our next component needs!
+*   `invertedIndex`: Maps a word (like "python") to a list of "postings." A "posting" tells us a `docId` (book ID), how many times the word appears (`freq`), and its `positions` in that book.
+*   `tfIdfVectors`: For each book's `docId` (like "1"), it lists the important `term`s (words) in that book and their "importance score" (`tfIdf`).
+*   `idfScores`: For each `term` (word), it lists its `idf` (overall rarity/importance score) across *all* books.
 
-### Part 2: Understanding Popularity (The "Analyst")
+### Under the Hood: Building the Search Index Step-by-Step
 
-Gathering raw click data is useful, but we need to *process* it to get meaningful insights. This is where the analytics part comes in.
+Let's visualize the entire process of how the `IndexerMain` builds this powerful index:
 
-#### The `LogAnalyzerMain`: Our Offline Popularity Calculator
+```mermaid
+sequenceDiagram
+    participant IndexerMain
+    participant BookLoader
+    participant TextProcessor
+    participant IndexBuilder
+    participant TfIdfCalculator
+    participant index_data.json
 
-Similar to `IndexerMain` (from [Search Index Management](04_search_index_management_.md)) which built our search index, `LogAnalyzerMain` is another **offline tool**. This means you run it separately, usually when the application isn't running, to process the accumulated `logs.json` file.
+    IndexerMain->>BookLoader: "Load all books from book.json"
+    BookLoader-->>IndexerMain: "Here's a list of Book objects!"
+    loop For each Book
+        IndexerMain->>TextProcessor: "Clean text from title, description, etc."
+        Note over TextProcessor: Removes common words, normalizes spellings (Chapter 5)
+        TextProcessor-->>IndexerMain: "Here are the important, clean words (tokens)!"
+        IndexerMain->>IndexBuilder: "Add these tokens and book ID to the Inverted Index"
+        Note over IndexBuilder: Records which words are in which book, their count, and positions.
+    end
+    IndexerMain->>TfIdfCalculator: "Calculate IDF (overall word rarity) for all words"
+    IndexerMain->>TfIdfCalculator: "Calculate TF-IDF (word importance) for each word in each book"
+    TfIdfCalculator-->>IndexerMain: "Here are all the TF-IDF scores!"
+    IndexerMain->>index_data.json: "Save Inverted Index, TF-IDF scores to index_data.json"
+    IndexerMain-->>IndexerMain: Cleanup & Finish
+```
 
-Its job is simple:
-1.  Read every `LogEntry` from `logs.json`.
-2.  Count how many times each unique book (`clickedDocId`) was clicked.
-3.  Calculate a "popularity score" for each book based on its click count.
-4.  Save these popularity scores into a new file: `popularity.json`.
+#### 1. Storing the Index Data: `SearchIndexData`
 
-This `popularity.json` file will then be loaded by the main DevShelf application (just like `index_data.json`) to influence search results and recommendations.
+This class is a simple container to hold all the different parts of our pre-computed index together. It's the blueprint for how our `index_data.json` file is structured.
 
-#### How to Run the `LogAnalyzerMain`
-
-You would run `LogAnalyzerMain` directly, just like `IndexerMain`. It doesn't have a visual interface; it just prints messages as it processes the logs.
-
-**`src/main/java/core/LogAnalyzerMain.java` (Simplified `main` method)**
+**`src/main/java/domain/SearchIndexData.java` (Simplified)**
 ```java
-package core;
+package domain;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import domain.LogEntry;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
+import lombok.Getter; // Automatically creates 'get' methods
+import java.util.List;
 import java.util.Map;
 
-public class LogAnalyzerMain {
+public class SearchIndexData {
+    @Getter
+    private Map<String, List<Posting>> invertedIndex; // Maps word -> list of its locations
+    @Getter
+    private Map<Integer, Map<String, Double>> tfIdfVectors; // Maps book ID -> (word -> TF-IDF score)
+    @Getter
+    private Map<String, Double> idfScores; // Maps word -> its overall rarity score
 
-    private static final String LOGS_FILE_PATH = "src/main/resources/logs/logs.json";
-    private static final String POPULARITY_OUT_PATH = "src/main/resources/logs/popularity.json";
+    public SearchIndexData() {} // Constructor for JSON loading
 
-    public static void main(String[] args) {
-        System.out.println("--- Starting Log Analyzer ---");
-        ObjectMapper mapper = new ObjectMapper(); // JSON helper
+    public SearchIndexData(Map<String, List<Posting>> invertedIndex,
+                           Map<Integer, Map<String, Double>> tfIdfVectors,
+                           Map<String, Double> idfScores) {
+        this.invertedIndex = invertedIndex;
+        this.tfIdfVectors = tfIdfVectors;
+        this.idfScores = idfScores;
+    }
+}
+```
+This class makes it easy to save and load the entire complex index data as one unit using JSON.
 
-        Map<Integer, Integer> clickCounts = new HashMap<>(); // Store: <BookID, ClickCount>
+#### 2. Loading the Index for the Application: `IndexLoader`
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(LOGS_FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) continue;
-                LogEntry entry = mapper.readValue(line, LogEntry.class); // Read each click entry
-                int docId = entry.getClickedDocId();
-                clickCounts.put(docId, clickCounts.getOrDefault(docId, 0) + 1); // Count clicks
+Once `IndexerMain` has created `index_data.json`, the main DevShelf application (as seen in [Application Orchestration](03_application_orchestration_.md)) needs to load this file when it starts up. This is the job of the `IndexLoader`.
+
+**`src/main/java/storage/IndexLoader.java` (Simplified `loadIndex` method)**
+```java
+package storage;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import domain.SearchIndexData;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+public class IndexLoader {
+    private final String resourcePath;
+
+    public IndexLoader(String resourcePath) {
+        this.resourcePath = resourcePath;
+    }
+
+    public SearchIndexData loadIndex() {
+        ObjectMapper mapper = new ObjectMapper(); // Our JSON reading tool
+        System.out.println("📦 Loading pre-compiled index...");
+        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                // If the default index is not found, something is wrong.
+                throw new RuntimeException("Resource not found: " + resourcePath);
             }
+            // This magical line reads the JSON file and converts it into a SearchIndexData object!
+            SearchIndexData indexData = mapper.readValue(inputStream, SearchIndexData.class);
+            System.out.println("Index loaded successfully.");
+            return indexData;
         } catch (IOException e) {
-            System.err.println("Error reading log file: " + e.getMessage());
-            return;
-        }
-
-        // --- Calculate popularity scores (using a logarithm to soften high counts) ---
-        Map<Integer, Double> popularityScores = new HashMap<>();
-        double maxScore = 0.0;
-        for (Integer docId : clickCounts.keySet()) {
-            double score = Math.log10(1 + clickCounts.get(docId)); // E.g., 9 clicks -> log10(10) = 1.0
-            popularityScores.put(docId, score);
-            if (score > maxScore) maxScore = score; // Find the highest score
-        }
-
-        // --- Normalize all scores between 0 and 1 ---
-        if (maxScore > 0) {
-            for (Integer docId : popularityScores.keySet()) {
-                double normalizedScore = popularityScores.get(docId) / maxScore;
-                popularityScores.put(docId, normalizedScore);
-            }
-        }
-
-        // --- Save the final popularity map to popularity.json ---
-        try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(POPULARITY_OUT_PATH), popularityScores);
-            System.out.println("--- Log Analyzer Finished ---");
-        } catch (IOException e) {
-            System.err.println("Error writing popularity file: " + e.getMessage());
+            System.err.println("FATAL ERROR: Could not load index file. " + e.getMessage());
+            throw new RuntimeException("Failed to load search index", e); // Crash if no index
         }
     }
 }
 ```
-This process:
-1.  Reads each line from `logs.json`.
-2.  Converts the JSON line back into a `LogEntry` object.
-3.  Increments a counter for the `clickedDocId`.
-4.  After reading all logs, it calculates a raw score using `Math.log10(1 + clicks)`. This "logarithm" helps to smooth out the scores; for example, 100 clicks isn't *100 times* better than 1 click, but still significantly better. This prevents super popular books from totally dominating everything else.
-5.  Finally, it normalizes these scores so they all fall between `0.0` and `1.0`, making them easy to use in calculations later. The most popular book will have a score of `1.0`.
-6.  The result is then saved to `popularity.json`.
+The `IndexLoader` quickly reads the `index_data.json` file. If the file is missing or corrupted, DevShelf cannot function, so it will stop the application with an error. But if successful, it provides the entire `SearchIndexData` object to the core application logic, making it ready for instant searches.
 
-#### What the `popularity.json` File Looks Like
+#### 3. Building the Inverted Index: `IndexBuilder`
 
-`popularity.json` contains a map where each book ID is linked to its calculated popularity score:
+This is where the actual "indexing" of individual books happens. The `IndexBuilder` takes a [Book (Domain Model)](02_book__domain_model__.md) object, extracts and cleans its text, and then adds its words to the `invertedIndex`.
 
-**`src/main/resources/logs/popularity.json` (Snippet)**
-```json
-{
-  "194" : 0.227670248696953,
-  "2" : 1.0,           // This is the most popular book (score 1.0)
-  "3" : 0.3608488067145302,
-  "6" : 0.5286339468194481,
-  "135" : 0.7876096569652562,
-  "72" : 0.5286339468194481,
-  "9" : 0.5286339468194481,
-  "58" : 0.8668214419824227, // Second most popular book
-  // ... many more books and their scores ...
-}
-```
-Now, DevShelf has a clear, up-to-date understanding of which books are most frequently clicked by its users.
-
-### Part 3: Using Popularity to Improve DevShelf (The "Enhancer")
-
-The collected and analyzed popularity scores are not just for show! They are directly fed back into DevShelf to make your experience better.
-
-#### 1. Boosting Search Results: The `ReRanker`
-
-In [Core Search Engine](05_core_search_engine_.md), we learned that the `QueryProcessor` finds initial results. Then, the `ReRanker` (from [Search Enhancement & Recommendations](07_search_enhancement___recommendations_.md)) steps in to sort those results, ensuring the *best* ones are at the top. The `ReRanker` uses our freshly calculated popularity scores to give a boost to trending books.
-
-When DevShelf starts, the `ReRanker` loads the `popularity.json` file:
-
-**`src/main/java/features/search/ReRanker.java` (Simplified Constructor)**
+**`src/main/java/features/search/IndexBuilder.java` (Simplified `indexDocument` method)**
 ```java
 package features.search;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Book;
-import domain.SearchResult;
-import java.io.File;
-import java.io.IOException;
+import domain.Posting;
+import utils.TextProcessor; // Our text cleaning tool from Chapter 5
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReRanker {
+public class IndexBuilder {
+    @Getter
+    private final Map<String, List<Posting>> invertedIndex; // The main index: word -> list of book locations
+    private final TextProcessor textProcessor;
 
-    private final Map<Integer, Book> bookMap;
-    private final Map<Integer, Double> popularityMap; // This will hold our popularity scores!
-
-    // Weights to decide how much each factor contributes to the final score
-    private static final double W_TFIDF = 0.7;      // Raw search score
-    private static final double W_POPULARITY = 0.20; // NEW: How popular the book is!
-    private static final double W_RATING = 0.10;     // Book's star rating
-
-    public ReRanker(Map<Integer, Book> bookMap, String popularityFilePath) {
-        this.bookMap = bookMap;
-        this.popularityMap = loadPopularity(popularityFilePath); // Load the popularity scores!
+    public IndexBuilder(TextProcessor textProcessor) {
+        this.textProcessor = textProcessor;
+        this.invertedIndex = new HashMap<>();
     }
 
-    private Map<Integer, Double> loadPopularity(String path) {
-        // Reads popularity.json into the popularityMap
-        try { /* ... file reading logic ... */ }
-        catch (IOException e) { /* ... error handling ... */ }
-        return new HashMap<>(); // Return empty if loading fails
-    }
+    public void indexDocument(Book book) {
+        // 1. Combine all relevant text about the book
+        String bookData = book.getTitle() + " " + book.getAuthor() + " " + book.getDescription() +
+                          " " + book.getCategory() + " " + book.getProgLang() +
+                          " " + String.join(" ", book.getTag());
 
-    // ... reRank method ...
+        // 2. Clean and normalize the text (uses TextProcessor from Chapter 5)
+        List<String> stemmedTokens = textProcessor.process(bookData);
+
+        // 3. Record each term's positions and frequency within THIS book
+        Map<String, List<Integer>> termPositionsInThisBook = new HashMap<>();
+        for (int pos = 0; pos < stemmedTokens.size(); pos++) {
+            String term = stemmedTokens.get(pos);
+            termPositionsInThisBook.computeIfAbsent(term, k -> new ArrayList<>()).add(pos);
+        }
+
+        // 4. Add this book's data to the overall inverted index
+        for (Map.Entry<String, List<Integer>> entry : termPositionsInThisBook.entrySet()) {
+            String term = entry.getKey();
+            List<Integer> positions = entry.getValue();
+            // A Posting records a book ID, how many times the term appeared (frequency), and its positions
+            Posting posting = new Posting(book.getBookId(), positions.size(), positions);
+            // Add this posting to the list for this term in the inverted index
+            invertedIndex.computeIfAbsent(term, k -> new ArrayList<>()).add(posting);
+        }
+    }
 }
 ```
-When `ReRanker.reRank` is called, it combines the initial search score (`tfIdfScore`), the book's rating, and now also the `popularityScore` to calculate a `finalScore`:
+The `indexDocument` method is run for each book:
+1.  It collects all descriptive text for the book.
+2.  It uses the `textProcessor` (our "digital editor" from [Text Preprocessing](05_text_preprocessing_.md)) to clean and standardize the words.
+3.  It then counts how often each word appears in *this specific book* and notes its positions.
+4.  Finally, it creates a `Posting` object with this information (`bookId`, word count, positions) and adds it to the `invertedIndex` for that specific word.
 
-**`src/main/java/features/search/ReRanker.java` (Snippet from `reRank` method)**
+#### 4. Calculating Word Importance: `TfIdfCalculator`
+
+After the `invertedIndex` is built for all books, the `TfIdfCalculator` then goes through all the words and books to figure out their TF-IDF scores.
+
+**`src/main/java/utils/TfIdfCalculator.java` (Simplified `calculateIdf` and `calculateTfIdf` methods)**
 ```java
-// Inside ReRanker class
-public List<SearchResult> reRank(List<SearchResult> tfIdfResults, String query) {
-    List<SearchResult> reRankedResults = new ArrayList<>();
+package utils;
 
-    for (SearchResult oldResult : tfIdfResults) {
-        int docId = oldResult.getDocId();
-        Book book = bookMap.get(docId); // Get the book details
+import domain.Posting;
+import lombok.Getter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-        double tfIdfScore = oldResult.getScore();
-        double normalizedRating = book.getRating() / 5.0; // Scale rating from 0 to 1
-        double popularityScore = popularityMap.getOrDefault(docId, 0.0); // Get our popularity score!
+public class TfIdfCalculator {
+    @Getter
+    private Map<Integer, Map<String, Double>> tfIdfVectors = new HashMap<>(); // Book ID -> (Word -> TF-IDF Score)
+    @Getter
+    private Map<String, Double> idfScores = new HashMap<>(); // Word -> Overall Rarity Score
 
-        // --- The MASTER FORMULA now includes popularity! ---
-        double finalScore = (W_TFIDF * tfIdfScore) +
-                            (W_RATING * normalizedRating) +
-                            (W_POPULARITY * popularityScore); // Add popularity weight
-
-        // ... (title boosts and other re-ranking logic) ...
-
-        reRankedResults.add(new SearchResult(docId, finalScore));
+    public void calculateIdf(Map<String, List<Posting>> invertedIndex, int totalDocCount) {
+        System.out.println("Calculating IDF scores for " + invertedIndex.size() + " terms...");
+        for(String term : invertedIndex.keySet()) {
+            // How many documents (books) contain this term
+            int docFrequency = invertedIndex.get(term).size();
+            // IDF: The rarer the term (lower docFrequency), the higher its IDF score
+            double idf = Math.log10( (double) totalDocCount / docFrequency );
+            idfScores.put(term, idf); // Store overall rarity score for each term
+        }
     }
-    // ... (sorting by finalScore) ...
-    return reRankedResults;
-}
-```
-By adding `W_POPULARITY * popularityScore` to the `finalScore`, DevShelf now makes sure that books that are currently trending (have higher popularity scores) appear higher in the search results, even if their initial `tfIdfScore` wasn't the absolute highest.
 
-#### 2. Providing Trending Recommendations: The `Graph`
+    public void calculateTfIdf(Map<String, List<Posting>> invertedIndex) {
+        System.out.println("Calculating TF-IDF vectors for all documents...");
+        for(String term : invertedIndex.keySet()) {
+            double idf = idfScores.get(term); // Get the term's overall rarity score
+            List<Posting> postings = invertedIndex.get(term);
+            for(Posting posting : postings ) {
+                int docId = posting.getDocId();
+                int termFreq = posting.getFreq(); // How many times this term appears in THIS book
+                // TF: More frequent in this book means higher TF
+                double tf = 1 + Math.log10(termFreq);
+                double tfIdf = tf * idf; // Combine TF (local importance) and IDF (global rarity)
 
-The `Graph` component (from [Search Enhancement & Recommendations](07_search_enhancement___recommendations_.md)) uses this popularity data to provide smarter recommendations. When suggesting books related to a specific title, it can now prioritize those related books that are also highly popular.
-
-**`src/main/java/features/recommendation/Graph.java` (Snippet from `recommendPopularBooks` method)**
-```java
-package features.recommendation;
-
-import domain.Book;
-import java.util.*;
-
-public class Graph {
-
-    // ... graph building logic ...
-
-    public List<String> recommendPopularBooks(String bookTitle, int limit, Map<Integer, Double> popularityMap) {
-        String key = normalize(bookTitle); // Clean the input book title
-        Map<String, Double> relatedBooks = adjList.getOrDefault(key, Collections.emptyMap());
-        List<String> result = new ArrayList<>(relatedBooks.keySet());
-
-        final double ALPHA = 0.7; // How much emphasis on relevance vs. popularity (70% relevance, 30% popularity)
-
-        // Sort the related books based on a combined score
-        result.sort((a, b) -> {
-            double relA = relatedBooks.getOrDefault(a, 0.0); // Relevance score for book A
-            double relB = relatedBooks.getOrDefault(b, 0.0); // Relevance score for book B
-
-            // Get popularity scores from the map
-            double popA = popularityMap != null
-                    ? popularityMap.getOrDefault(titleToId.getOrDefault(a, -1), 0.0)
-                    : 0.0;
-            double popB = popularityMap != null
-                    ? popularityMap.getOrDefault(titleToId.getOrDefault(b, -1), 0.0)
-                    : 0.0;
-
-            // Combine relevance and popularity to get a final recommendation score
-            double scoreA = ALPHA * relA + (1 - ALPHA) * popA;
-            double scoreB = ALPHA * relB + (1 - ALPHA) * popB;
-
-            return Double.compare(scoreB, scoreA); // Sort from highest score to lowest
-        });
-
-        return result.subList(0, Math.min(limit, result.size())); // Return top recommendations
+                // Store this word's TF-IDF score for this specific book
+                tfIdfVectors.computeIfAbsent(docId, k -> new HashMap<>()).put(term, tfIdf);
+            }
+        }
+        System.out.println("TF-IDF calculation complete.");
     }
 }
 ```
-Here, the `recommendPopularBooks` method takes the `popularityMap` as an input. It calculates a `scoreA` and `scoreB` for two books `A` and `B` by blending their intrinsic "relevance" (how strongly they are related to the original book) with their `popularity` score. This means that if two books are equally related, the more popular one will be recommended first!
+*   `calculateIdf`: This method first calculates the **Inverse Document Frequency (IDF)** for *every unique word* across all books. Words that are very common (like "programming") will have a low IDF, while unique words will have a high IDF.
+*   `calculateTfIdf`: Then, for each word in each book, it calculates the **Term Frequency-Inverse Document Frequency (TF-IDF)**. This score combines how often a word appears in a *specific book* (Term Frequency) with how *rare* that word is across the *entire library* (IDF). A high TF-IDF means a word is very important and unique to a document.
 
-### Summary of User Interaction & Analytics Components
+### Why Offline Search Indexing is So Important
 
-| Component           | Role                                              | When it runs                                   | Data Processed/Produced                 | Used by                                |
-| :------------------ | :------------------------------------------------ | :--------------------------------------------- | :-------------------------------------- | :------------------------------------- |
-| `LoggingService`    | Records user clicks on books.                     | **Real-time** (during application use)         | `LogEntry` objects -> `logs.json`       | `DevShelfService` (called by UI)       |
-| `LogAnalyzerMain`   | Processes raw click logs to calculate popularity. | **Offline** (run separately, e.g., nightly)    | `logs.json` -> `popularity.json`        | No direct user, prepares data for others |
-| `LogEntry`          | A single data record of a user's click.           | Created by `LoggingService`                    | Stores `query`, `clickedDocId`, `timestamp` | `LoggingService`, `LogAnalyzerMain`    |
-| `popularity.json`   | Stores calculated popularity scores for each book. | Output of `LogAnalyzerMain`                    | Map of `BookID` to `PopularityScore`    | `ReRanker`, `Graph`                    |
+This pre-computation step might seem like a lot of work, but it's absolutely vital for DevShelf's performance and user experience:
+
+| Feature                   | WITHOUT Offline Search Indexing                             | WITH Offline Search Indexing                                          |
+| :------------------------ | :---------------------------------------------------------- | :-------------------------------------------------------------------- |
+| **Search Speed**          | Very slow, as each query requires re-scanning all books and recalculating scores. | **Instant!** DevShelf just looks up words and scores in pre-built tables. |
+| **Efficiency**            | Wastes computer resources by repeating calculations for every search. | Calculations done once, data loaded quickly, saving resources during live use. |
+| **Relevance**             | Harder to accurately rank results without pre-computed word importance scores. | Accurate ranking based on scientifically calculated TF-IDF scores.    |
+| **Scalability**           | Slows down dramatically as more books are added.            | Stays fast even with thousands of books, as the heavy work is done beforehand. |
 
 ### Conclusion
 
-In this chapter, we explored "User Interaction & Analytics," the hidden assistant that helps DevShelf learn from your behavior. We discovered:
-*   The `LoggingService` actively records your clicks on books, saving them as `LogEntry` objects in the `logs.json` file.
-*   The `LogAnalyzerMain` is an offline tool that processes these raw `logs.json` files, counting clicks and calculating a normalized popularity score for each book, which is then saved to `popularity.json`.
-*   These crucial `popularity.json` scores are then used by other parts of DevShelf, like the `ReRanker` to boost trending books in search results and the `Graph` to provide popularity-aware recommendations.
+In this chapter, we uncovered the essential process of **Offline Search Indexing**. We learned that:
+*   It's an **offline process** performed by `IndexerMain` to prepare book data for lightning-fast searches.
+*   It builds two crucial lookup tables: the **Inverted Index** (mapping words to books) and **TF-IDF scores** (measuring a word's importance to a book and its overall rarity).
+*   The `IndexBuilder` meticulously processes each book's text (using our [Text Preprocessing](05_text_preprocessing_.md) tools) to populate the inverted index.
+*   The `TfIdfCalculator` then assigns numerical importance scores to every word in every book.
+*   All this prepared data is saved into a file (`index_data.json`) and efficiently loaded by the `IndexLoader` when DevShelf starts, turning our digital library into an instant search powerhouse.
 
-This dynamic feedback loop ensures that DevShelf isn't just a static library but an intelligent system that adapts to what users are actually interested in, making your next search even more relevant and exciting!
+This clever preparation is the foundation upon which DevShelf can provide quick and intelligent search results. Now that DevShelf knows how to find the right books, let's explore how it can make those search results even smarter and more helpful!
 
-Next, we'll dive deeper into how DevShelf takes all these pieces—search results, popularity, and relationships between books—to enhance your overall search experience.
-
-[Next Chapter: Search Enhancement & Recommendations](07_search_enhancement___recommendations_.md)
+[Next Chapter: Intelligent Search Enhancements](07_intelligent_search_enhancements_.md)
