@@ -1,313 +1,229 @@
+# Chapter 5: Text Preprocessing
 
-Welcome back to DevShelf! In our last chapter, [Search Index Management](04_search_index_management_.md), we learned how DevShelf meticulously prepares a "secret catalog" (our search index) of all its books *before* you even start searching. This pre-computed index makes our library incredibly fast.
+Welcome back, digital librarian! In our last chapter, [Core Search Engine](04_core_search_engine_.md), we unveiled the powerful "finder" of DevShelf. We learned how the `QueryProcessor` intelligently takes your search terms, compares them to books, and ranks the most relevant results.
 
-Now, imagine you have this amazing, super-organized catalog. How do you actually *use* it to find the books you're looking for? If you ask a question like "Find me books about clean code in Java," what happens next?
+But have you ever thought about how the search engine truly *understands* your words? What if you search for "programming books" and a book's description says "This guide is for **programmers**"? Or what if you type "JAVA" (all caps) but the book's title is "Effective **Java**"? Without some clever preparation, these wouldn't match perfectly, and you might miss great books!
 
-That's where the **Core Search Engine** comes in!
+This is where **Text Preprocessing** comes in. Think of it as DevShelf's very own "digital editor." Its job is to ensure all text – whether from book descriptions or your search queries – is clean, consistent, and easy for the search engine to understand. It's the silent hero that makes accurate search matching possible.
 
-### The "Finder" of Our Digital Library
+### What Problem Does Our Digital Editor Solve?
 
-The Core Search Engine is the primary brain of DevShelf that answers your search queries. It's the "finder" in our digital library. It takes your question (your search query), consults the "secret catalog" (the search index), and then quickly identifies and presents the initial set of books that are most relevant to what you asked.
+Text from the real world is messy! It has:
+*   **Different spellings/forms**: "run", "running", "runs"
+*   **Capitalization**: "Java", "java", "JAVA"
+*   **Punctuation**: "code!", "code."
+*   **Common, uninformative words**: "the", "a", "is", "of"
 
-**Our central use case:** A user types a search query like "Python machine learning" into DevShelf, and the Core Search Engine needs to find and list the most pertinent books on that topic.
+If DevShelf tried to match words exactly as they are, it would miss many relevant books. Our "digital editor" solves this by transforming all text into a standard, simplified format.
 
-Let's break down how it does this magic!
+**Our central use case:** You search for "How to write **Clean Code** in **Java**". DevShelf needs to understand that you're looking for books on "clean," "code," and "java," regardless of the casing, the presence of common words like "to" or "how," or even if a book says "java programs" instead of just "java." Text Preprocessing ensures your query intelligently matches the book's content.
 
-### How the Core Search Engine Works
+### The `TextProcessor`: Our Digital Editor in Action
 
-The Core Search Engine, primarily handled by the `QueryProcessor` component, performs these key steps:
+The main tool that performs text preprocessing in DevShelf is the `TextProcessor`. It takes any raw text and puts it through a structured "pipeline" of cleaning steps:
 
-1.  **Understand Your Query:** It first cleans up your search query and breaks it into important words.
-2.  **Find Potential Books:** It then uses the pre-built "inverted index" from [Search Index Management](04_search_index_management_.md) to quickly identify *all* books that contain *any* of your important search words.
-3.  **Score for Relevance:** Not all matching books are equally good! It then calculates a "relevance score" for each potential book to your query. This score helps determine which books are the *most* pertinent.
-4.  **Rank and Present:** Finally, it sorts the books from highest score to lowest, ensuring that the best matches rise to the top of your search results.
+1.  **Tokenization**: Breaking text into individual words.
+2.  **Lowercasing**: Converting all words to lowercase.
+3.  **Stop Word Removal**: Filtering out common words that don't add much meaning.
+4.  **Stemming**: Reducing words to their basic "root" form.
 
-### Using the Core Search Engine
+Let's see an example of how the `TextProcessor` works:
 
-You don't directly tell the `QueryProcessor` what to do. Instead, when you type into the search bar (in the GUI) or enter a command (in the CLI), our main application logic (like `DevShelfService` for GUI or `BookSearchEngine` for CLI) calls the `QueryProcessor` to do the heavy lifting.
-
-Let's look at how the `DevShelfService` (for the GUI) calls the `QueryProcessor`'s `search` method:
-
-**`src/main/java/ui/gui/services/DevShelfService.java` (Simplified `search` method)**
 ```java
-package ui.gui.services;
+// Imagine 'textProcessor' is our digital editor, ready to use
+String rawText = "The best BOOKS for running CODE in Python!";
 
-import domain.Book;
-import domain.SearchResult;
-import features.search.QueryProcessor; // Our search engine!
-// ... other imports
+// We ask the text processor to clean this text
+List<String> cleanedWords = textProcessor.process(rawText);
 
-public class DevShelfService {
-    // ... other services and bookMap
-    private final QueryProcessor queryProcessor; // The brain of our search
-
-    public DevShelfService( /* ... other services, QueryProcessor queryProcessor ... */ ) {
-        // ... initialize other services
-        this.queryProcessor = queryProcessor; // Get the search engine ready
-    }
-
-    public SearchResponse search(String query) {
-        System.out.println("🔍 GUI Processing Query: [" + query + "]");
-
-        // 1. Raw Search: Hand the query to our QueryProcessor
-        List<SearchResult> results = queryProcessor.search(query);
-
-        // ... (further steps like handling no results, re-ranking, converting to Book objects) ...
-
-        // Example output (after re-ranking and conversion):
-        // return new SearchResponse(books, isSuggestion, usedQuery);
-        return null; // Simplified
-    }
-    // ... other methods
-}
+System.out.println(cleanedWords);
 ```
-When you type "Python" and hit Enter, the `search` method in `DevShelfService` gets `query = "Python"`. It then simply passes this `query` to `queryProcessor.search(query)`. The `QueryProcessor` then goes to work and returns a list of `SearchResult` objects.
 
-A `SearchResult` object is a simple container that holds two things:
-*   `docId`: The unique ID of the book that matched.
-*   `score`: How relevant that book is to your query. A higher score means more relevant.
-
-**`src/main/java/domain/SearchResult.java` (Simplified)**
-```java
-package domain;
-
-import lombok.Getter;
-
-public class SearchResult implements Comparable<SearchResult> {
-
-    @Getter
-    private final int docId;   // The ID of the matching book
-    @Getter
-    private final double score; // How relevant it is to the query
-
-    public SearchResult(int docId, double score) {
-        this.docId = docId;
-        this.score = score;
-    }
-
-    // This helps us sort results from highest score to lowest
-    @Override
-    public int compareTo(SearchResult other) {
-        return Double.compare(other.score, this.score);
-    }
-    // ... toString() method for debugging ...
-}
+**Output:**
 ```
-After the `QueryProcessor` returns this list of `SearchResult`s, `DevShelfService` (or `BookSearchEngine` in CLI) takes these `docId`s, looks up the full [Book (Domain Model)](02_book__domain_model_.md) objects using our `bookMap` (from [Application Startup & Flow Control](01_application_startup___flow_control_.md) and [Book (Domain Model)](02_book__domain_model_.md)), and then passes them to the [User Interface Presentation](03_user_interface_presentation_.md) to be displayed.
+[best, book, run, code, python]
+```
 
-### Under the Hood: The `QueryProcessor` in Action
+Notice how much cleaner and more focused the text is!
+*   "The," "for," "in" are gone (stop words).
+*   "BOOKS" became "book" (lowercasing, stemming).
+*   "running" became "run" (stemming).
+*   "CODE!" became "code" (lowercasing, punctuation removed).
+*   "Python!" became "python" (lowercasing, punctuation removed).
 
-Let's visualize what happens inside the `QueryProcessor` when you submit a search for "Java algorithms":
+This standardized list of words is what the [Core Search Engine](04_core_search_engine_.md) actually uses for matching and scoring!
+
+### Under the Hood: The `TextProcessor`'s Workflow
+
+Let's visualize the `TextProcessor` at work when it cleans a piece of text like `"The best BOOKS for running CODE in Python!"`:
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant App Service
-    participant QueryProcessor
+    participant Raw Text
     participant TextProcessor
-    participant Search Index
-    participant Search Results
+    participant StopWordLoader
+    participant Stemmer
+    participant Cleaned Words
 
-    User->>App Service: "Search: Java algorithms"
-    App Service->>QueryProcessor: search("Java algorithms")
-    QueryProcessor->>TextProcessor: "Clean and stem 'Java algorithms'"
-    Note over TextProcessor: "java" "algorithm"
-    TextProcessor-->>QueryProcessor: Cleaned terms: ["java", "algorithm"]
-    QueryProcessor->>QueryProcessor: Calculate query's TF-IDF vector
-    QueryProcessor->>Search Index: Find documents with "java" or "algorithm"
-    Note over Search Index: Uses Inverted Index to get initial doc IDs
-    Search Index-->>QueryProcessor: List of potential Book IDs (e.g., 1, 3, 5, 7)
-    loop For each potential Book ID
-        QueryProcessor->>Search Index: Get book's TF-IDF vector (e.g., for book ID 1)
-        Note over Search Index: Uses tfIdfVectors map
-        Search Index-->>QueryProcessor: Book 1's vector
-        QueryProcessor->>QueryProcessor: Calculate Cosine Similarity (Query Vector vs. Book 1 Vector)
-        Note over QueryProcessor: Assigns a relevance score (e.g., 0.75 for Book 1)
-    end
-    QueryProcessor->>QueryProcessor: Sort results by score (highest first)
-    QueryProcessor-->>Search Results: List<SearchResult> (e.g., (Book 1, 0.75), (Book 3, 0.62)...)
-    Search Results-->>App Service: Ranked Search Results
-    App Service-->>User: Display books
+    Raw Text->>TextProcessor: "Process 'The best BOOKS for running CODE in Python!'"
+    TextProcessor->>TextProcessor: 1. Tokenize & Lowercase
+    Note over TextProcessor: Words become: "the", "best", "books", "for", "running", "code", "in", "python"
+    TextProcessor->>StopWordLoader: 2. Check for Stop Words
+    StopWordLoader-->>TextProcessor: Identifies "the", "for", "in"
+    TextProcessor->>TextProcessor: Remove Stop Words
+    Note over TextProcessor: Remaining words: "best", "books", "running", "code", "python"
+    TextProcessor->>Stemmer: 3. Stemming for remaining words
+    Stemmer-->>TextProcessor: "books" -> "book", "running" -> "run"
+    TextProcessor->>TextProcessor: Collect Stemmed Words
+    TextProcessor-->>Cleaned Words: ["best", "book", "run", "code", "python"]
 ```
 
-#### The `QueryProcessor` Class: The Search Mastermind
+#### The `TextProcessor` Class: The Orchestrator of Cleaning
 
-The `QueryProcessor` is the class that orchestrates the entire search process. It needs access to the tools we built in [Search Index Management](04_search_index_management_.md): the `invertedIndex`, `tfIdfVectors`, and `idfScores`. It also uses our `TextProcessor` (which we'll explore in [Text Normalization Utilities](08_text_normalization_utilities_.md)) to clean up the user's query.
+The `TextProcessor` class (found in `src/main/java/utils/TextProcessor.java`) is the "brain" that combines all these cleaning steps. When it's created, it needs a list of "stop words" and uses a special `Stemmer` tool.
 
-**`src/main/java/features/search/QueryProcessor.java` (Simplified Constructor)**
+**`src/main/java/utils/TextProcessor.java` (Simplified Constructor)**
 ```java
-package features.search;
+package utils;
 
-import domain.Posting;
-import domain.SearchResult;
-import utils.TextProcessor; // Our text cleaning tool
-import java.util.*;
+import org.tartarus.snowball.ext.englishStemmer; // A tool for finding root words
+import java.util.Set; // To store our list of stop words
 
-public class QueryProcessor {
-    private final TextProcessor textProcessor;
-    private final Map<String, List<Posting>> invertedIndex;     // Word -> Books containing it
-    private final Map<Integer, Map<String, Double>> tfIdfVectors; // Book ID -> (Word -> Score)
-    private final Map<String, Double> idfScores;                // Word -> Overall Rarity Score
+public class TextProcessor {
 
-    public QueryProcessor(TextProcessor textProcessor,
-                          Map<String, List<Posting>> invertedIndex,
-                          Map<Integer, Map<String, Double>> tfIdfVectors,
-                          Map<String, Double> idfScores) {
-        this.textProcessor = textProcessor;
-        this.invertedIndex = invertedIndex;
-        this.tfIdfVectors = tfIdfVectors;
-        this.idfScores = idfScores;
-    }
-    // ... search method and other helper methods
+   private final Set<String> stopWords;           // Our list of uninformative words
+   private final englishStemmer stemmer = new englishStemmer(); // Our root-word finder
+
+   // When TextProcessor is created, we give it the list of stop words
+   public TextProcessor(Set<String> stopWords) {
+       this.stopWords = stopWords;
+   }
+
+   // ... process method will be here ...
 }
 ```
-The constructor simply takes all the pre-built index components and the `TextProcessor` as "ingredients" to do its job.
+This constructor makes sure our `TextProcessor` has all the necessary "ingredients" (`stopWords` and `stemmer`) to clean text properly.
 
-#### The `search` Method: The Core Logic
+#### The `process` Method: Step-by-Step Cleaning in Code
 
-This is the main method that runs when you search.
+This is the main method that you call to clean any text. It implements the workflow we just saw.
 
-**`src/main/java/features/search/QueryProcessor.java` (Simplified `search` method)**
+**`src/main/java/utils/TextProcessor.java` (Simplified `process` method)**
 ```java
-// Inside QueryProcessor class
-public List<SearchResult> search(String rawQuery) {
-    // 1. Process the query (clean words, stem them)
-    List<String> queryTerms = textProcessor.process(rawQuery);
-    if (queryTerms.isEmpty()) {
-        return Collections.emptyList(); // No valid terms left to search
+// Inside TextProcessor class
+public List<String> process(String text) {
+
+    if (text == null || text.isBlank()) {
+        return Collections.emptyList(); // Safety check: return empty if no text
     }
 
-    // 2. Calculate the query's own TF-IDF vector
-    Map<String, Double> queryVector = calculateQueryVector(queryTerms);
+    // 1. Tokenization and Lowercasing
+    // text.toLowerCase() makes everything lowercase.
+    // .split("[^a-zA-Z0-9']+") breaks the text into words by
+    // anything that's NOT a letter, number, or apostrophe.
+    String[] rawTokens = text.toLowerCase().split("[^a-zA-Z0-9']+");
+    List<String> tokens = Arrays.asList(rawTokens);
 
-    // 3. Find all documents that match *any* query term using the inverted index
-    Set<Integer> matchingDocIds = findMatchingDocuments(queryTerms);
-
-    // 4. Score each matching document using Cosine Similarity
-    List<SearchResult> results = new ArrayList<>();
-    for (int docId : matchingDocIds) {
-        Map<String, Double> docVector = tfIdfVectors.get(docId); // Get book's TF-IDF vector
-        double score = cosineSimilarity(queryVector, docVector); // Calculate relevance!
-        if (score > 0) { // Only add if there's some relevance
-            results.add(new SearchResult(docId, score));
+    // 2. Stop Word Removal
+    List<String> filteredTokens = new ArrayList<>();
+    for(String token : tokens) {
+        if (token.isEmpty()) continue; // Skip any empty strings from splitting
+        if(!stopWords.contains(token)) { // If the word is NOT in our stopWords list
+            filteredTokens.add(token);   // Keep it!
         }
     }
 
-    // 5. Rank (sort) the results by score (highest first)
-    Collections.sort(results);
+    // 3. Stemming
+    List<String> stemmedTokens = new ArrayList<>();
+    for (String token : filteredTokens) {
+        stemmer.setCurrent(token); // Give the stemmer the word
+        stemmer.stem();            // Ask it to find the root form
+        stemmedTokens.add(stemmer.getCurrent()); // Get the root word (e.g., "running" -> "run")
+    }
 
-    return results;
+    return stemmedTokens; // Return our super clean list of words!
 }
 ```
-Here's a breakdown of the steps in `search()`:
-1.  **`textProcessor.process(rawQuery)`**: Just like `IndexerMain` processed book text, the `QueryProcessor` uses `TextProcessor` to clean and standardize your search query (e.g., "Programming Books" becomes ["program", "book"]).
-2.  **`calculateQueryVector(queryTerms)`**: It then creates a special numeric representation (a "vector") of your query, using the same TF-IDF logic applied to books. This helps us compare your query to books.
-3.  **`findMatchingDocuments(queryTerms)`**: This step is super fast because it uses the `invertedIndex` we built. It quickly gathers a list of all `bookId`s that contain any of the processed query terms.
-4.  **`cosineSimilarity(queryVector, docVector)`**: This is the core of relevance scoring. For each potential book, it compares the query's vector to the book's pre-computed `tfIdfVectors` using a mathematical technique called Cosine Similarity.
-5.  **`Collections.sort(results)`**: Finally, all the `SearchResult`s are sorted from highest relevance score to lowest, putting the best matches at the top.
 
-#### `findMatchingDocuments`: Rapid Document Retrieval
+#### Loading Stop Words: The `StopWordLoader`
 
-This method uses the `invertedIndex` to get all books that contain at least one of your query words.
+Where does the `stopWords` list come from? DevShelf has a file named `stopword.txt` (located in `src/main/resources/data/stopword.txt`) which contains a list of common English words like "the", "a", "is", etc. The `StopWordLoader` is responsible for reading this file and providing that list to the `TextProcessor`.
 
-**`src/main/java/features/search/QueryProcessor.java` (Simplified `findMatchingDocuments` method)**
+**`src/main/resources/data/stopword.txt` (Snippet)**
+```
+"a","an","the","and","or","but","if","then","else","on","in","at","by","for","with","about","against",
+"between","into","through","during","before","after","above","below","to","from","up","down","of","is",
+"are","was","were","be","been","being","as","that","this","these","those","it","its","I","you","he","she","they"
+```
+Each of these words will be removed by the `TextProcessor` because they don't help much with search relevance.
+
+**`src/main/java/utils/StopWordLoader.java` (Simplified `loadStopWords` method)**
 ```java
-// Inside QueryProcessor class
-private Set<Integer> findMatchingDocuments(List<String> queryTerms) {
-    Set<Integer> docIds = new HashSet<>();
-    for(String term : queryTerms) {
-        List<Posting> postings = invertedIndex.get(term); // Look up term in the index!
-        if(postings != null){
-            for(Posting p : postings) {
-                docIds.add(p.getDocId()); // Add all unique book IDs found
-            }
-        }
+package utils;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
+
+public class StopWordLoader {
+
+    // This method can be called directly to get the stop words
+    public static Set<String> loadStopWords(String resourcePath) {
+       Set<String> stopWords = new HashSet<>();
+       try (InputStream inputStream = StopWordLoader.class.getResourceAsStream(resourcePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+           if (inputStream == null) return stopWords; // If file not found, return empty set
+
+           String line;
+           while ((line = reader.readLine()) != null) {
+               String word = line.trim().toLowerCase(); // Clean up word from file
+               if (!word.isEmpty()) {
+                   stopWords.add(word); // Add each word to our set
+               }
+           }
+       } catch (Exception e) {
+           System.err.println("❌ Error loading stopwords: " + e.getMessage());
+       }
+       return stopWords; // Return the set of all stop words
     }
-    return docIds;
 }
 ```
-For each word in your query (e.g., "java"), it goes to the `invertedIndex` and retrieves all the `Posting` objects associated with "java". Each `Posting` tells it which `docId` (book ID) contains that word. It collects all these `docId`s into a `Set` to avoid duplicates, giving us a list of all potential candidate books.
+The `loadStopWords` method reads each line from the `stopword.txt` file, removes any extra spaces, converts it to lowercase, and then adds it to a `HashSet`. A `HashSet` is like a super-fast list that allows us to quickly check if a word is a stop word or not.
 
-#### `calculateQueryVector`: Understanding the Query's Importance
+#### The `Stemmer` Class: Finding Root Words
 
-This method creates a TF-IDF vector for *your search query itself*. This allows us to treat your query like a small "document" and compare it to our books.
+The `englishStemmer` used by `TextProcessor` is a special tool that knows the rules of English grammar to reduce words to their base or "root" form. For example:
+*   "programming" becomes "program"
+*   "developers" becomes "develop"
+*   "configured" becomes "configur" (sometimes the root form isn't a perfect English word, but it's consistent!)
+*   "algorithms" becomes "algorithm"
 
-**`src/main/java/features/search/QueryProcessor.java` (Simplified `calculateQueryVector` method)**
-```java
-// Inside QueryProcessor class
-private Map<String, Double> calculateQueryVector(List<String> queryTerms) {
-    Map<String, Double> queryVector = new HashMap<>();
-    Map<String, Integer> termCounts = new HashMap<>(); // Count how many times each term appears in YOUR query
+This ensures that whether a book mentions "programming," "programmer," or "programmed," the search engine only sees the root word "program," making the search much more flexible and accurate.
 
-    for(String term : queryTerms) {
-        termCounts.put(term, termCounts.getOrDefault(term, 0) + 1);
-    }
+### Why Text Preprocessing is So Important
 
-    for(String term : termCounts.keySet()) {
-        double tf = 1 + Math.log10(termCounts.get(term)); // Calculate Term Frequency for query term
-        double idf = idfScores.getOrDefault(term, 0.0);    // Get Inverse Document Frequency from our index
+Text preprocessing might seem like a small detail, but it's absolutely fundamental for DevShelf to work effectively. Here’s why:
 
-        queryVector.put(term, tf * idf); // Store TF-IDF score for query term
-    }
-    return queryVector;
-}
-```
-This method essentially does the same TF-IDF calculation we saw in [Search Index Management](04_search_index_management_.md), but for the query. It counts how many times each word appears in *your query* (TF) and then multiplies it by the overall rarity of that word (`idfScores`) from our pre-built index.
+| Feature                   | WITHOUT Text Preprocessing                                   | WITH Text Preprocessing                                                |
+| :------------------------ | :----------------------------------------------------------- | :--------------------------------------------------------------------- |
+| **Search Accuracy**       | Misses many relevant matches due to different capitalization, punctuation, or word endings. | Finds far more relevant matches by standardizing all text.                 |
+| **Search Efficiency**     | The search index would be much larger (e.g., storing "Run," "Runs," "Running" as separate terms). | Smaller and more efficient index (only stores "run"), leading to faster searches.         |
+| **User Experience**       | Frustrating, as users expect a search for "Java" to match "java" and "develop" to match "developer." | Intuitive, forgiving search that "understands" the user's intent, even with typos or variations. |
+| **Relevance Scoring**     | Scores might be inaccurate because common words or inconsistent spellings are treated equally. | Clearer, more precise relevance scores because only meaningful, standardized terms are compared. |
 
-#### `cosineSimilarity`: Measuring How Alike Things Are
-
-This is the clever math part! Cosine Similarity measures the "angle" between two "vectors" (our lists of TF-IDF scores for the query and a book).
-
-**Analogy:** Imagine your query and a book are two arrows in a multi-dimensional space.
-*   If they point in exactly the same direction, they are very similar (score = 1.0).
-*   If they point in completely different directions, they are not similar at all (score = 0.0).
-*   Anything in between is a partial match.
-
-**`src/main/java/features/search/QueryProcessor.java` (Simplified `cosineSimilarity` method)**
-```java
-// Inside QueryProcessor class
-private double cosineSimilarity(Map<String, Double> vec1, Map<String, Double> vec2) {
-    if (vec2 == null) return 0.0; // If book has no TF-IDF data, it can't be similar
-
-    double dotProduct = 0.0;
-    double norm1 = 0.0; // "Length" of query vector
-    double norm2 = 0.0; // "Length" of document vector
-
-    // Calculate how much the two vectors overlap (dot product)
-    // and the "length" of the query vector (norm1)
-    for (String term : vec1.keySet()) {
-        double queryTermScore = vec1.get(term);
-        double bookTermScore = vec2.getOrDefault(term, 0.0);
-
-        dotProduct += queryTermScore * bookTermScore;
-        norm1 += queryTermScore * queryTermScore;
-    }
-
-    // Calculate the "length" of the document vector (norm2)
-    for (double score : vec2.values()) {
-        norm2 += score * score;
-    }
-
-    // Avoid division by zero
-    if (norm1 == 0.0 || norm2 == 0.0) {
-        return 0.0;
-    }
-
-    // The final formula: (Overlap) / (Length of Query * Length of Book)
-    return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
-}
-```
-This method takes two maps (the query's TF-IDF vector and a book's TF-IDF vector) and computes a score between 0 and 1. A score closer to 1 means the book is highly relevant to the query, while a score closer to 0 means it's not. This score is precisely what determines the book's ranking in your search results!
+This table clearly shows that our "digital editor" is a crucial step that makes DevShelf intelligent, fast, and user-friendly.
 
 ### Conclusion
 
-In this chapter, we explored the **Core Search Engine**, which is the "finder" of our DevShelf application. We learned that:
-*   The `QueryProcessor` is the main component responsible for taking your search query and finding relevant books.
-*   It first **processes** your query (cleaning and stemming words).
-*   Then, it uses the pre-built `invertedIndex` from [Search Index Management](04_search_index_management_.md) to quickly **identify matching documents**.
-*   Crucially, it **scores** these books for relevance using techniques like Cosine Similarity, comparing the query's TF-IDF vector to each book's TF-IDF vector (also from [Search Index Management](04_search_index_management_.md)).
-*   Finally, it **ranks** the results, ensuring the most pertinent books are shown first.
+In this chapter, we explored **Text Preprocessing**, the essential behind-the-scenes process that makes all our text clean, consistent, and ready for search. We learned that:
+*   The `TextProcessor` is our digital editor, performing **tokenization, lowercasing, stop word removal, and stemming** on all text inputs.
+*   It relies on a `Set` of `stopWords` loaded by the `StopWordLoader` from `stopword.txt` to filter out uninformative words.
+*   It uses a `Stemmer` to reduce words to their root form, allowing searches to match variations of words.
+*   This consistency is vital for the [Core Search Engine](04_core_search_engine_.md) to accurately match queries with book content and generate relevant results.
 
-This entire process allows DevShelf to quickly transform your simple search query into a prioritized list of highly relevant books. Now that we know how books are found, let's look at how DevShelf keeps track of what you click on and how you interact with the results!
+By ensuring all text is perfectly prepared, DevShelf provides a much more accurate, efficient, and user-friendly search experience, forming the bedrock for all its intelligent features. Now that we know how text is cleaned, let's discover how DevShelf builds its super-fast search catalog!
 
-[Next Chapter: User Interaction & Analytics](06_user_interaction___analytics_.md)
+[Next Chapter: Offline Search Indexing](06_offline_search_indexing_.md)
