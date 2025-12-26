@@ -162,13 +162,6 @@ mvn javafx:run
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.  
-See the `LICENSE` file for details.
-
----
-
 Built with pure Java, mathematics, and first principles.
 
 
