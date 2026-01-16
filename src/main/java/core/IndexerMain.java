@@ -12,6 +12,7 @@ import utils.TextProcessor;
 import utils.TfIdfCalculator;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class IndexerMain {
 
             // 3. Indexing Process
             System.out.println("Indexing books...");
-            List<Book> allBooks = loader.loadBooks();
+            List<Book> allBooks = loader.loadBooksFromSource(BOOK_RES);
             if (allBooks.isEmpty()) {
                 System.err.println("❌ Critical Error: No books loaded. Check book.json path.");
                 return;

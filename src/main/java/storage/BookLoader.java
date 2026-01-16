@@ -19,6 +19,17 @@ public class BookLoader {
         this.resourcePath = resourcePath;
     }
 
+    // Add a new method specifically for the Indexer
+    public List<Book> loadBooksFromSource(String path) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // Reads directly from the project folder, ignoring AppData
+            return mapper.readValue(new File("src/main/resources" + path), new TypeReference<List<Book>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 
     public List<Book> loadBooks() {
         ObjectMapper mapper = new ObjectMapper();

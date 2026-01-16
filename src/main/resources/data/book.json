@@ -3321,6 +3321,82 @@
     "rating": "4.6",
     "coverUrl": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1348971620i/9637420.jpg",
     "downLink": "https://dl.icdst.org/pdfs/files4/f5087fa30778ccd742790526c0d6be83.pdf"
+  },
+  {
+    "bookId": 208,
+    "title": "Computer Organization and Architecture: Designing for Performance",
+    "author": "William Stallings",
+    "description": "A comprehensive textbook on computer organization and architecture, covering processor design, memory hierarchy, I/O systems, instruction sets, and performance optimization principles. It provides both theoretical foundations and practical examples for students and professionals in computer science and engineering.",
+    "progLang": "Assembly",
+    "category": "Computer Science",
+    "tag": [
+      "Computer Organization",
+      "Computer Architecture",
+      "William Stallings",
+      "Processor Design",
+      "Memory Hierarchy",
+      "Assembly",
+      "I/O Systems"
+    ],
+    "rating": "4.1",
+    "coverUrl": "https://m.media-amazon.com/images/I/713+cg1BJwL._SL1500_.jpg",
+    "downLink": "https://os.ecci.ucr.ac.cr/ci0114/material/Stallings/Computer-Organization-Architecture-11th.pdf"
+  },
+  {
+    "bookId": 209,
+    "title": "Introduction to Computer Theory",
+    "author": "Daniel I. A. Cohen",
+    "description": "A foundational textbook covering the mathematical theory of computation, including automata, formal languages, Turing machines, and computability.",
+    "progLang": "English",
+    "category": "Computer Science",
+    "tag": [
+      "Computer Theory",
+      "Automata",
+      "Formal Languages",
+      "Turing Machine",
+      "Computation",
+      "Computer Science"
+    ],
+    "rating": "4.3",
+    "coverUrl": "https://www.ketabton.com/book-cover/1495/large.jpg",
+    "downLink": "https://pakistandasti.wordpress.com/wp-content/uploads/2013/11/introduction-to-computer-theory-by-cohen-copy.pdf"
+  },
+  {
+    "bookId": 210,
+    "title": "Assembly Language Programming and Organization of the IBM PC",
+    "author": "Ytha Y. Yu, Charles Marut",
+    "description": "A comprehensive tutorial-style guide to assembly language programming on the IBM PC, covering microcomputer systems, representation of numbers and characters, instruction sets, memory and I/O organization, BIOS/DOS interrupts, graphics and keyboard programming, and advanced topics with practical examples and exercises.",
+    "progLang": "English",
+    "category": "Computer Science",
+    "tag": [
+      "Assembly Language",
+      "IBM PC",
+      "8086 Microprocessor",
+      "Computer Organization",
+      "Machine Code",
+      "Low-Level Programming"
+    ],
+    "rating": "4.5",
+    "coverUrl": "https://covers.openlibrary.org/b/isbn/0070726922-L.jpg",
+    "downLink": "https://pdos.csail.mit.edu/6.828/2010/readings/pcasm-book.pdf"
+  },
+  {
+    "bookId": 211,
+    "title": "Database System Concepts, 6th Edition",
+    "author": "Avi Silberschatz, Henry F. Korth, S. Sudarshan",
+    "description": "A foundational and widely used textbook on database management systems that covers core concepts such as relational databases, SQL, query processing and optimization, transactions, concurrency control, recovery, and advanced topics like distributed databases and data mining. It is designed for undergraduate and graduate courses in computer science and related fields.",
+    "progLang": "English",
+    "category": "Computer Science",
+    "tag": [
+      "Databases",
+      "Database Systems",
+      "SQL",
+      "Relational Model",
+      "Query Processing",
+      "Transaction Management"
+    ],
+    "rating": "4.5",
+    "coverUrl": "https://covers.openlibrary.org/b/isbn/9780073523323-L.jpg",
+    "downLink": "https://people.vts.su.ac.rs/~peti/Baze%20podataka/Literatura/Silberschatz-Database%20System%20Concepts%206th%20ed.pdf"
   }
-
 ]
