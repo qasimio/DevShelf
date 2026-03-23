@@ -153,6 +153,16 @@ mvn javafx:run
 
 ```
 
+---
+
+## 💖 Support
+
+DevShelf is actively maintained and improved. If you find it useful or appreciate the engineering behind it, you can support its continued development and maintenance:
+
+👉 https://patreon.com/qasimio
+
+---
+
 ## 👥 Engineering Team
 
 | Name | Role | Focus |
