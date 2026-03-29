@@ -173,6 +173,16 @@ DevShelf is actively maintained and improved. If you find it useful or appreciat
 
 ---
 
+<a href="https://peerlist.io/qasimio/project/devshelf" target="_blank" rel="noreferrer">
+				<img
+					src="https://peerlist.io/api/v1/projects/embed/PRJH6A7AGANB76896CONO696R6PK6B?showUpvote=true&theme=dark"
+					alt="DevShelf"
+					style="width: auto; height: 72px;"
+				/>
+			</a>
+
+---
+
 Built with pure Java, mathematics, and first principles.
 
 
