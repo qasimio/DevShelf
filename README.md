@@ -167,7 +167,7 @@ DevShelf is actively maintained and improved. If you find it useful or appreciat
 
 | Name | Role | Focus |
 |------|------|-------|
-| Muhammad Qasim | Lead Architect | Core search engine, system architecture, ranking algorithms |
+| Qasim Sethar | Lead Architect | Core search engine, system architecture, ranking algorithms |
 | Nancy Chawla | Frontend Engineer | JavaFX UI, UX design, view controllers |
 | Ritika Lund | Feature Engineer | Recommendations, filtering logic, data analysis |
 
@@ -183,6 +183,6 @@ DevShelf is actively maintained and improved. If you find it useful or appreciat
 
 ---
 
-Built with pure Java, mathematics, and first principles.
+Built by Qasim Sethar with pure Java, mathematics, and first principles.
 
 
