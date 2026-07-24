@@ -1,5 +1,5 @@
 # 📚 DevShelf
-## Search Engine that Gets Smarter with Every Search
+## Google, But Only for Computer Science Books
 
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Build Status](https://img.shields.io/badge/build-passing-success?style=for-the-badge)
