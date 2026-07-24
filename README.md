@@ -1,18 +1,27 @@
-# 📚 DevShelf
-## Google, But Only for Computer Science Books
+<h1 align="center">📚 DevShelf</h1>
 
-![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Build Status](https://img.shields.io/badge/build-passing-success?style=for-the-badge)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/qasimio/DevShelf)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+<p align="center">
+  <strong>Google, But Only for Computer Science Books</strong>
+</p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
+  <img src="https://img.shields.io/badge/build-passing-success?style=for-the-badge" alt="Build Status" />
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue?style=for-the-badge" alt="Platform" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
+<a href="https://deepwiki.com/qasimio/DevShelf">
+    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki" />
+  </a>
+</p>
 
 <p align="center">
   <strong>Try DevShelf locally — no cloud dependency required.</strong><br>
   <em>Offline-first • Fast • Built from first principles</em>
 </p>
+
+<br>
+
+---
 
 <br>
 
@@ -30,6 +39,24 @@
   <sub>
     Linux users: download the latest release from the same page.
   </sub>
+</p>
+
+---
+
+## 🎬 Walkthrough under a minute!
+
+<p align="center">
+  <a href="https://youtu.be/YOUR_VIDEO_ID">
+    <img
+      src="https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg"
+      alt="Watch the DevShelf demo"
+      width="800"
+    />
+  </a>
+</p>
+
+<p align="center">
+  <strong>▶ Watch DevShelf search, rank, filter, and recommend Computer Science books in under one minute.</strong>
 </p>
 
 ---
